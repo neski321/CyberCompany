@@ -47,9 +47,12 @@ export function Navbar() {
               {link.name}
             </a>
           ))}
-          <Button variant="default" className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] transition-all">
+          <button 
+            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] transition-all px-6 py-2 rounded-lg"
+          >
             Secure Your Assets
-          </Button>
+          </button>
         </div>
 
         {/* Mobile Toggle */}
@@ -81,9 +84,15 @@ export function Navbar() {
                   {link.name}
                 </a>
               ))}
-              <Button className="w-full bg-primary text-primary-foreground mt-4">
+              <button 
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-2 rounded-lg font-semibold mt-4"
+              >
                 Get Started
-              </Button>
+              </button>
             </div>
           </motion.div>
         )}
