@@ -18,6 +18,7 @@ export function Navbar() {
 
   const navLinks = [
     { name: "Services", href: "#services" },
+    { name: "What We Do", href: "#what-we-do" },
     { name: "About", href: "#about" },
     { name: "Contact", href: "#contact" },
   ];
@@ -32,7 +33,7 @@ export function Navbar() {
         <Link href="/">
           <div className="flex items-center gap-2 group cursor-pointer">
             <Shield className="w-8 h-8 text-primary group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.5)] transition-all" />
-            <span className="font-display font-bold text-xl tracking-wide">CYBERGUARD</span>
+            <span className="font-display font-bold text-xl tracking-wide text-white">CYBERGUARD</span>
           </div>
         </Link>
 
@@ -42,7 +43,7 @@ export function Navbar() {
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+              className="text-sm font-bold text-white hover:text-primary transition-colors"
             >
               {link.name}
             </a>
@@ -57,7 +58,7 @@ export function Navbar() {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-foreground"
+          className="md:hidden text-white"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X /> : <Menu />}
@@ -78,7 +79,7 @@ export function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-lg font-medium hover:text-primary transition-colors"
+                  className="text-lg font-bold text-white hover:text-primary transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}

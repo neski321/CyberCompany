@@ -1,9 +1,20 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, ShieldCheck, Lock } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import heroBg from "@assets/generated_images/dark_abstract_cybersecurity_network_background_with_blue_neon_lines.png";
+import { AssessmentForm } from "@/components/AssessmentForm";
 
 export function Hero() {
+  const [assessmentOpen, setAssessmentOpen] = useState(false);
+
+  const scrollToServices = () => {
+    const servicesSection = document.getElementById("services");
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background Image with Overlay */}
@@ -57,10 +68,19 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.8 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 min-w-[180px] h-12 text-base font-semibold shadow-[0_0_20px_rgba(6,182,212,0.4)]">
+          <Button 
+            size="lg" 
+            onClick={() => setAssessmentOpen(true)}
+            className="bg-primary text-primary-foreground hover:bg-primary/90 min-w-[180px] h-12 text-base font-semibold shadow-[0_0_20px_rgba(6,182,212,0.4)]"
+          >
             Start Assessment <ArrowRight className="ml-2 w-4 h-4" />
           </Button>
-          <Button size="lg" variant="outline" className="border-white/10 hover:bg-white/5 hover:text-primary min-w-[180px] h-12 text-base backdrop-blur-sm">
+          <Button 
+            size="lg" 
+            variant="outline" 
+            onClick={scrollToServices}
+            className="border-white/10 hover:bg-white/5 hover:text-primary min-w-[180px] h-12 text-base backdrop-blur-sm"
+          >
             View Services
           </Button>
         </motion.div>
@@ -85,6 +105,8 @@ export function Hero() {
           ))}
         </motion.div>
       </div>
+
+      <AssessmentForm open={assessmentOpen} onOpenChange={setAssessmentOpen} />
     </section>
   );
 }

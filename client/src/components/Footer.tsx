@@ -11,9 +11,9 @@ export function Footer() {
           </div>
           
           <div className="flex gap-6 text-muted-foreground">
-            <a href="#" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-primary transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-primary transition-colors">Security</a>
+            <a href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</a>
+            <a href="/terms-of-service" className="hover:text-primary transition-colors">Terms of Service</a>
+            <a href="/security" className="hover:text-primary transition-colors">Security</a>
           </div>
 
           <div className="text-muted-foreground">

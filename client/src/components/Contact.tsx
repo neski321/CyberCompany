@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Globe } from "lucide-react";
+import { Mail, Phone, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SchedulingDialog } from "@/components/SchedulingDialog";
 
 export function Contact() {
+  const [schedulingOpen, setSchedulingOpen] = useState(false);
+
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none" />
@@ -40,7 +44,7 @@ export function Contact() {
               </div>
               <div>
                 <h3 className="font-bold text-lg mb-1">Global HQ</h3>
-                <p className="text-muted-foreground">San Francisco, CA</p>
+                <p className="text-muted-foreground">Kansas City, Kansas</p>
               </div>
             </div>
 
@@ -55,11 +59,17 @@ export function Contact() {
             </div>
           </div>
 
-          <Button size="lg" className="w-full md:w-auto min-w-[200px] h-14 text-lg bg-primary text-primary-foreground hover:bg-primary/90 font-bold shadow-[0_0_20px_rgba(6,182,212,0.4)]">
+          <Button 
+            size="lg" 
+            onClick={() => setSchedulingOpen(true)}
+            className="w-full md:w-auto min-w-[200px] h-14 text-lg bg-primary text-primary-foreground hover:bg-primary/90 font-bold shadow-[0_0_20px_rgba(6,182,212,0.4)]"
+          >
             Schedule Free Consultation
           </Button>
         </motion.div>
       </div>
+
+      <SchedulingDialog open={schedulingOpen} onOpenChange={setSchedulingOpen} />
     </section>
   );
 }
