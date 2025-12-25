@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Shield, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -7,6 +7,9 @@ import { Button } from "@/components/ui/button";
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [location, setLocation] = useLocation();
+  // Check if we're on home page - use both wouter location and window.location as fallback
+  const isHomePage = location === "/" || window.location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +18,78 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Handle scrolling to section after navigation to home page
+  useEffect(() => {
+    if (isHomePage) {
+      const hash = window.location.hash;
+      if (hash) {
+        const sectionId = hash.replace("#", "");
+        // Small delay to ensure page is rendered
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 200);
+      }
+    }
+  }, [isHomePage, location]);
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  const handleNavClick = (href: string, e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const sectionId = href.replace("#", "");
+    setIsMobileMenuOpen(false);
+    
+    // Check current pathname directly (more reliable than state)
+    const currentPath = window.location.pathname;
+    const onHomePage = currentPath === "/";
+    
+    if (onHomePage) {
+      // If on home page, just scroll to section and update hash
+      window.history.pushState(null, "", href);
+      scrollToSection(sectionId);
+    } else {
+      // If on another page, navigate to home first, then set hash and scroll
+      setLocation("/");
+      // Use setTimeout to ensure navigation completes before scrolling
+      setTimeout(() => {
+        window.history.pushState(null, "", href);
+        scrollToSection(sectionId);
+      }, 150);
+    }
+  };
+
+  const handleContactClick = (e?: React.MouseEvent<HTMLButtonElement>) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    setIsMobileMenuOpen(false);
+    
+    // Check current pathname directly (more reliable than state)
+    const currentPath = window.location.pathname;
+    const onHomePage = currentPath === "/";
+    
+    if (onHomePage) {
+      window.history.pushState(null, "", "#contact");
+      scrollToSection("contact");
+    } else {
+      setLocation("/");
+      setTimeout(() => {
+        window.history.pushState(null, "", "#contact");
+        scrollToSection("contact");
+      }, 150);
+    }
+  };
 
   const navLinks = [
     { name: "Services", href: "#services" },
@@ -43,13 +118,14 @@ export function Navbar() {
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-bold text-white hover:text-primary transition-colors whitespace-nowrap"
+              onClick={(e) => handleNavClick(link.href, e)}
+              className="text-sm font-bold text-white hover:text-primary transition-colors whitespace-nowrap cursor-pointer"
             >
               {link.name}
             </a>
           ))}
           <button 
-            onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={handleContactClick}
             className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] transition-all px-4 xl:px-6 py-2 rounded-lg whitespace-nowrap text-sm xl:text-base"
           >
             Secure Your Assets
@@ -58,8 +134,13 @@ export function Navbar() {
 
         {/* Mobile/Tablet Toggle - Show on screens smaller than lg */}
         <button
+          type="button"
           className="lg:hidden text-white flex-shrink-0 p-2 hover:bg-white/5 rounded-lg transition-colors"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setIsMobileMenuOpen((prev) => !prev);
+          }}
           aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -80,17 +161,14 @@ export function Navbar() {
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-lg font-bold text-white hover:text-primary transition-colors py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={(e) => handleNavClick(link.href, e)}
+                  className="text-lg font-bold text-white hover:text-primary transition-colors py-2 cursor-pointer"
                 >
                   {link.name}
                 </a>
               ))}
               <button 
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                }}
+                onClick={handleContactClick}
                 className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-3 rounded-lg font-semibold mt-2"
               >
                 Secure Your Assets
