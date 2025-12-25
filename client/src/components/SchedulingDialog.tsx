@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -86,6 +86,8 @@ const isDateDisabled = (date: Date) => {
 export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const formRef = useRef<HTMLFormElement>(null);
+  const dialogContentRef = useRef<HTMLDivElement>(null);
 
   const form = useForm<SchedulingFormValues>({
     resolver: zodResolver(schedulingSchema),
@@ -99,6 +101,33 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
       message: "",
     },
   });
+
+  // Handle mobile keyboard and scrolling
+  useEffect(() => {
+    if (!open) return;
+
+    const handleFocus = (e: FocusEvent) => {
+      const target = e.target as HTMLElement;
+      if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA')) {
+        // Small delay to let keyboard appear
+        setTimeout(() => {
+          target.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center',
+            inline: 'nearest'
+          });
+        }, 300);
+      }
+    };
+
+    const formElement = formRef.current;
+    if (formElement) {
+      formElement.addEventListener('focusin', handleFocus);
+      return () => {
+        formElement.removeEventListener('focusin', handleFocus);
+      };
+    }
+  }, [open]);
 
   async function onSubmit(data: SchedulingFormValues) {
     setIsSubmitting(true);
@@ -146,17 +175,17 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-card/95 backdrop-blur-xl border-white/10">
-        <DialogHeader>
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-              <CalendarIcon2 className="w-6 h-6 text-primary" />
+      <DialogContent className="max-w-2xl max-h-[95dvh] md:max-h-[90vh] overflow-y-auto bg-card/95 backdrop-blur-xl border-white/10 p-4 sm:p-6 w-[calc(100vw-2rem)] md:w-full [@media(max-width:768px)]:!top-4 [@media(max-width:768px)]:!bottom-4 [@media(max-width:768px)]:!translate-y-0 [@media(max-width:768px)]:!translate-x-[-50%]">
+        <DialogHeader className="sticky top-0 bg-card/95 backdrop-blur-sm z-10 pb-4 -mx-4 sm:-mx-6 px-4 sm:px-6 border-b border-white/5 mb-4">
+          <div className="flex items-center gap-2 sm:gap-3 mb-2">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <CalendarIcon2 className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
             </div>
-            <div>
-              <DialogTitle className="text-2xl font-display">
+            <div className="min-w-0 flex-1">
+              <DialogTitle className="text-xl sm:text-2xl font-display">
                 Schedule Free Consultation
               </DialogTitle>
-              <DialogDescription className="text-base mt-1">
+              <DialogDescription className="text-sm sm:text-base mt-1">
                 Choose a date and time that works for you. Our security experts will reach out to confirm.
               </DialogDescription>
             </div>
@@ -164,16 +193,21 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
         </DialogHeader>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
               <FormField
                 control={form.control}
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Name *</FormLabel>
+                    <FormLabel className="text-sm sm:text-base">Full Name *</FormLabel>
                     <FormControl>
-                      <Input placeholder="John Doe" {...field} />
+                      <Input 
+                        placeholder="John Doe" 
+                        {...field}
+                        className="text-base"
+                        autoComplete="name"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -185,9 +219,16 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email Address *</FormLabel>
+                    <FormLabel className="text-sm sm:text-base">Email Address *</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder="john@company.com" {...field} />
+                      <Input 
+                        type="email" 
+                        placeholder="john@company.com" 
+                        {...field}
+                        className="text-base"
+                        autoComplete="email"
+                        inputMode="email"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -195,15 +236,20 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
               <FormField
                 control={form.control}
                 name="company"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Company Name *</FormLabel>
+                    <FormLabel className="text-sm sm:text-base">Company Name *</FormLabel>
                     <FormControl>
-                      <Input placeholder="Acme Corp" {...field} />
+                      <Input 
+                        placeholder="Acme Corp" 
+                        {...field}
+                        className="text-base"
+                        autoComplete="organization"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -215,9 +261,16 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
                 name="phone"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone Number</FormLabel>
+                    <FormLabel className="text-sm sm:text-base">Phone Number</FormLabel>
                     <FormControl>
-                      <Input type="tel" placeholder="+1 (555) 123-4567" {...field} />
+                      <Input 
+                        type="tel" 
+                        placeholder="+1 (555) 123-4567" 
+                        {...field}
+                        className="text-base"
+                        autoComplete="tel"
+                        inputMode="tel"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -225,22 +278,23 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
               <FormField
                 control={form.control}
                 name="date"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel>Select Date *</FormLabel>
+                    <FormLabel className="text-sm sm:text-base">Select Date *</FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
                           <Button
                             variant="outline"
                             className={cn(
-                              "w-full pl-3 text-left font-normal",
+                              "w-full pl-3 text-left font-normal text-base h-10",
                               !field.value && "text-muted-foreground"
                             )}
+                            type="button"
                           >
                             {field.value ? (
                               format(field.value, "PPP")
@@ -251,7 +305,7 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
                           </Button>
                         </FormControl>
                       </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0" align="start">
+                      <PopoverContent className="w-auto p-0 z-[60]" align="start" side="bottom">
                         <Calendar
                           mode="single"
                           selected={field.value}
@@ -261,7 +315,7 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
                         />
                       </PopoverContent>
                     </Popover>
-                    <FormDescription>
+                    <FormDescription className="text-xs sm:text-sm">
                       Select a date for your consultation
                     </FormDescription>
                     <FormMessage />
@@ -274,10 +328,10 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
                 name="timeSlot"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Select Time *</FormLabel>
+                    <FormLabel className="text-sm sm:text-base">Select Time *</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger>
+                        <SelectTrigger className="text-base h-10">
                           <SelectValue placeholder="Choose a time slot">
                             {field.value ? (
                               <div className="flex items-center gap-2">
@@ -290,7 +344,7 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
                           </SelectValue>
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="z-[60]">
                         {timeSlots.map((time) => (
                           <SelectItem key={time} value={time}>
                             {time}
@@ -298,7 +352,7 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
                         ))}
                       </SelectContent>
                     </Select>
-                    <FormDescription>
+                    <FormDescription className="text-xs sm:text-sm">
                       All times are in your local timezone
                     </FormDescription>
                     <FormMessage />
@@ -312,15 +366,15 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
               name="message"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Additional Notes (Optional)</FormLabel>
+                  <FormLabel className="text-sm sm:text-base">Additional Notes (Optional)</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Any specific topics you'd like to discuss or questions you have..."
-                      className="min-h-[80px]"
+                      className="min-h-[80px] text-base resize-none"
                       {...field}
                     />
                   </FormControl>
-                  <FormDescription>
+                  <FormDescription className="text-xs sm:text-sm">
                     Help us prepare for our conversation
                   </FormDescription>
                   <FormMessage />
@@ -328,11 +382,11 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
               )}
             />
 
-            <div className="flex flex-col sm:flex-row gap-3 pt-4">
+            <div className="flex flex-col sm:flex-row gap-3 pt-4 pb-2 sticky bottom-0 bg-card/95 backdrop-blur-sm -mx-4 sm:-mx-6 px-4 sm:px-6 border-t border-white/5 mt-4">
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
+                className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 h-11 text-base"
               >
                 {isSubmitting ? (
                   <>
@@ -351,6 +405,7 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
                 variant="outline"
                 onClick={() => onOpenChange(false)}
                 disabled={isSubmitting}
+                className="h-11 text-base"
               >
                 Cancel
               </Button>

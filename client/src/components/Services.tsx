@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Shield, Lock, Search, Server, FileCode, Users, ChevronDown, CheckCircle2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 const services = [
   {
@@ -93,12 +92,17 @@ const services = [
 ];
 
 export function Services() {
-  const [openCards, setOpenCards] = useState<number[]>([]);
+  const [openCardIndex, setOpenCardIndex] = useState<number | null>(null);
 
-  const toggleCard = (index: number) => {
-    setOpenCards((prev) =>
-      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
-    );
+  const handleToggle = (clickedIndex: number) => {
+    setOpenCardIndex((currentIndex) => {
+      // If clicking the same card that's open, close it
+      if (currentIndex === clickedIndex) {
+        return null;
+      }
+      // Otherwise, open ONLY the clicked card
+      return clickedIndex;
+    });
   };
 
   return (
@@ -124,65 +128,85 @@ export function Services() {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
           {services.map((service, index) => {
-            const isOpen = openCards.includes(index);
+            // Use strict equality check - only this exact index should be open
+            // Double-check: ensure openCardIndex is a number and matches this index exactly
+            const isOpen = openCardIndex !== null && openCardIndex === index;
+            const cardId = `service-card-${index}`;
+            
             return (
               <motion.div
-                key={index}
+                key={cardId}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <Card className="bg-card/30 backdrop-blur-sm border-white/5 hover:border-primary/50 transition-all duration-300 h-full group hover:shadow-[0_0_20px_rgba(6,182,212,0.1)] flex flex-col">
+                <Card className="bg-card/30 backdrop-blur-sm border-white/5 hover:border-primary/50 transition-all duration-300 group hover:shadow-[0_0_20px_rgba(6,182,212,0.1)] flex flex-col w-full">
                   <CardHeader>
                     <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                       <service.icon className="w-6 h-6 text-primary" />
                     </div>
                     <CardTitle className="text-xl font-display">{service.title}</CardTitle>
                   </CardHeader>
-                  <CardContent className="flex-1 flex flex-col">
+                  <CardContent className="flex flex-col">
                     <CardDescription className="text-base leading-relaxed mb-4">
                       {service.description}
                     </CardDescription>
 
-                    <Collapsible open={isOpen} onOpenChange={() => toggleCard(index)}>
-                      <CollapsibleTrigger asChild>
-                        <Button
-                          variant="ghost"
-                          className="w-full justify-between text-sm text-primary hover:text-primary/80 p-0 h-auto font-medium"
-                        >
-                          <span>{isOpen ? "Hide Details" : "Learn More"}</span>
-                          <ChevronDown
-                            className={`h-4 w-4 transition-transform duration-200 ${
-                              isOpen ? "transform rotate-180" : ""
-                            }`}
-                          />
-                        </Button>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent className="mt-4 space-y-4">
-                        <div>
-                          <h4 className="text-sm font-semibold mb-2 text-foreground">
-                            What's Included:
-                          </h4>
-                          <ul className="space-y-2">
-                            {service.details.map((detail, i) => (
-                              <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
-                                <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                                <span>{detail}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                        <div className="pt-2 border-t border-white/5">
-                          <p className="text-xs text-muted-foreground">
-                            <span className="font-semibold text-foreground">Deliverables: </span>
-                            {service.deliverables}
-                          </p>
-                        </div>
-                      </CollapsibleContent>
-                    </Collapsible>
+                    <div className="w-full">
+                      <Button
+                        variant="ghost"
+                        type="button"
+                        className="w-full justify-between text-sm text-primary hover:text-primary/80 p-0 h-auto font-medium mb-4"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleToggle(index);
+                        }}
+                      >
+                        <span>{isOpen ? "Hide Details" : "Learn More"}</span>
+                        <ChevronDown
+                          className={`h-4 w-4 transition-transform duration-200 ${
+                            isOpen ? "transform rotate-180" : ""
+                          }`}
+                        />
+                      </Button>
+                      
+                      <AnimatePresence>
+                        {isOpen && (
+                          <motion.div
+                            key={`content-${index}-${openCardIndex}`}
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.3 }}
+                            className="space-y-4 overflow-hidden mt-4"
+                          >
+                            <div>
+                              <h4 className="text-sm font-semibold mb-2 text-foreground">
+                                What's Included:
+                              </h4>
+                              <ul className="space-y-2">
+                                {service.details.map((detail, i) => (
+                                  <li key={`${index}-detail-${i}`} className="flex items-start gap-2 text-sm text-muted-foreground">
+                                    <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                                    <span>{detail}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                            <div className="pt-2 border-t border-white/5">
+                              <p className="text-xs text-muted-foreground">
+                                <span className="font-semibold text-foreground">Deliverables: </span>
+                                {service.deliverables}
+                              </p>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>

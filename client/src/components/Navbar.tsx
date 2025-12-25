@@ -29,57 +29,58 @@ export function Navbar() {
         isScrolled ? "bg-background/80 backdrop-blur-md border-b border-white/5 py-4" : "bg-transparent py-6"
       }`}
     >
-      <div className="container mx-auto px-6 flex items-center justify-between">
-        <Link href="/">
+      <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between gap-4">
+        <Link href="/" className="flex-shrink-0">
           <div className="flex items-center gap-2 group cursor-pointer">
-            <Shield className="w-8 h-8 text-primary group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.5)] transition-all" />
-            <span className="font-display font-bold text-xl tracking-wide text-white">CYBERGUARD</span>
+            <Shield className="w-7 h-7 sm:w-8 sm:h-8 text-primary group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.5)] transition-all" />
+            <span className="font-display font-bold text-lg sm:text-xl tracking-wide text-white whitespace-nowrap">CYBERGUARD</span>
           </div>
         </Link>
 
-        {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8">
+        {/* Desktop Nav - Show on lg screens and up, with proper spacing */}
+        <div className="hidden lg:flex items-center gap-6 xl:gap-8 flex-1 justify-end ml-8">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
-              className="text-sm font-bold text-white hover:text-primary transition-colors"
+              className="text-sm font-bold text-white hover:text-primary transition-colors whitespace-nowrap"
             >
               {link.name}
             </a>
           ))}
           <button 
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] transition-all px-6 py-2 rounded-lg"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] transition-all px-4 xl:px-6 py-2 rounded-lg whitespace-nowrap text-sm xl:text-base"
           >
             Secure Your Assets
           </button>
         </div>
 
-        {/* Mobile Toggle */}
+        {/* Mobile/Tablet Toggle - Show on screens smaller than lg */}
         <button
-          className="md:hidden text-white"
+          className="lg:hidden text-white flex-shrink-0 p-2 hover:bg-white/5 rounded-lg transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle menu"
         >
-          {isMobileMenuOpen ? <X /> : <Menu />}
+          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile/Tablet Menu */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background/95 backdrop-blur-xl border-b border-white/10 overflow-hidden"
+            className="lg:hidden bg-background/95 backdrop-blur-xl border-b border-white/10 overflow-hidden"
           >
             <div className="flex flex-col p-6 gap-4">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-lg font-bold text-white hover:text-primary transition-colors"
+                  className="text-lg font-bold text-white hover:text-primary transition-colors py-2"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
@@ -90,9 +91,9 @@ export function Navbar() {
                   setIsMobileMenuOpen(false);
                   document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-2 rounded-lg font-semibold mt-4"
+                className="w-full bg-primary text-primary-foreground hover:bg-primary/90 py-3 rounded-lg font-semibold mt-2"
               >
-                Get Started
+                Secure Your Assets
               </button>
             </div>
           </motion.div>
