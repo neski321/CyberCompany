@@ -1,93 +1,79 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Shield, Lock, Search, Server, FileCode, Users, ChevronDown, CheckCircle2 } from "lucide-react";
+import { Shield, FileCheck, Users, TrendingUp, Search, ChevronDown, CheckCircle2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
 const services = [
   {
-    icon: Search,
-    title: "Penetration Testing",
-    description: "Rigorous ethical hacking to identify vulnerabilities before malicious actors do.",
-    details: [
-      "External and internal network penetration testing",
-      "Web application security assessment",
-      "Mobile application security testing",
-      "Social engineering simulations",
-      "Physical security assessments",
-      "Detailed vulnerability reports with remediation guidance",
-    ],
-    deliverables: "Comprehensive penetration test report, executive summary, remediation roadmap",
-  },
-  {
     icon: Shield,
-    title: "Security Audits",
-    description: "Comprehensive review of your infrastructure, compliance, and security policies.",
+    title: "Compliance & Risk Governance",
+    description: "Build robust governance frameworks and navigate complex compliance requirements with confidence.",
     details: [
-      "ISO 27001 compliance assessment",
-      "GDPR, HIPAA, PCI-DSS compliance reviews",
-      "Security policy and procedure evaluation",
-      "Access control and identity management audit",
-      "Data protection and privacy assessment",
-      "Third-party vendor security evaluation",
+      "Strategic risk management program development",
+      "Policy framework design and implementation",
+      "Compliance readiness for NIST, ISO 27001, SOC 2, PCI-DSS, HIPAA, and CMMC",
+      "Control environment assessment and optimization",
+      "Regulatory gap analysis and remediation planning",
+      "Ongoing compliance monitoring and reporting",
     ],
-    deliverables: "Audit report, compliance gap analysis, policy recommendations",
+    deliverables: "GRC framework documentation, risk register, compliance roadmap, policy templates",
   },
   {
-    icon: Lock,
-    title: "Incident Response",
-    description: "24/7 rapid response team to contain and mitigate security breaches effectively.",
+    icon: FileCheck,
+    title: "Security Audits & Virtual CISO",
+    description: "Independent security assessments and strategic security leadership tailored to your organization.",
     details: [
-      "24/7 Security Operations Center (SOC) monitoring",
-      "Real-time threat detection and analysis",
-      "Rapid containment and eradication procedures",
-      "Forensic investigation and root cause analysis",
-      "Business continuity planning",
-      "Post-incident review and lessons learned",
+      "Comprehensive IT security audit and control testing",
+      "Security posture evaluation and gap identification",
+      "Virtual Chief Information Security Officer (vCISO) leadership",
+      "Long-term security program development and maturity",
+      "Risk management strategy and execution",
+      "Board-level security reporting and communication",
     ],
-    deliverables: "Incident response plan, forensic report, security hardening recommendations",
-  },
-  {
-    icon: Server,
-    title: "Network Defense",
-    description: "Architecture design and implementation of fortified network perimeters.",
-    details: [
-      "Network architecture security design",
-      "Firewall and intrusion detection system configuration",
-      "Network segmentation and micro-segmentation",
-      "DDoS protection and mitigation",
-      "VPN and secure remote access setup",
-      "Network monitoring and SIEM implementation",
-    ],
-    deliverables: "Network security architecture, implementation guide, monitoring dashboard",
-  },
-  {
-    icon: FileCode,
-    title: "Code Review",
-    description: "Static and dynamic analysis of your application code to ensure secure development.",
-    details: [
-      "Static Application Security Testing (SAST)",
-      "Dynamic Application Security Testing (DAST)",
-      "Interactive Application Security Testing (IAST)",
-      "Dependency vulnerability scanning",
-      "Secure coding best practices review",
-      "CI/CD pipeline security integration",
-    ],
-    deliverables: "Code review report, vulnerability findings, secure coding guidelines",
+    deliverables: "Audit findings report, vCISO engagement plan, security roadmap, executive briefings",
   },
   {
     icon: Users,
-    title: "Staff Training",
-    description: "Empower your team with the knowledge to recognize and prevent social engineering.",
+    title: "Security Training & Operations",
+    description: "Strengthen your human and technical defenses through training and proactive vulnerability management.",
     details: [
-      "Phishing simulation and awareness training",
-      "Security awareness workshops",
-      "Secure coding training for developers",
-      "Incident response team training",
-      "Executive cybersecurity briefings",
-      "Custom training programs tailored to your industry",
+      "Customized security awareness training programs",
+      "Phishing simulation campaigns and education",
+      "Vulnerability identification and assessment services",
+      "Threat monitoring and remediation guidance",
+      "Security culture development initiatives",
+      "Ongoing security awareness metrics and reporting",
     ],
-    deliverables: "Training materials, assessment reports, ongoing support resources",
+    deliverables: "Training curriculum, awareness campaign materials, vulnerability assessment report, progress metrics",
+  },
+  {
+    icon: TrendingUp,
+    title: "Cybersecurity Strategy & Advisory",
+    description: "Strategic guidance and planning to align technology decisions with your security objectives.",
+    details: [
+      "Security program strategy and roadmap development",
+      "Technology risk assessment and mitigation planning",
+      "Security architecture review and recommendations",
+      "Strategic planning for security investments",
+      "Executive security briefings and decision support",
+      "Vendor and technology evaluation guidance",
+    ],
+    deliverables: "Strategic security plan, technology recommendations, executive reports, decision frameworks",
+  },
+  {
+    icon: Search,
+    title: "Security Testing & Assessment",
+    description: "Real-world attack simulations that validate your defenses and uncover exploitable weaknesses.",
+    details: [
+      "Network infrastructure penetration testing",
+      "Web and mobile application security testing",
+      "Cloud environment security assessments",
+      "Social engineering and phishing simulations",
+      "Manual exploit validation and impact analysis",
+      "Detailed remediation guidance and verification testing",
+    ],
+    deliverables: "Penetration test report, executive summary, remediation recommendations, retest validation",
   },
 ];
 
@@ -119,11 +105,11 @@ export function Services() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
-              Comprehensive <span className="text-primary">Protection</span>
+              Transforming Vulnerabilities into <span className="text-primary">Security</span>
             </h2>
             <p className="text-lg text-muted-foreground">
-              Our suite of cybersecurity services is designed to cover every attack vector, 
-              ensuring your organization remains resilient in a hostile digital landscape.
+              We provide comprehensive security solutions designed to strengthen your defenses, 
+              manage risk, and achieve compliance while supporting your business objectives.
             </p>
           </motion.div>
         </div>

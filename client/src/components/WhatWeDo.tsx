@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { 
   Target, 
-  Zap, 
-  Eye, 
+  FileCheck, 
+  Users, 
   ShieldCheck,
   Search,
   FileText,
@@ -14,64 +14,64 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 const methodologies = [
   {
     icon: Target,
-    title: "Threat Assessment",
-    description: "We begin by understanding your unique threat landscape, identifying potential attack vectors, and mapping your digital assets to create a comprehensive security baseline.",
+    title: "Risk & Compliance Assessment",
+    description: "We start by evaluating your current risk posture and compliance status, identifying gaps in governance frameworks and regulatory requirements to establish a clear security foundation.",
   },
   {
-    icon: Eye,
-    title: "Continuous Monitoring",
-    description: "Our 24/7 Security Operations Center (SOC) provides real-time threat detection, log analysis, and proactive security monitoring to catch threats before they impact your business.",
+    icon: FileCheck,
+    title: "Comprehensive Auditing",
+    description: "Our independent security audits examine your controls, policies, and procedures, providing objective insights into your security posture and areas needing improvement.",
   },
   {
-    icon: Zap,
-    title: "Rapid Response",
-    description: "When incidents occur, our expert team springs into action with proven containment strategies, minimizing damage and restoring operations quickly.",
+    icon: Users,
+    title: "Training & Awareness",
+    description: "We empower your team through targeted security training programs and awareness initiatives, building a security-conscious culture that strengthens your human defenses.",
   },
   {
     icon: ShieldCheck,
-    title: "Proactive Defense",
-    description: "We don't wait for breaches. Our proactive approach includes regular security assessments, penetration testing, and continuous improvement of your security posture.",
+    title: "Strategic Planning",
+    description: "Our strategic approach combines security testing, risk management, and program development to continuously strengthen your security posture and align with business objectives.",
   },
 ];
 
 const approach = [
   {
     icon: Search,
-    title: "Risk-Based Approach",
-    description: "We prioritize security investments based on your actual risk profile, ensuring maximum protection where it matters most while optimizing your security budget.",
+    title: "Governance-First Strategy",
+    description: "We build security programs on strong governance foundations, ensuring policies, procedures, and controls align with your risk tolerance and compliance obligations.",
   },
   {
     icon: FileText,
-    title: "Customized Solutions",
-    description: "Every organization is unique. We tailor our security solutions to fit your specific industry, size, compliance requirements, and business objectives.",
+    title: "Tailored Implementation",
+    description: "Every organization faces unique challenges. We design security solutions that fit your industry, scale, regulatory environment, and strategic goals.",
   },
   {
     icon: CheckCircle2,
-    title: "Measurable Results",
-    description: "We establish clear security metrics and KPIs, providing regular reports so you can see the tangible improvement in your security posture over time.",
+    title: "Evidence-Based Outcomes",
+    description: "We define clear security metrics and deliver regular reporting, enabling you to track progress and demonstrate the value of your security investments.",
   },
 ];
 
 const process = [
   {
     step: "01",
-    title: "Discovery & Assessment",
-    description: "We conduct a comprehensive assessment of your current security posture, identifying vulnerabilities, risks, and areas for improvement.",
+    title: "Evaluation & Gap Analysis",
+    description: "We assess your security posture, compliance status, and risk exposure, identifying critical gaps and opportunities for improvement.",
   },
   {
     step: "02",
-    title: "Strategic Planning",
-    description: "Based on our findings, we develop a customized security strategy aligned with your business objectives and risk tolerance.",
+    title: "Strategy Development",
+    description: "We create a customized security roadmap that addresses your specific risks, compliance needs, and business objectives.",
   },
   {
     step: "03",
-    title: "Implementation",
-    description: "Our team implements security controls, tools, and processes, ensuring minimal disruption to your operations.",
+    title: "Program Execution",
+    description: "We implement governance frameworks, security controls, training programs, and advisory services with minimal operational impact.",
   },
   {
     step: "04",
-    title: "Monitoring & Optimization",
-    description: "We provide ongoing monitoring, regular assessments, and continuous optimization to keep your security posture strong.",
+    title: "Continuous Improvement",
+    description: "We provide ongoing audits, assessments, training updates, and strategic guidance to maintain and enhance your security maturity.",
   },
 ];
 
