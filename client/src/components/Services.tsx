@@ -1,10 +1,20 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Shield, FileCheck, Users, TrendingUp, Search, ChevronDown, CheckCircle2 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+"use client"
 
-const services = [
+import { useState, useEffect, useRef } from "react"
+import { motion, AnimatePresence, LayoutGroup } from "framer-motion"
+import { Shield, FileCheck, Users, TrendingUp, Search, ChevronDown, CheckCircle2, Sparkles, LucideIcon } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+
+interface Service {
+  icon: LucideIcon
+  title: string
+  description: string
+  details: string[]
+  deliverables: string
+}
+
+const services: Service[] = [
   {
     icon: Shield,
     title: "Compliance & Risk Governance",
@@ -36,7 +46,8 @@ const services = [
   {
     icon: Users,
     title: "Security Training & Operations",
-    description: "Strengthen your human and technical defenses through training and proactive vulnerability management.",
+    description:
+      "Strengthen your human and technical defenses through training and proactive vulnerability management.",
     details: [
       "Customized security awareness training programs",
       "Phishing simulation campaigns and education",
@@ -45,7 +56,8 @@ const services = [
       "Security culture development initiatives",
       "Ongoing security awareness metrics and reporting",
     ],
-    deliverables: "Training curriculum, awareness campaign materials, vulnerability assessment report, progress metrics",
+    deliverables:
+      "Training curriculum, awareness campaign materials, vulnerability assessment report, progress metrics",
   },
   {
     icon: TrendingUp,
@@ -75,155 +87,328 @@ const services = [
     ],
     deliverables: "Penetration test report, executive summary, remediation recommendations, retest validation",
   },
-];
+]
+
+const toRomanNumeral = (num: number): string => {
+  const romanNumerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
+  return romanNumerals[num - 1] || String(num)
+}
+
+// Card component extracted for reuse
+function ServiceCard({
+  service,
+  index,
+  isOpen,
+  onToggle,
+}: {
+  service: Service
+  index: number
+  isOpen: boolean
+  onToggle: (index: number) => void
+}) {
+  const IconComponent = service.icon
+  
+  return (
+    <Card
+      className={`
+        relative overflow-hidden
+        bg-gradient-to-br from-card/80 to-card/40
+        backdrop-blur-xl
+        border border-border/50
+        transition-colors duration-300
+        group
+        hover:border-primary/40
+        hover:shadow-2xl hover:shadow-primary/10
+        ${isOpen ? "border-primary/50 shadow-xl shadow-primary/10" : ""}
+      `}
+    >
+      {/* Gradient overlay on hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+      {/* Card number indicator */}
+      <div className="absolute top-4 right-4 text-7xl font-bold text-primary/5 group-hover:text-primary/10 transition-colors select-none font-serif italic">
+        {toRomanNumeral(index + 1)}
+      </div>
+
+      <CardHeader className="relative pb-2">
+        {/* Icon with gradient ring */}
+        <div className="relative mb-5">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center ring-1 ring-primary/20 group-hover:ring-primary/40 transition-all duration-300 group-hover:scale-105">
+            <IconComponent className="w-7 h-7 text-primary" />
+          </div>
+        </div>
+        <CardTitle className="text-xl font-semibold tracking-tight group-hover:text-primary transition-colors duration-300">
+          {service.title}
+        </CardTitle>
+      </CardHeader>
+
+      <CardContent className="relative pt-0">
+        <CardDescription className="text-base text-muted-foreground leading-relaxed mb-5">
+          {service.description}
+        </CardDescription>
+
+        <div className="w-full">
+          <Button
+            variant="ghost"
+            type="button"
+            className="w-full justify-between text-sm font-medium p-0 h-auto text-primary/80 hover:text-primary hover:bg-transparent transition-colors"
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              onToggle(index)
+            }}
+          >
+            <span className="flex items-center gap-2">{isOpen ? "Hide Details" : "View Details"}</span>
+            <motion.div
+              className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors"
+              animate={{ rotate: isOpen ? 180 : 0 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <ChevronDown className="h-4 w-4" />
+            </motion.div>
+          </Button>
+
+          <AnimatePresence mode="wait">
+            {isOpen && (
+              <motion.div
+                key={`content-${index}`}
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: "auto" }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{
+                  duration: 0.4,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="overflow-hidden"
+              >
+                <div className="pt-5 mt-5 border-t border-border/50 space-y-5">
+                  <div>
+                    <h4 className="text-sm font-semibold mb-3 text-foreground flex items-center gap-2">
+                      <span className="w-1 h-4 bg-primary rounded-full" />
+                      What's Included
+                    </h4>
+                    <ul className="space-y-2.5">
+                      {service.details.map((detail, i) => (
+                        <motion.li
+                          key={`${index}-detail-${i}`}
+                          initial={{ opacity: 0, x: -15 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{
+                            delay: i * 0.05,
+                            duration: 0.3,
+                            ease: [0.16, 1, 0.3, 1],
+                          }}
+                          className="flex items-start gap-3 text-sm text-muted-foreground"
+                        >
+                          <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                          <span>{detail}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
+                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      delay: service.details.length * 0.05 + 0.1,
+                      duration: 0.3,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="p-3 rounded-xl bg-muted/50 border border-border/50"
+                  >
+                    <p className="text-xs text-muted-foreground">
+                      <span className="font-semibold text-foreground">Deliverables: </span>
+                      {service.deliverables}
+                    </p>
+                  </motion.div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
 
 export function Services() {
-  const [openCardIndex, setOpenCardIndex] = useState<number | null>(null);
+  const [openCardIndex, setOpenCardIndex] = useState<number | null>(null)
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
+  const justOpenedRef = useRef(false)
 
   const handleToggle = (clickedIndex: number) => {
     setOpenCardIndex((currentIndex) => {
-      // If clicking the same card that's open, close it
       if (currentIndex === clickedIndex) {
-        return null;
+        return null
       }
-      // Otherwise, open ONLY the clicked card
-      return clickedIndex;
-    });
-  };
+      justOpenedRef.current = true
+      setTimeout(() => {
+        justOpenedRef.current = false
+      }, 50)
+      return clickedIndex
+    })
+  }
+
+  // Close expanded card when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (justOpenedRef.current) return
+      if (openCardIndex === null) return
+
+      const clickedElement = event.target as Node
+      const openCard = cardRefs.current[openCardIndex]
+
+      if (openCard && !openCard.contains(clickedElement)) {
+        setOpenCardIndex(null)
+      }
+    }
+
+    document.addEventListener("click", handleClickOutside)
+    return () => document.removeEventListener("click", handleClickOutside)
+  }, [openCardIndex])
+
+  // Distribute cards across columns
+  const getColumnCards = (numColumns: number, columnIndex: number) => {
+    return services
+      .map((service, index) => ({ service, index }))
+      .filter((_, i) => i % numColumns === columnIndex)
+  }
+
+  const renderColumnCard = (service: Service, index: number, keyPrefix: string) => {
+    const isOpen = openCardIndex === index
+
+    return (
+      <motion.div
+        key={`${keyPrefix}-${index}`}
+        ref={(el) => {
+          cardRefs.current[index] = el
+        }}
+        layout
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{
+          duration: 0.5,
+          delay: index * 0.08,
+          ease: [0.16, 1, 0.3, 1],
+          layout: {
+            type: "spring",
+            stiffness: 300,
+            damping: 30,
+          },
+        }}
+      >
+        <ServiceCard service={service} index={index} isOpen={isOpen} onToggle={handleToggle} />
+      </motion.div>
+    )
+  }
 
   return (
-    <section id="services" className="py-24 bg-background relative overflow-hidden">
-      {/* Decorative Glow */}
-      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+    <section
+      id="services"
+      className="py-28 bg-gradient-to-b from-background via-background to-muted/20 relative overflow-hidden"
+    >
+      {/* Decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-40 right-10 w-96 h-96 bg-primary/8 rounded-full blur-[150px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-primary/3 to-transparent rounded-full blur-3xl opacity-50" />
+      </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-20">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{
+              duration: 0.8,
+              ease: [0.16, 1, 0.3, 1],
+            }}
+            className="space-y-6"
           >
-            <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
-              Transforming Vulnerabilities into <span className="text-primary">Security</span>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium">
+              <Sparkles className="w-4 h-4" />
+              <span>Our Services</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-balance">
+              Transforming Vulnerabilities into{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-primary/70">
+                Security
+              </span>
             </h2>
-            <p className="text-lg text-muted-foreground">
-              We provide comprehensive security solutions designed to strengthen your defenses, 
-              manage risk, and achieve compliance while supporting your business objectives.
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto text-pretty">
+              Comprehensive security solutions designed to strengthen your defenses, manage risk, and achieve compliance
+              while supporting your business objectives.
             </p>
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start">
-          {services.map((service, index) => {
-            // Use strict equality check - only this exact index should be open
-            // Double-check: ensure openCardIndex is a number and matches this index exactly
-            const isOpen = openCardIndex !== null && openCardIndex === index;
-            const cardId = `service-card-${index}`;
-            
-            return (
-              <motion.div
-                key={cardId}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <Card className="bg-card/30 backdrop-blur-sm border-white/5 hover:border-primary/50 transition-all duration-300 group hover:shadow-[0_0_20px_rgba(6,182,212,0.1)] flex flex-col w-full">
-                  <CardHeader>
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                      <service.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl font-display">{service.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent className="flex flex-col">
-                    <CardDescription className="text-base leading-relaxed mb-4">
-                      {service.description}
-                    </CardDescription>
+        {/* Services Grid - Flex columns for smooth animations */}
+        <LayoutGroup>
+          {/* Mobile: Single column */}
+          <div className="flex flex-col gap-5 md:hidden">
+            {services.map((service, index) => renderColumnCard(service, index, "mobile"))}
+          </div>
 
-                    <div className="w-full">
-                      <Button
-                        variant="ghost"
-                        type="button"
-                        className="w-full justify-between text-sm text-primary hover:text-primary/80 p-0 h-auto font-medium mb-4"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          handleToggle(index);
-                        }}
-                      >
-                        <span>{isOpen ? "Hide Details" : "Learn More"}</span>
-                        <ChevronDown
-                          className={`h-4 w-4 transition-transform duration-200 ${
-                            isOpen ? "transform rotate-180" : ""
-                          }`}
-                        />
-                      </Button>
-                      
-                      <AnimatePresence>
-                        {isOpen && (
-                          <motion.div
-                            key={`content-${index}-${openCardIndex}`}
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.3 }}
-                            className="space-y-4 overflow-hidden mt-4"
-                          >
-                            <div>
-                              <h4 className="text-sm font-semibold mb-2 text-foreground">
-                                What's Included:
-                              </h4>
-                              <ul className="space-y-2">
-                                {service.details.map((detail, i) => (
-                                  <li key={`${index}-detail-${i}`} className="flex items-start gap-2 text-sm text-muted-foreground">
-                                    <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                                    <span>{detail}</span>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                            <div className="pt-2 border-t border-white/5">
-                              <p className="text-xs text-muted-foreground">
-                                <span className="font-semibold text-foreground">Deliverables: </span>
-                                {service.deliverables}
-                              </p>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            );
-          })}
-        </div>
+          {/* Tablet: 2 columns */}
+          <div className="hidden md:flex lg:hidden gap-5">
+            {[0, 1].map((colIndex) => (
+              <div key={colIndex} className="flex flex-col gap-5 flex-1">
+                {getColumnCards(2, colIndex).map(({ service, index }) =>
+                  renderColumnCard(service, index, "tablet")
+                )}
+              </div>
+            ))}
+          </div>
 
+          {/* Desktop: 3 columns */}
+          <div className="hidden lg:flex gap-5">
+            {[0, 1, 2].map((colIndex) => (
+              <div key={colIndex} className="flex flex-col gap-5 flex-1">
+                {getColumnCards(3, colIndex).map(({ service, index }) =>
+                  renderColumnCard(service, index, "desktop")
+                )}
+              </div>
+            ))}
+          </div>
+        </LayoutGroup>
+
+        {/* CTA Section */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-12 text-center"
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{
+            duration: 0.8,
+            delay: 0.4,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+          className="mt-20 text-center"
         >
-          <p className="text-muted-foreground mb-6">
-            Need a custom solution? Our experts can tailor a security program to your specific needs.
-          </p>
-          <Button
-            size="lg"
-            onClick={() => {
-              const contactSection = document.getElementById("contact");
-              if (contactSection) {
-                contactSection.scrollIntoView({ behavior: "smooth", block: "start" });
-              }
-            }}
-            className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-[0_0_20px_rgba(6,182,212,0.4)]"
-          >
-            Get Custom Quote
-          </Button>
+          <div className="inline-flex flex-col items-center gap-6 p-8 rounded-3xl bg-gradient-to-br from-muted/50 to-muted/20 border border-border/50 backdrop-blur-sm">
+            <p className="text-muted-foreground text-lg max-w-md">
+              Need a custom solution? Our experts can tailor a security program to your specific needs.
+            </p>
+            <Button
+              size="lg"
+              onClick={() => {
+                const contactSection = document.getElementById("contact")
+                if (contactSection) {
+                  contactSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  })
+                }
+              }}
+              className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 px-8"
+            >
+              Get Custom Quote
+            </Button>
+          </div>
         </motion.div>
       </div>
     </section>
-  );
+  )
 }
