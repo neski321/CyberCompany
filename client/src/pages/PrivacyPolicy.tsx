@@ -1,3 +1,4 @@
+import { SEO } from "@/components/SEO";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Shield, Lock, Eye, FileText } from "lucide-react";
@@ -6,9 +7,14 @@ import { Card, CardContent } from "@/components/ui/card";
 export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="Privacy Policy"
+        description="CyberGuard Consulting privacy policy. Learn how we collect, use, disclose, and safeguard your information when you visit our website or use our services."
+        path="/privacy-policy"
+      />
       <Navbar />
       
-      <main className="pt-24 pb-16">
+      <main id="main-content" className="pt-24 pb-16">
         <div className="container mx-auto px-6 max-w-4xl">
           {/* Header */}
           <div className="text-center mb-12">

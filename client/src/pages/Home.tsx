@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "wouter";
+import { SEO } from "@/components/SEO";
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Services } from "@/components/Services";
@@ -27,6 +28,11 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-primary/20">
+      <SEO
+        title="CyberGuard | Elite Cybersecurity Consulting"
+        description="Professional cybersecurity consulting services. Compliance, risk governance, security audits, vCISO, and penetration testing. Protect your digital assets with enterprise-grade security strategies."
+        path="/"
+      />
       <Navbar />
       <Hero />
       <Services />

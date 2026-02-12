@@ -1,3 +1,4 @@
+import { SEO } from "@/components/SEO";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FileText, Scale, AlertTriangle, CheckCircle2 } from "lucide-react";
@@ -6,9 +7,14 @@ import { Card, CardContent } from "@/components/ui/card";
 export default function TermsOfService() {
   return (
     <div className="min-h-screen bg-background text-foreground">
+      <SEO
+        title="Terms of Service"
+        description="CyberGuard Consulting terms of service. Read the terms governing your access to and use of our website and cybersecurity consulting services."
+        path="/terms-of-service"
+      />
       <Navbar />
       
-      <main className="pt-24 pb-16">
+      <main id="main-content" className="pt-24 pb-16">
         <div className="container mx-auto px-6 max-w-4xl">
           {/* Header */}
           <div className="text-center mb-12">
