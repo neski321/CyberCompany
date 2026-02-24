@@ -9,7 +9,7 @@ export default function PrivacyPolicy() {
     <div className="min-h-screen bg-background text-foreground">
       <SEO
         title="Privacy Policy"
-        description="CyberGuard Consulting privacy policy. Learn how we collect, use, disclose, and safeguard your information when you visit our website or use our services."
+        description="RiskWise Global Consulting privacy policy. Learn how we collect, use, disclose, and safeguard your information when you visit our website or use our services."
         path="/privacy-policy"
       />
       <Navbar />
@@ -38,7 +38,7 @@ export default function PrivacyPolicy() {
                   Introduction
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  CyberGuard Consulting ("we," "our," or "us") is committed to protecting your privacy. 
+                  RiskWise Global Consulting ("we," "our," or "us") is committed to protecting your privacy. 
                   This Privacy Policy explains how we collect, use, disclose, and safeguard your information 
                   when you visit our website or use our services. Please read this policy carefully to understand 
                   our practices regarding your personal data.
@@ -149,8 +149,8 @@ export default function PrivacyPolicy() {
                 </ul>
                 <p className="mt-4 text-muted-foreground leading-relaxed">
                   To exercise these rights, please contact us at{" "}
-                  <a href="mailto:privacy@cyberguard.com" className="text-primary hover:underline">
-                    privacy@cyberguard.com
+                  <a href="mailto:privacy@riskwiseglobalconsulting.com" className="text-primary hover:underline">
+                    privacy@riskwiseglobalconsulting.com
                   </a>
                 </p>
               </CardContent>
@@ -190,8 +190,8 @@ export default function PrivacyPolicy() {
                 </p>
                 <div className="mt-4 space-y-2 text-muted-foreground">
                   <p><strong className="text-foreground">Email:</strong>{" "}
-                    <a href="mailto:privacy@cyberguard.com" className="text-primary hover:underline">
-                      privacy@cyberguard.com
+                    <a href="mailto:privacy@riskwiseglobalconsulting.com" className="text-primary hover:underline">
+                      privacy@riskwiseglobalconsulting.com
                     </a>
                   </p>
                   <p><strong className="text-foreground">Address:</strong> Kansas City, Kansas, United States</p>

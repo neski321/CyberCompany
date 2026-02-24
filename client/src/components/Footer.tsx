@@ -1,3 +1,4 @@
+import { Link } from "wouter";
 import { Shield } from "lucide-react";
 
 export function Footer() {
@@ -7,17 +8,23 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-2">
             <Shield className="w-6 h-6 text-primary" />
-            <span className="font-display font-bold text-lg">CYBERGUARD</span>
+            <span className="font-display font-bold text-lg">RISKWISE GLOBAL CONSULTING</span>
           </div>
           
           <div className="flex gap-6 text-muted-foreground">
-            <a href="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</a>
-            <a href="/terms-of-service" className="hover:text-primary transition-colors">Terms of Service</a>
-            <a href="/security" className="hover:text-primary transition-colors">Security</a>
+            <Link href="/privacy-policy" className="hover:text-primary transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms-of-service" className="hover:text-primary transition-colors">
+              Terms of Service
+            </Link>
+            <Link href="/security" className="hover:text-primary transition-colors">
+              Security
+            </Link>
           </div>
 
           <div className="text-muted-foreground">
-            © {new Date().getFullYear()} CyberGuard Consulting. All rights reserved.
+            © {new Date().getFullYear()} RiskWise Global Consulting. All rights reserved.
           </div>
         </div>
       </div>

@@ -165,7 +165,7 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
         description:
           error instanceof Error
             ? error.message
-            : "Please try again or contact us directly at secure@cyberguard.com",
+            : "Please try again or contact us directly at secure@riskwiseglobalconsulting.com",
         variant: "destructive",
       });
     } finally {

@@ -108,7 +108,7 @@ export function AssessmentForm({ open, onOpenChange }: AssessmentFormProps) {
       console.error("Assessment submission error:", error);
       toast({
         title: "Submission Failed",
-        description: error instanceof Error ? error.message : "Please try again or contact us directly at secure@cyberguard.com",
+        description: error instanceof Error ? error.message : "Please try again or contact us directly at secure@riskwiseglobalconsulting.com",
         variant: "destructive",
       });
     } finally {
