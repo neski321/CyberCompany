@@ -9,7 +9,7 @@ export default function Security() {
     <div className="min-h-screen bg-background text-foreground">
       <SEO
         title="Security Practices"
-        description="Learn how CyberGuard Consulting protects your data with industry-leading security practices, encryption, and compliance standards."
+        description="Learn how RiskWise Global Consulting protects your data with industry-leading security practices, encryption, and compliance standards."
         path="/security"
       />
       <Navbar />
@@ -35,7 +35,7 @@ export default function Security() {
               <CardContent className="p-8">
                 <h2 className="text-2xl font-display font-bold mb-4">Our Security Commitment</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  At CyberGuard Consulting, security is not just our business—it's our foundation. We implement 
+                  At RiskWise Global Consulting, security is not just our business—it's our foundation. We implement 
                   industry-leading security practices to protect your information and maintain the trust you place 
                   in us. This page outlines our security measures and practices.
                 </p>
@@ -244,8 +244,8 @@ export default function Security() {
                 </p>
                 <div className="space-y-2 text-muted-foreground">
                   <p><strong className="text-foreground">Security Email:</strong>{" "}
-                    <a href="mailto:security@cyberguard.com" className="text-primary hover:underline">
-                      security@cyberguard.com
+                    <a href="mailto:security@riskwiseglobalconsulting.com" className="text-primary hover:underline">
+                      security@riskwiseglobalconsulting.com
                     </a>
                   </p>
                   <p className="mt-4 leading-relaxed">

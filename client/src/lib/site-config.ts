@@ -5,7 +5,7 @@
 const SITE_URL = import.meta.env.VITE_SITE_URL || "https://yourdomain.com";
 
 export const SITE_CONFIG = {
-  name: "CyberGuard",
+  name: "RiskWise Global Consulting",
   tagline: "Elite Cybersecurity Consulting",
   baseUrl: typeof window !== "undefined" ? window.location.origin : SITE_URL,
 } as const;

@@ -108,7 +108,7 @@ export function Navbar() {
         <Link href="/" className="flex-shrink-0">
           <div className="flex items-center gap-2 group cursor-pointer">
             <Shield className="w-7 h-7 sm:w-8 sm:h-8 text-primary group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.5)] transition-all" />
-            <span className="font-display font-bold text-lg sm:text-xl tracking-wide text-white whitespace-nowrap">CYBERGUARD</span>
+            <span className="font-display font-bold text-lg sm:text-xl tracking-wide text-white whitespace-nowrap">RISKWISE GLOBAL CONSULTING</span>
           </div>
         </Link>
 

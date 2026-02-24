@@ -9,7 +9,7 @@ export default function TermsOfService() {
     <div className="min-h-screen bg-background text-foreground">
       <SEO
         title="Terms of Service"
-        description="CyberGuard Consulting terms of service. Read the terms governing your access to and use of our website and cybersecurity consulting services."
+        description="RiskWise Global Consulting terms of service. Read the terms governing your access to and use of our website and cybersecurity consulting services."
         path="/terms-of-service"
       />
       <Navbar />
@@ -38,7 +38,7 @@ export default function TermsOfService() {
                   Agreement to Terms
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  These Terms of Service ("Terms") govern your access to and use of the CyberGuard Consulting 
+                  These Terms of Service ("Terms") govern your access to and use of the RiskWise Global Consulting 
                   website and services. By accessing or using our website, you agree to be bound by these Terms. 
                   If you disagree with any part of these terms, you may not access our services.
                 </p>
@@ -50,7 +50,7 @@ export default function TermsOfService() {
               <CardContent className="p-8">
                 <h2 className="text-2xl font-display font-bold mb-4">Services Description</h2>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  CyberGuard Consulting provides cybersecurity consulting services, including but not limited to:
+                  RiskWise Global Consulting provides cybersecurity consulting services, including but not limited to:
                 </p>
                 <ul className="list-disc list-inside space-y-2 text-muted-foreground ml-4">
                   <li>Security assessments and penetration testing</li>
@@ -94,7 +94,7 @@ export default function TermsOfService() {
                 <h2 className="text-2xl font-display font-bold mb-4">Intellectual Property Rights</h2>
                 <p className="text-muted-foreground leading-relaxed mb-4">
                   All content, features, and functionality of our website and services, including but not limited 
-                  to text, graphics, logos, and software, are owned by CyberGuard Consulting and are protected 
+                  to text, graphics, logos, and software, are owned by RiskWise Global Consulting and are protected 
                   by copyright, trademark, and other intellectual property laws.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
@@ -124,7 +124,7 @@ export default function TermsOfService() {
                   Limitation of Liability
                 </h2>
                 <p className="text-muted-foreground leading-relaxed mb-4">
-                  TO THE MAXIMUM EXTENT PERMITTED BY LAW, CYBERGUARD CONSULTING SHALL NOT BE LIABLE FOR ANY 
+                  TO THE MAXIMUM EXTENT PERMITTED BY LAW, RISKWISE CONSEIL SHALL NOT BE LIABLE FOR ANY 
                   INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS 
                   OR REVENUES, WHETHER INCURRED DIRECTLY OR INDIRECTLY, OR ANY LOSS OF DATA, USE, GOODWILL, 
                   OR OTHER INTANGIBLE LOSSES.
@@ -157,7 +157,7 @@ export default function TermsOfService() {
               <CardContent className="p-8">
                 <h2 className="text-2xl font-display font-bold mb-4">Indemnification</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  You agree to indemnify, defend, and hold harmless CyberGuard Consulting and its officers, 
+                  You agree to indemnify, defend, and hold harmless RiskWise Global Consulting and its officers, 
                   directors, employees, and agents from and against any claims, liabilities, damages, losses, 
                   and expenses arising out of or in any way connected with your use of our services or violation 
                   of these Terms.
@@ -214,8 +214,8 @@ export default function TermsOfService() {
                 </p>
                 <div className="space-y-2 text-muted-foreground">
                   <p><strong className="text-foreground">Email:</strong>{" "}
-                    <a href="mailto:legal@cyberguard.com" className="text-primary hover:underline">
-                      legal@cyberguard.com
+                    <a href="mailto:legal@riskwiseglobalconsulting.com" className="text-primary hover:underline">
+                      legal@riskwiseglobalconsulting.com
                     </a>
                   </p>
                   <p><strong className="text-foreground">Address:</strong> Kansas City, Kansas, United States</p>

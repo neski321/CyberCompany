@@ -19,11 +19,11 @@ const getEmailConfig = () => {
 };
 
 const getFromEmail = () => {
-  return process.env.SMTP_FROM || process.env.SMTP_USER || "noreply@cyberguard.com";
+  return process.env.SMTP_FROM || process.env.SMTP_USER || "noreply@riskwiseglobalconsulting.com";
 };
 
 const getNotificationEmail = () => {
-  return process.env.NOTIFICATION_EMAIL || "secure@cyberguard.com";
+  return process.env.NOTIFICATION_EMAIL || "secure@riskwiseglobalconsulting.com";
 };
 
 // Create reusable transporter
@@ -292,7 +292,7 @@ export async function sendAssessmentEmail(data: AssessmentSubmission): Promise<v
     </div>
 
     <div class="footer">
-      <p>This assessment request was submitted through the CyberGuard website.</p>
+      <p>This assessment request was submitted through the RiskWise Global Consulting website.</p>
       <p>Please respond to: <a href="mailto:${data.email}">${data.email}</a></p>
     </div>
   </div>
@@ -333,13 +333,13 @@ ADDITIONAL DETAILS
 ${data.message}
 
 ---
-This assessment request was submitted through the CyberGuard website.
+This assessment request was submitted through the RiskWise Global Consulting website.
 Please respond to: ${data.email}
   `;
 
   try {
     const mailOptions = {
-      from: `CyberGuard Security <${fromEmail}>`,
+      from: `RiskWise Global Consulting <${fromEmail}>`,
       to: notificationEmail,
       replyTo: data.email,
       subject: `New Security Assessment Request from ${data.name} at ${data.company}`,
@@ -541,7 +541,7 @@ export async function sendConsultationScheduleEmail(data: ConsultationSchedule):
     ` : ""}
 
     <div class="footer">
-      <p>This consultation was scheduled through the CyberGuard website.</p>
+      <p>This consultation was scheduled through the RiskWise Global Consulting website.</p>
       <p>Please respond to: <a href="mailto:${data.email}">${data.email}</a></p>
       <p style="margin-top: 10px; color: #06b6d4; font-weight: 600;">Please confirm this appointment in your calendar.</p>
     </div>
@@ -572,14 +572,14 @@ ${data.message}
 ` : ""}
 
 ---
-This consultation was scheduled through the CyberGuard website.
+This consultation was scheduled through the RiskWise Global Consulting website.
 Please respond to: ${data.email}
 Please confirm this appointment in your calendar.
   `;
 
   try {
     const mailOptions = {
-      from: `CyberGuard Security <${fromEmail}>`,
+      from: `RiskWise Global Consulting <${fromEmail}>`,
       to: notificationEmail,
       replyTo: data.email,
       subject: `New Consultation Scheduled: ${data.name} from ${data.company} - ${formattedDate}`,

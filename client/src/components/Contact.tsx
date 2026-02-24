@@ -27,14 +27,14 @@ export function Contact() {
             regarding your security posture.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            <a href="mailto:secure@cyberguard.com" className="flex flex-col items-center gap-4 group p-6 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/10">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 min-w-0">
+            <a href="mailto:secure@riskwiseglobalconsulting.com" className="flex flex-col items-center gap-4 group p-6 rounded-2xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/10 min-w-0">
+              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors flex-shrink-0">
                 <Mail className="w-8 h-8 text-primary" />
               </div>
-              <div>
+              <div className="w-full min-w-0 flex flex-col items-center">
                 <h3 className="font-bold text-lg mb-1">Email Us</h3>
-                <p className="text-muted-foreground group-hover:text-primary transition-colors">secure@cyberguard.com</p>
+                <p className="text-muted-foreground group-hover:text-primary transition-colors break-all text-center max-w-full">secure@riskwiseglobalconsulting.com</p>
               </div>
             </a>
 
