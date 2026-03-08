@@ -1,21 +1,19 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, Linkedin } from "lucide-react";
+import { CheckCircle2, Linkedin, User } from "lucide-react";
 import aboutImg from "@assets/generated_images/3d_glassmorphism_digital_shield_icon_on_dark_background.png";
-
-const teamMembers = [
-  {
-    name: "Trixy Otieno",
-    role: "Principal Security Consultant",
-    linkedinUrl: "https://www.linkedin.com/in/trixy-otieno-ms-cissp-cisa-ceh-gcih-gsec-pcip-pmp-3a3a98238/",
-  },
-  {
-    name: "Ami",
-    role: "Senior Security Consultant",
-    linkedinUrl: "https://linkedin.com/in/your-profile",
-  },
-];
+import { consultantProfiles, type ConsultantProfile } from "@/lib/consultant-profiles";
+import { ConsultantProfileModal } from "@/components/ConsultantProfileModal";
 
 export function About() {
+  const [selectedProfile, setSelectedProfile] = useState<ConsultantProfile | null>(null);
+  const [profileModalOpen, setProfileModalOpen] = useState(false);
+
+  const openProfile = (profile: ConsultantProfile) => {
+    setSelectedProfile(profile);
+    setProfileModalOpen(true);
+  };
+
   const benefits = [
     "Certified Ethical Hackers (CEH)",
     "CISSP & OSCP Certified Consultants",
@@ -76,32 +74,41 @@ export function About() {
             <div className="mt-12">
               <h3 className="text-xl font-display font-bold mb-6">Meet Our Consultants</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {teamMembers.map((member, i) => (
-                  <motion.a
+                {consultantProfiles.map((member, i) => (
+                  <motion.button
                     key={i}
-                    href={member.linkedinUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    type="button"
+                    onClick={() => openProfile(member)}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
-                    className="flex items-center gap-4 p-4 rounded-xl bg-card/50 border border-white/5 hover:border-primary/30 hover:bg-card/70 transition-all group"
+                    className="flex items-center gap-4 p-4 rounded-xl bg-card/50 border border-white/5 hover:border-primary/30 hover:bg-card/70 active:scale-[0.99] transition-all group text-left w-full min-h-[72px]"
                   >
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors flex-shrink-0">
-                      <Linkedin className="w-6 h-6 text-primary" />
+                      {(member.executiveProfile || member.coreCapabilities) ? (
+                        <User className="w-6 h-6 text-primary" />
+                      ) : (
+                        <Linkedin className="w-6 h-6 text-primary" />
+                      )}
                     </div>
                     <div className="min-w-0 flex-1">
                       <div className="font-bold text-white group-hover:text-primary transition-colors">{member.name}</div>
-                      <div className="text-sm text-muted-foreground">{member.role}</div>
+                      <div className="text-sm text-muted-foreground line-clamp-2">{member.role}</div>
                       <div className="text-xs text-primary mt-1 flex items-center gap-1">
-                        View LinkedIn <Linkedin className="w-3 h-3" />
+                        View Profile
                       </div>
                     </div>
-                  </motion.a>
+                  </motion.button>
                 ))}
               </div>
             </div>
+
+            <ConsultantProfileModal
+              profile={selectedProfile}
+              open={profileModalOpen}
+              onOpenChange={setProfileModalOpen}
+            />
 
             <div className="mt-10 p-6 bg-card/50 rounded-xl border border-white/5 border-l-4 border-l-primary">
               <p className="italic text-muted-foreground">
