@@ -6,8 +6,10 @@ import { Hero } from "@/components/Hero";
 import { Services } from "@/components/Services";
 import { WhatWeDo } from "@/components/WhatWeDo";
 import { About } from "@/components/About";
+import { Consultants } from "@/components/Consultants";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
+import { CustomCursor } from "@/components/CustomCursor";
 
 export default function Home() {
   const [location] = useLocation();
@@ -28,6 +30,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-primary/20">
+      <CustomCursor />
       <SEO
         title="RiskWise Global Consulting | Elite Cybersecurity Consulting"
         description="Professional cybersecurity consulting services. Compliance, risk governance, security audits, vCISO, and penetration testing. Protect your digital assets with enterprise-grade security strategies."
@@ -38,6 +41,7 @@ export default function Home() {
       <Services />
       <WhatWeDo />
       <About />
+      <Consultants />
       <Contact />
       <Footer />
     </div>
