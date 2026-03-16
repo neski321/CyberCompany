@@ -58,22 +58,8 @@ export function ConsultantProfileModal({
           >
             {/* Animated background elements */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-              <motion.div
-                animate={{
-                  scale: [1, 1.2, 1],
-                  rotate: [0, 90, 0],
-                }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute -top-32 -right-32 w-64 h-64 bg-primary/10 rounded-full blur-3xl"
-              />
-              <motion.div
-                animate={{
-                  scale: [1, 1.3, 1],
-                  rotate: [0, -90, 0],
-                }}
-                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                className="absolute -bottom-32 -left-32 w-80 h-80 bg-primary/5 rounded-full blur-3xl"
-              />
+              <div className="decorative-blur absolute -top-32 -right-32 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
+              <div className="decorative-blur absolute -bottom-32 -left-32 w-80 h-80 bg-primary/5 rounded-full blur-3xl" />
               <div className="absolute inset-0 bg-grid-pattern opacity-30" />
             </div>
 
@@ -108,13 +94,11 @@ export function ConsultantProfileModal({
                     <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/30 flex items-center justify-center shadow-lg shadow-primary/20">
                       <User className="w-12 h-12 sm:w-16 sm:h-16 text-primary" />
                     </div>
-                    <motion.div
-                      animate={{ scale: [1, 1.2, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
+                    <div
                       className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/50"
                     >
                       <CheckCircle2 className="w-4 h-4 text-primary-foreground" />
-                    </motion.div>
+                    </div>
                   </motion.div>
 
                   {/* Name & Role */}

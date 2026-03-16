@@ -5,6 +5,7 @@ import { motion, AnimatePresence, LayoutGroup } from "framer-motion"
 import { Shield, FileCheck, Users, TrendingUp, Search, ChevronDown, CheckCircle2, Sparkles, LucideIcon } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { useBreakpoint } from "@/hooks/use-breakpoint"
 
 interface Service {
   icon: LucideIcon
@@ -267,19 +268,15 @@ export function Services() {
     return () => document.removeEventListener("click", handleClickOutside)
   }, [openCardIndex])
 
-  // Distribute cards across columns
-  const getColumnCards = (numColumns: number, columnIndex: number) => {
-    return services
-      .map((service, index) => ({ service, index }))
-      .filter((_, i) => i % numColumns === columnIndex)
-  }
+  // Use breakpoint hook to render only the active layout
+  const numColumns = useBreakpoint();
 
-  const renderColumnCard = (service: Service, index: number, keyPrefix: string) => {
+  const renderColumnCard = (service: Service, index: number) => {
     const isOpen = openCardIndex === index
 
     return (
       <motion.div
-        key={`${keyPrefix}-${index}`}
+        key={`col-${numColumns}-${index}`}
         ref={(el) => {
           cardRefs.current[index] = el
         }}
@@ -310,9 +307,9 @@ export function Services() {
     >
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-40 right-10 w-96 h-96 bg-primary/8 rounded-full blur-[150px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-primary/3 to-transparent rounded-full blur-3xl opacity-50" />
+        <div className="decorative-blur absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-[120px]" />
+        <div className="decorative-blur absolute bottom-40 right-10 w-96 h-96 bg-primary/8 rounded-full blur-[150px]" />
+        <div className="decorative-blur absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-primary/3 to-transparent rounded-full blur-3xl opacity-50" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
@@ -347,31 +344,22 @@ export function Services() {
 
         {/* Services Grid - Flex columns for smooth animations */}
         <LayoutGroup>
-          {/* Mobile: Single column */}
-          <div className="flex flex-col gap-5 md:hidden">
-            {services.map((service, index) => renderColumnCard(service, index, "mobile"))}
-          </div>
-
-          {/* Tablet: 2 columns */}
-          <div className="hidden md:flex lg:hidden gap-5">
-            {[0, 1].map((colIndex) => (
-              <div key={colIndex} className="flex flex-col gap-5 flex-1">
-                {getColumnCards(2, colIndex).map(({ service, index }) =>
-                  renderColumnCard(service, index, "tablet")
-                )}
-              </div>
-            ))}
-          </div>
-
-          {/* Desktop: 3 columns */}
-          <div className="hidden lg:flex gap-5">
-            {[0, 1, 2].map((colIndex) => (
-              <div key={colIndex} className="flex flex-col gap-5 flex-1">
-                {getColumnCards(3, colIndex).map(({ service, index }) =>
-                  renderColumnCard(service, index, "desktop")
-                )}
-              </div>
-            ))}
+          <div className={`flex gap-5 ${numColumns === 1 ? 'flex-col' : ''}`}>
+            {numColumns === 1 ? (
+              // Mobile: single column
+              services.map((service, index) => renderColumnCard(service, index))
+            ) : (
+              // Tablet (2) / Desktop (3): multi-column
+              Array.from({ length: numColumns }, (_, colIndex) => (
+                <div key={colIndex} className="flex flex-col gap-5 flex-1">
+                  {services
+                    .map((service, index) => ({ service, index }))
+                    .filter((_, i) => i % numColumns === colIndex)
+                    .map(({ service, index }) => renderColumnCard(service, index))
+                  }
+                </div>
+              ))
+            )}
           </div>
         </LayoutGroup>
 

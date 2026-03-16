@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
-import aboutImg from "@assets/generated_images/3d_glassmorphism_digital_shield_icon_on_dark_background.png";
+import aboutImg from "@assets/generated_images/3d_glassmorphism_digital_shield_icon_on_dark_background.webp";
 
 export function About() {
 
@@ -27,12 +27,13 @@ export function About() {
               <img 
                 src={aboutImg} 
                 alt="Cybersecurity Shield" 
+                loading="lazy"
                 className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
               />
             </div>
             {/* Decorative Elements */}
-            <div className="absolute -top-10 -left-10 w-32 h-32 bg-primary/20 rounded-full blur-3xl" />
-            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl" />
+            <div className="decorative-blur absolute -top-10 -left-10 w-32 h-32 bg-primary/20 rounded-full blur-3xl" />
+            <div className="decorative-blur absolute -bottom-10 -right-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl" />
           </motion.div>
 
           <motion.div 

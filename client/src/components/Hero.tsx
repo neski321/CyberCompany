@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import heroBg from "@assets/generated_images/dark_abstract_cybersecurity_network_background_with_blue_neon_lines.png";
+import heroBg from "@assets/generated_images/dark_abstract_cybersecurity_network_background_with_blue_neon_lines.webp";
 import { AssessmentForm } from "@/components/AssessmentForm";
 
 export function Hero() {

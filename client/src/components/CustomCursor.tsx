@@ -5,6 +5,17 @@ export function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
+  // Don't render on touch/mobile devices
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  useEffect(() => {
+    const mql = window.matchMedia("(pointer: coarse)");
+    setIsTouchDevice(mql.matches);
+    const onChange = (e: MediaQueryListEvent) => setIsTouchDevice(e.matches);
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+  if (isTouchDevice) return null;
+
   // Use motion values for better performance
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
