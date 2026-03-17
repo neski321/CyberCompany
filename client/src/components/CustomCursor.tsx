@@ -5,8 +5,12 @@ export function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Don't render on touch/mobile devices
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  // Detect touch/mobile devices
+  const [isTouchDevice, setIsTouchDevice] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return window.matchMedia("(pointer: coarse)").matches;
+  });
+
   useEffect(() => {
     const mql = window.matchMedia("(pointer: coarse)");
     setIsTouchDevice(mql.matches);
@@ -14,18 +18,19 @@ export function CustomCursor() {
     mql.addEventListener("change", onChange);
     return () => mql.removeEventListener("change", onChange);
   }, []);
-  if (isTouchDevice) return null;
 
-  // Use motion values for better performance
+  // All hooks must be called unconditionally (React rules of hooks)
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  // Smooth out the movement
   const springConfig = { damping: 20, stiffness: 250, restDelta: 0.001 };
   const cursorX = useSpring(mouseX, springConfig);
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
+    // Skip event listeners on touch devices
+    if (isTouchDevice) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       mouseX.set(e.clientX);
       mouseY.set(e.clientY);
@@ -51,9 +56,10 @@ export function CustomCursor() {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("mouseover", handleMouseOver);
     };
-  }, [isVisible, mouseX, mouseY]);
+  }, [isTouchDevice, isVisible, mouseX, mouseY]);
 
-  if (!isVisible) return null;
+  // Don't render on touch devices or before first mouse move
+  if (isTouchDevice || !isVisible) return null;
 
   return (
     <>
@@ -77,7 +83,7 @@ export function CustomCursor() {
       <motion.div
         className="fixed top-0 left-0 w-1.5 h-1.5 bg-primary rounded-full pointer-events-none z-[9999] shadow-[0_0_10px_rgba(var(--primary),0.8)]"
         style={{
-          x: mouseX, // Dot follows mouse instantly
+          x: mouseX,
           y: mouseY,
           translateX: "-50%",
           translateY: "-50%",
