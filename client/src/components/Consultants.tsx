@@ -16,8 +16,8 @@ export function Consultants() {
   return (
     <section id="consultants" className="py-24 bg-background relative overflow-hidden">
       {/* Background decorative elements */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="decorative-blur absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="decorative-blur absolute bottom-0 right-1/4 w-80 h-80 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
       
       <div className="container mx-auto px-6 relative z-10">
         {/* Section Header */}
