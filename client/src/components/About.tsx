@@ -1,15 +1,12 @@
 import { motion } from "framer-motion";
 import { CheckCircle2 } from "lucide-react";
 import aboutImg from "@assets/generated_images/3d_glassmorphism_digital_shield_icon_on_dark_background.webp";
+import { useTranslation } from "react-i18next";
 
 export function About() {
+  const { t } = useTranslation();
 
-  const benefits = [
-    "Certified Ethical Hackers (CEH)",
-    "CISSP & OSCP Certified Consultants",
-    "ISO 27001 Compliance Experts",
-    "24/7 dedicated support channels",
-  ];
+  const benefits = t("about.benefits", { returnObjects: true }) as string[];
 
   return (
     <section id="about" className="py-24 bg-muted/30 border-y border-white/5">
@@ -44,13 +41,10 @@ export function About() {
             className="w-full lg:w-1/2"
           >
             <h2 className="text-3xl md:text-5xl font-display font-bold mb-6">
-              Guardians of the <span className="text-primary">Digital Realm</span>
+              {t("about.title")} <span className="text-primary">{t("about.title_accent")}</span>
             </h2>
             <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-              We are not just consultants; we are your strategic partners in defense. 
-              In an era where data is the new currency, protecting your assets is non-negotiable. 
-              Our team consists of elite security researchers and industry veterans dedicated to 
-              staying one step ahead of cyber threats.
+              {t("about.subtitle")}
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -62,13 +56,11 @@ export function About() {
               ))}
             </div>
 
-
-
             <div className="mt-10 p-6 bg-card/50 rounded-xl border border-white/5 border-l-4 border-l-primary">
               <p className="italic text-muted-foreground">
-                "Security is not a product, but a process. We build the process that secures your future."
+                "{t("about.quote")}"
               </p>
-              <div className="mt-4 font-display font-bold text-white">— Chief Security Officer</div>
+              <div className="mt-4 font-display font-bold text-white">— {t("about.quote_author")}</div>
             </div>
           </motion.div>
 

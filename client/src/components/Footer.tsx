@@ -1,7 +1,10 @@
 import { Link } from "wouter";
 import { Shield } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 export function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className="py-12 bg-background border-t border-white/10 text-sm">
       <div className="container mx-auto px-6">
@@ -13,18 +16,18 @@ export function Footer() {
           
           <div className="flex gap-6 text-muted-foreground">
             <Link href="/privacy-policy" className="hover:text-primary transition-colors">
-              Privacy Policy
+              {t("footer.privacy")}
             </Link>
             <Link href="/terms-of-service" className="hover:text-primary transition-colors">
-              Terms of Service
+              {t("footer.terms")}
             </Link>
             <Link href="/security" className="hover:text-primary transition-colors">
-              Security
+              {t("footer.security")}
             </Link>
           </div>
 
           <div className="text-muted-foreground">
-            © {new Date().getFullYear()} RiskWise Global Consulting. All rights reserved.
+            {t("footer.copyright", { year: new Date().getFullYear() })}
           </div>
         </div>
       </div>

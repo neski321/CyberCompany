@@ -1,11 +1,12 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useMemo } from "react"
 import { motion, AnimatePresence, LayoutGroup } from "framer-motion"
 import { Shield, FileCheck, Users, TrendingUp, Search, ChevronDown, CheckCircle2, Sparkles, LucideIcon } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { useBreakpoint } from "@/hooks/use-breakpoint"
+import { useTranslation } from "react-i18next"
 
 interface Service {
   icon: LucideIcon
@@ -14,81 +15,6 @@ interface Service {
   details: string[]
   deliverables: string
 }
-
-const services: Service[] = [
-  {
-    icon: Shield,
-    title: "Compliance & Risk Governance",
-    description: "Build robust governance frameworks and navigate complex compliance requirements with confidence.",
-    details: [
-      "Strategic risk management program development",
-      "Policy framework design and implementation",
-      "Compliance readiness for NIST, ISO 27001, SOC 2, PCI-DSS, HIPAA, and CMMC",
-      "Control environment assessment and optimization",
-      "Regulatory gap analysis and remediation planning",
-      "Ongoing compliance monitoring and reporting",
-    ],
-    deliverables: "GRC framework documentation, risk register, compliance roadmap, policy templates",
-  },
-  {
-    icon: FileCheck,
-    title: "Security Audits & Virtual CISO",
-    description: "Independent security assessments and strategic security leadership tailored to your organization.",
-    details: [
-      "Comprehensive IT security audit and control testing",
-      "Security posture evaluation and gap identification",
-      "Virtual Chief Information Security Officer (vCISO) leadership",
-      "Long-term security program development and maturity",
-      "Risk management strategy and execution",
-      "Board-level security reporting and communication",
-    ],
-    deliverables: "Audit findings report, vCISO engagement plan, security roadmap, executive briefings",
-  },
-  {
-    icon: Users,
-    title: "Security Training & Operations",
-    description:
-      "Strengthen your human and technical defenses through training and proactive vulnerability management.",
-    details: [
-      "Customized security awareness training programs",
-      "Phishing simulation campaigns and education",
-      "Vulnerability identification and assessment services",
-      "Threat monitoring and remediation guidance",
-      "Security culture development initiatives",
-      "Ongoing security awareness metrics and reporting",
-    ],
-    deliverables:
-      "Training curriculum, awareness campaign materials, vulnerability assessment report, progress metrics",
-  },
-  {
-    icon: TrendingUp,
-    title: "Cybersecurity Strategy & Advisory",
-    description: "Strategic guidance and planning to align technology decisions with your security objectives.",
-    details: [
-      "Security program strategy and roadmap development",
-      "Technology risk assessment and mitigation planning",
-      "Security architecture review and recommendations",
-      "Strategic planning for security investments",
-      "Executive security briefings and decision support",
-      "Vendor and technology evaluation guidance",
-    ],
-    deliverables: "Strategic security plan, technology recommendations, executive reports, decision frameworks",
-  },
-  {
-    icon: Search,
-    title: "Security Testing & Assessment",
-    description: "Real-world attack simulations that validate your defenses and uncover exploitable weaknesses.",
-    details: [
-      "Network infrastructure penetration testing",
-      "Web and mobile application security testing",
-      "Cloud environment security assessments",
-      "Social engineering and phishing simulations",
-      "Manual exploit validation and impact analysis",
-      "Detailed remediation guidance and verification testing",
-    ],
-    deliverables: "Penetration test report, executive summary, remediation recommendations, retest validation",
-  },
-]
 
 const toRomanNumeral = (num: number): string => {
   const romanNumerals = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"]
@@ -107,6 +33,7 @@ function ServiceCard({
   isOpen: boolean
   onToggle: (index: number) => void
 }) {
+  const { t } = useTranslation()
   const IconComponent = service.icon
   
   return (
@@ -159,7 +86,7 @@ function ServiceCard({
               onToggle(index)
             }}
           >
-            <span className="flex items-center gap-2">{isOpen ? "Hide Details" : "View Details"}</span>
+            <span className="flex items-center gap-2">{isOpen ? t("services.card.hide_details") : t("services.card.view_details")}</span>
             <motion.div
               className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors"
               animate={{ rotate: isOpen ? 180 : 0 }}
@@ -186,7 +113,7 @@ function ServiceCard({
                   <div>
                     <h4 className="text-sm font-semibold mb-3 text-foreground flex items-center gap-2">
                       <span className="w-1 h-4 bg-primary rounded-full" />
-                      What's Included
+                      {t("services.card.included")}
                     </h4>
                     <ul className="space-y-2.5">
                       {service.details.map((detail, i) => (
@@ -211,14 +138,14 @@ function ServiceCard({
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
-                      delay: service.details.length * 0.05 + 0.1,
+                      delay: (service.details?.length || 0) * 0.05 + 0.1,
                       duration: 0.3,
                       ease: [0.16, 1, 0.3, 1],
                     }}
                     className="p-3 rounded-xl bg-muted/50 border border-border/50"
                   >
                     <p className="text-xs text-muted-foreground">
-                      <span className="font-semibold text-foreground">Deliverables: </span>
+                      <span className="font-semibold text-foreground">{t("services.card.deliverables_label")}</span>
                       {service.deliverables}
                     </p>
                   </motion.div>
@@ -233,9 +160,48 @@ function ServiceCard({
 }
 
 export function Services() {
+  const { t } = useTranslation()
   const [openCardIndex, setOpenCardIndex] = useState<number | null>(null)
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
   const justOpenedRef = useRef(false)
+
+  const services: Service[] = useMemo(() => [
+    {
+      icon: Shield,
+      title: t("services.items.compliance.title"),
+      description: t("services.items.compliance.description"),
+      details: t("services.items.compliance.details", { returnObjects: true }) as string[],
+      deliverables: t("services.items.compliance.deliverables"),
+    },
+    {
+      icon: FileCheck,
+      title: t("services.items.audits.title"),
+      description: t("services.items.audits.description"),
+      details: t("services.items.audits.details", { returnObjects: true }) as string[],
+      deliverables: t("services.items.audits.deliverables"),
+    },
+    {
+      icon: Users,
+      title: t("services.items.training.title"),
+      description: t("services.items.training.description"),
+      details: t("services.items.training.details", { returnObjects: true }) as string[],
+      deliverables: t("services.items.training.deliverables"),
+    },
+    {
+      icon: TrendingUp,
+      title: t("services.items.strategy.title"),
+      description: t("services.items.strategy.description"),
+      details: t("services.items.strategy.details", { returnObjects: true }) as string[],
+      deliverables: t("services.items.strategy.deliverables"),
+    },
+    {
+      icon: Search,
+      title: t("services.items.testing.title"),
+      description: t("services.items.testing.description"),
+      details: t("services.items.testing.details", { returnObjects: true }) as string[],
+      deliverables: t("services.items.testing.deliverables"),
+    },
+  ], [t])
 
   const handleToggle = (clickedIndex: number) => {
     setOpenCardIndex((currentIndex) => {
@@ -327,17 +293,16 @@ export function Services() {
           >
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium">
               <Sparkles className="w-4 h-4" />
-              <span>Our Services</span>
+              <span>{t("services.badge")}</span>
             </div>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-balance">
-              Transforming Vulnerabilities into{" "}
+              {t("services.title")}{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-primary/70">
-                Security
+                {t("services.title_accent")}
               </span>
             </h2>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto text-pretty">
-              Comprehensive security solutions designed to strengthen your defenses, manage risk, and achieve compliance
-              while supporting your business objectives.
+              {t("services.subtitle")}
             </p>
           </motion.div>
         </div>
@@ -377,7 +342,7 @@ export function Services() {
         >
           <div className="inline-flex flex-col items-center gap-6 p-8 rounded-3xl bg-gradient-to-br from-muted/50 to-muted/20 border border-border/50 backdrop-blur-sm">
             <p className="text-muted-foreground text-lg max-w-md">
-              Need a custom solution? Our experts can tailor a security program to your specific needs.
+              {t("services.cta.text")}
             </p>
             <Button
               size="lg"
@@ -392,7 +357,7 @@ export function Services() {
               }}
               className="bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300 px-8"
             >
-              Get Custom Quote
+              {t("services.cta.button")}
             </Button>
           </div>
         </motion.div>

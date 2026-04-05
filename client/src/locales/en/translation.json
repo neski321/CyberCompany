@@ -1,0 +1,219 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "what_we_do": "What We Do",
+    "about": "About",
+    "contact": "Contact",
+    "security": "Security",
+    "privacy": "Privacy",
+    "cta": "Secure Your Assets"
+  },
+  "hero": {
+    "badge": "Elite Cyber Defense",
+    "title": "Fortify Your",
+    "title_accent": "Digital Future",
+    "subtitle": "We provide enterprise-grade security consulting for businesses that refuse to compromise. Proactive threat hunting, vulnerability assessment, and strategic defense.",
+    "cta_primary": "Start Assessment",
+    "cta_secondary": "View Services",
+    "stats": {
+      "threats": "Threats Blocked",
+      "uptime": "Uptime Secured",
+      "clients": "Clients Protected",
+      "reach": "Global Reach"
+    }
+  },
+  "services": {
+    "badge": "Our Services",
+    "title": "Transforming Vulnerabilities into",
+    "title_accent": "Security",
+    "subtitle": "Comprehensive security solutions designed to strengthen your defenses, manage risk, and achieve compliance while supporting your business objectives.",
+    "items": {
+      "compliance": {
+        "title": "Compliance & Risk Governance",
+        "description": "Build robust governance frameworks and navigate complex compliance requirements with confidence.",
+        "details": [
+          "Strategic risk management program development",
+          "Policy framework design and implementation",
+          "Compliance readiness for NIST, ISO 27001, SOC 2, PCI-DSS, HIPAA, and CMMC",
+          "Control environment assessment and optimization",
+          "Regulatory gap analysis and remediation planning",
+          "Ongoing compliance monitoring and reporting"
+        ],
+        "deliverables": "GRC framework documentation, risk register, compliance roadmap, policy templates"
+      },
+      "audits": {
+        "title": "Security Audits & Virtual CISO",
+        "description": "Independent security assessments and strategic security leadership tailored to your organization.",
+        "details": [
+          "Comprehensive IT security audit and control testing",
+          "Security posture evaluation and gap identification",
+          "Virtual Chief Information Security Officer (vCISO) leadership",
+          "Long-term security program development and maturity",
+          "Risk management strategy and execution",
+          "Board-level security reporting and communication"
+        ],
+        "deliverables": "Audit findings report, vCISO engagement plan, security roadmap, executive briefings"
+      },
+      "training": {
+        "title": "Security Training & Operations",
+        "description": "Strengthen your human and technical defenses through training and proactive vulnerability management.",
+        "details": [
+          "Customized security awareness training programs",
+          "Phishing simulation campaigns and education",
+          "Vulnerability identification and assessment services",
+          "Threat monitoring and remediation guidance",
+          "Security culture development initiatives",
+          "Ongoing security awareness metrics and reporting"
+        ],
+        "deliverables": "Training curriculum, awareness campaign materials, vulnerability assessment report, progress metrics"
+      },
+      "strategy": {
+        "title": "Cybersecurity Strategy & Advisory",
+        "description": "Strategic guidance and planning to align technology decisions with your security objectives.",
+        "details": [
+          "Security program strategy and roadmap development",
+          "Technology risk assessment and mitigation planning",
+          "Security architecture review and recommendations",
+          "Strategic planning for security investments",
+          "Executive security briefings and decision support",
+          "Vendor and technology evaluation guidance"
+        ],
+        "deliverables": "Strategic security plan, technology recommendations, executive reports, decision frameworks"
+      },
+      "testing": {
+        "title": "Security Testing & Assessment",
+        "description": "Real-world attack simulations that validate your defenses and uncover exploitable weaknesses.",
+        "details": [
+          "Network infrastructure penetration testing",
+          "Web and mobile application security testing",
+          "Cloud environment security assessments",
+          "Social engineering and phishing simulations",
+          "Manual exploit validation and impact analysis",
+          "Detailed remediation guidance and verification testing"
+        ],
+        "deliverables": "Penetration test report, executive summary, remediation recommendations, retest validation"
+      }
+    },
+    "cta": {
+      "text": "Need a custom solution? Our experts can tailor a security program to your specific needs.",
+      "button": "Get Custom Quote"
+    },
+    "card": {
+      "view_details": "View Details",
+      "hide_details": "Hide Details",
+      "included": "What's Included",
+      "deliverables_label": "Deliverables: "
+    }
+  },
+  "about": {
+    "title": "Guardians of the",
+    "title_accent": "Digital Realm",
+    "subtitle": "We are not just consultants; we are your strategic partners in defense. In an era where data is the new currency, protecting your assets is non-negotiable. Our team consists of elite security researchers and industry veterans dedicated to staying one step ahead of cyber threats.",
+    "benefits": [
+      "Certified Ethical Hackers (CEH)",
+      "CISSP & OSCP Certified Consultants",
+      "ISO 27001 Compliance Experts",
+      "24/7 dedicated support channels"
+    ],
+    "quote": "Security is not a product, but a process. We build the process that secures your future.",
+    "quote_author": "Chief Security Officer"
+  },
+  "whatwedo": {
+    "title": "What We",
+    "title_accent": "Do",
+    "subtitle": "Our approach combines proven methodologies with cutting-edge technology to deliver comprehensive security solutions. We focus on understanding your unique challenges and building a security program that grows with your business.",
+    "methodology_title": "Our",
+    "methodology_accent": "Methodology",
+    "methodologies": {
+      "risk": {
+        "title": "Risk & Compliance Assessment",
+        "description": "We start by evaluating your current risk posture and compliance status, identifying gaps in governance frameworks and regulatory requirements to establish a clear security foundation."
+      },
+      "auditing": {
+        "title": "Comprehensive Auditing",
+        "description": "Our independent security audits examine your controls, policies, and procedures, providing objective insights into your security posture and areas needing improvement."
+      },
+      "training": {
+        "title": "Training & Awareness",
+        "description": "We empower your team through targeted security training programs and awareness initiatives, building a security-conscious culture that strengthens your human defenses."
+      },
+      "planning": {
+        "title": "Strategic Planning",
+        "description": "Our strategic approach combines security testing, risk management, and program development to continuously strengthen your security posture and align with business objectives."
+      }
+    },
+    "approach_title": "Our",
+    "approach_accent": "Approach",
+    "approaches": {
+      "governance": {
+        "title": "Governance-First Strategy",
+        "description": "We build security programs on strong governance foundations, ensuring policies, procedures, and controls align with your risk tolerance and compliance obligations."
+      },
+      "tailored": {
+        "title": "Tailored Implementation",
+        "description": "Every organization faces unique challenges. We design security solutions that fit your industry, scale, regulatory environment, and strategic goals."
+      },
+      "evidence": {
+        "title": "Evidence-Based Outcomes",
+        "description": "We define clear security metrics and deliver regular reporting, enabling you to track progress and demonstrate the value of your security investments."
+      }
+    },
+    "process_title": "Our",
+    "process_accent": "Process",
+    "processes": {
+      "step1": {
+        "title": "Evaluation & Gap Analysis",
+        "description": "We assess your security posture, compliance status, and risk exposure, identifying critical gaps and opportunities for improvement."
+      },
+      "step2": {
+        "title": "Strategy Development",
+        "description": "We create a customized security roadmap that addresses your specific risks, compliance needs, and business objectives."
+      },
+      "step3": {
+        "title": "Program Execution",
+        "description": "We implement governance frameworks, security controls, training programs, and advisory services with minimal operational impact."
+      },
+      "step4": {
+        "title": "Continuous Improvement",
+        "description": "We provide ongoing audits, assessments, training updates, and strategic guidance to maintain and enhance your security maturity."
+      }
+    },
+    "cta_title": "Ready to Strengthen Your Security?",
+    "cta_subtitle": "Let's discuss how our comprehensive security solutions can protect your business and enable secure growth.",
+    "cta_button": "Get Started Today"
+  },
+  "consultants": {
+    "badge": "Expert Team",
+    "title": "Meet Our",
+    "title_accent": "Consultants",
+    "subtitle": "Our team of certified security professionals brings decades of combined experience in protecting organizations from evolving cyber threats.",
+    "view_profile": "View Full Profile",
+    "linkedin_profile": "LinkedIn Profile",
+    "profile_modal": {
+      "contact_btn": "Contact",
+      "executive_profile": "Executive Profile",
+      "experience_highlights": "Professional Experience Highlights",
+      "key_differentiators": "Key Differentiators",
+      "education": "Education",
+      "certifications": "Certifications",
+      "technical": "Technical Proficiencies",
+      "view_linkedin": "View Full Profile on LinkedIn"
+    }
+  },
+  "contact": {
+    "title": "Ready to",
+    "title_accent": "Secure Your Business?",
+    "subtitle": "Don't wait for a breach to happen. Contact us today for a confidential consultation regarding your security posture.",
+    "email_us": "Email Us",
+    "global_hq": "Global HQ",
+    "emergency": "Emergency",
+    "cta": "Schedule Free Consultation"
+  },
+  "footer": {
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "security": "Security",
+    "copyright": "© {{year}} RiskWise Global Consulting. All rights reserved."
+  }
+}

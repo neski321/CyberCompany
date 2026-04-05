@@ -2,8 +2,11 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import { Link, useLocation } from "wouter";
 import { Shield } from "lucide-react";
 import { StaggeredMenu, type StaggeredMenuItem } from "@/components/StaggeredMenu";
+import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export function Navbar() {
+  const { t } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [, setLocation] = useLocation();
   useEffect(() => {
@@ -38,12 +41,12 @@ export function Navbar() {
     }
   }, [setLocation, scrollToSection]);
 
-  const navLinks = [
-    { name: "Services", href: "#services" },
-    { name: "What We Do", href: "#what-we-do" },
-    { name: "About", href: "#about" },
-    { name: "Contact", href: "#contact" },
-  ];
+  const navLinks = useMemo(() => [
+    { name: t("nav.services"), href: "#services" },
+    { name: t("nav.what_we_do"), href: "#what-we-do" },
+    { name: t("nav.about"), href: "#about" },
+    { name: t("nav.contact"), href: "#contact" },
+  ], [t]);
 
   const staggeredMenuItems: StaggeredMenuItem[] = useMemo(
     () => [
@@ -54,13 +57,13 @@ export function Navbar() {
         onClick: () => handleHashNav(link.href),
       })),
       {
-        label: "Secure Your Assets",
+        label: t("nav.cta"),
         ariaLabel: "Contact us",
         link: "#contact",
         onClick: () => handleHashNav("#contact"),
       },
     ],
-    [navLinks, handleHashNav]
+    [navLinks, handleHashNav, t]
   );
 
   const logoComponent = (
@@ -103,12 +106,15 @@ export function Navbar() {
                 {link.name}
               </a>
             ))}
-            <button
-              onClick={() => handleHashNav("#contact")}
-              className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] transition-all px-4 xl:px-6 py-2 rounded-lg whitespace-nowrap text-sm xl:text-base"
-            >
-              Secure Your Assets
-            </button>
+            <div className="flex items-center gap-4">
+              <LanguageSwitcher />
+              <button
+                onClick={() => handleHashNav("#contact")}
+                className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_25px_rgba(6,182,212,0.5)] transition-all px-4 xl:px-6 py-2 rounded-lg whitespace-nowrap text-sm xl:text-base"
+              >
+                {t("nav.cta")}
+              </button>
+            </div>
           </div>
         </div>
       </nav>

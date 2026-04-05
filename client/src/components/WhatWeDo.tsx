@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { 
   Target, 
@@ -10,72 +11,75 @@ import {
   ArrowRight
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-
-const methodologies = [
-  {
-    icon: Target,
-    title: "Risk & Compliance Assessment",
-    description: "We start by evaluating your current risk posture and compliance status, identifying gaps in governance frameworks and regulatory requirements to establish a clear security foundation.",
-  },
-  {
-    icon: FileCheck,
-    title: "Comprehensive Auditing",
-    description: "Our independent security audits examine your controls, policies, and procedures, providing objective insights into your security posture and areas needing improvement.",
-  },
-  {
-    icon: Users,
-    title: "Training & Awareness",
-    description: "We empower your team through targeted security training programs and awareness initiatives, building a security-conscious culture that strengthens your human defenses.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Strategic Planning",
-    description: "Our strategic approach combines security testing, risk management, and program development to continuously strengthen your security posture and align with business objectives.",
-  },
-];
-
-const approach = [
-  {
-    icon: Search,
-    title: "Governance-First Strategy",
-    description: "We build security programs on strong governance foundations, ensuring policies, procedures, and controls align with your risk tolerance and compliance obligations.",
-  },
-  {
-    icon: FileText,
-    title: "Tailored Implementation",
-    description: "Every organization faces unique challenges. We design security solutions that fit your industry, scale, regulatory environment, and strategic goals.",
-  },
-  {
-    icon: CheckCircle2,
-    title: "Evidence-Based Outcomes",
-    description: "We define clear security metrics and deliver regular reporting, enabling you to track progress and demonstrate the value of your security investments.",
-  },
-];
-
-const process = [
-  {
-    step: "01",
-    title: "Evaluation & Gap Analysis",
-    description: "We assess your security posture, compliance status, and risk exposure, identifying critical gaps and opportunities for improvement.",
-  },
-  {
-    step: "02",
-    title: "Strategy Development",
-    description: "We create a customized security roadmap that addresses your specific risks, compliance needs, and business objectives.",
-  },
-  {
-    step: "03",
-    title: "Program Execution",
-    description: "We implement governance frameworks, security controls, training programs, and advisory services with minimal operational impact.",
-  },
-  {
-    step: "04",
-    title: "Continuous Improvement",
-    description: "We provide ongoing audits, assessments, training updates, and strategic guidance to maintain and enhance your security maturity.",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 export function WhatWeDo() {
+  const { t } = useTranslation();
+
+  const methodologies = useMemo(() => [
+    {
+      icon: Target,
+      title: t("whatwedo.methodologies.risk.title"),
+      description: t("whatwedo.methodologies.risk.description"),
+    },
+    {
+      icon: FileCheck,
+      title: t("whatwedo.methodologies.auditing.title"),
+      description: t("whatwedo.methodologies.auditing.description"),
+    },
+    {
+      icon: Users,
+      title: t("whatwedo.methodologies.training.title"),
+      description: t("whatwedo.methodologies.training.description"),
+    },
+    {
+      icon: ShieldCheck,
+      title: t("whatwedo.methodologies.planning.title"),
+      description: t("whatwedo.methodologies.planning.description"),
+    },
+  ], [t]);
+
+  const approach = useMemo(() => [
+    {
+      icon: Search,
+      title: t("whatwedo.approaches.governance.title"),
+      description: t("whatwedo.approaches.governance.description"),
+    },
+    {
+      icon: FileText,
+      title: t("whatwedo.approaches.tailored.title"),
+      description: t("whatwedo.approaches.tailored.description"),
+    },
+    {
+      icon: CheckCircle2,
+      title: t("whatwedo.approaches.evidence.title"),
+      description: t("whatwedo.approaches.evidence.description"),
+    },
+  ], [t]);
+
+  const process = useMemo(() => [
+    {
+      step: "01",
+      title: t("whatwedo.processes.step1.title"),
+      description: t("whatwedo.processes.step1.description"),
+    },
+    {
+      step: "02",
+      title: t("whatwedo.processes.step2.title"),
+      description: t("whatwedo.processes.step2.description"),
+    },
+    {
+      step: "03",
+      title: t("whatwedo.processes.step3.title"),
+      description: t("whatwedo.processes.step3.description"),
+    },
+    {
+      step: "04",
+      title: t("whatwedo.processes.step4.title"),
+      description: t("whatwedo.processes.step4.description"),
+    },
+  ], [t]);
+
   return (
     <section id="what-we-do" className="py-24 bg-background relative overflow-hidden">
       {/* Decorative Elements */}
@@ -92,12 +96,10 @@ export function WhatWeDo() {
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <h2 className="text-3xl md:text-5xl font-display font-bold mb-4">
-            What We <span className="text-primary">Do</span>
+            {t("whatwedo.title")} <span className="text-primary">{t("whatwedo.title_accent")}</span>
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            Our approach combines proven methodologies with cutting-edge technology to deliver 
-            comprehensive security solutions. We focus on understanding your unique challenges 
-            and building a security program that grows with your business.
+            {t("whatwedo.subtitle")}
           </p>
         </motion.div>
 
@@ -110,7 +112,7 @@ export function WhatWeDo() {
           className="mb-20"
         >
           <h3 className="text-2xl md:text-3xl font-display font-bold text-center mb-12">
-            Our <span className="text-primary">Methodology</span>
+            {t("whatwedo.methodology_title")} <span className="text-primary">{t("whatwedo.methodology_accent")}</span>
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {methodologies.map((method, index) => (
@@ -148,7 +150,7 @@ export function WhatWeDo() {
           className="mb-20"
         >
           <h3 className="text-2xl md:text-3xl font-display font-bold text-center mb-12">
-            Our <span className="text-primary">Approach</span>
+            {t("whatwedo.approach_title")} <span className="text-primary">{t("whatwedo.approach_accent")}</span>
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {approach.map((item, index) => (
@@ -185,7 +187,7 @@ export function WhatWeDo() {
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <h3 className="text-2xl md:text-3xl font-display font-bold text-center mb-12">
-            Our <span className="text-primary">Process</span>
+            {t("whatwedo.process_title")} <span className="text-primary">{t("whatwedo.process_accent")}</span>
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {process.map((step, index) => (
@@ -230,11 +232,10 @@ export function WhatWeDo() {
         >
           <div className="max-w-2xl mx-auto bg-card/40 backdrop-blur-md border border-white/10 rounded-2xl p-8">
             <h3 className="text-2xl font-display font-bold mb-4">
-              Ready to Strengthen Your Security?
+              {t("whatwedo.cta_title")}
             </h3>
             <p className="text-muted-foreground mb-6">
-              Let's discuss how our comprehensive security solutions can protect your business 
-              and enable secure growth.
+              {t("whatwedo.cta_subtitle")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
@@ -246,7 +247,7 @@ export function WhatWeDo() {
                 }}
                 className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-[0_0_20px_rgba(6,182,212,0.4)] px-8 py-3 rounded-lg transition-all flex items-center justify-center gap-2"
               >
-                Get Started Today
+                {t("whatwedo.cta_button")}
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -256,4 +257,5 @@ export function WhatWeDo() {
     </section>
   );
 }
+
 

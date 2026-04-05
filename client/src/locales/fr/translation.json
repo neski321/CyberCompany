@@ -1,0 +1,219 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "services": "Services",
+    "what_we_do": "Ce Que Nous Faisons",
+    "about": "À propos",
+    "contact": "Contact",
+    "security": "Sécurité",
+    "privacy": "Confidentialité",
+    "cta": "Sécurisez Vos Actifs"
+  },
+  "hero": {
+    "badge": "Défense Cyber d'Élite",
+    "title": "Fortifiez Votre",
+    "title_accent": "Avenir Numérique",
+    "subtitle": "Nous fournissons un conseil en sécurité de classe entreprise pour les entreprises qui refusent tout compromis. Chasse proactive aux menaces, évaluation des vulnérabilités et défense stratégique.",
+    "cta_primary": "Démarrer l'Évaluation",
+    "cta_secondary": "Voir les Services",
+    "stats": {
+      "threats": "Menaces Bloquées",
+      "uptime": "Temps de Disponibilité",
+      "clients": "Clients Protégés",
+      "reach": "Portée Mondiale"
+    }
+  },
+  "services": {
+    "badge": "Nos Services",
+    "title": "Transformer les Vulnérabilités en",
+    "title_accent": "Sécurité",
+    "subtitle": "Solutions de sécurité complètes conçues pour renforcer vos défenses, gérer les risques et assurer la conformité tout en soutenant vos objectifs commerciaux.",
+    "items": {
+      "compliance": {
+        "title": "Conformité et Gouvernance des Risques",
+        "description": "Établissez des cadres de gouvernance robustes et naviguez dans les exigences de conformité complexes avec confiance.",
+        "details": [
+          "Développement de programmes de gestion stratégique des risques",
+          "Conception et mise en œuvre de cadres de politiques",
+          "Préparation à la conformité pour NIST, ISO 27001, SOC 2, PCI-DSS, HIPAA et CMMC",
+          "Évaluation et optimisation de l'environnement de contrôle",
+          "Analyse des écarts réglementaires et planification de la remédiation",
+          "Surveillance et rapports de conformité continus"
+        ],
+        "deliverables": "Documentation du cadre GRC, registre des risques, feuille de route de conformité, modèles de politiques"
+      },
+      "audits": {
+        "title": "Audits de Sécurité et CISO Virtuel",
+        "description": "Évaluations de sécurité indépendantes et leadership de sécurité stratégique adaptés à votre organisation.",
+        "details": [
+          "Audit de sécurité informatique complet et tests de contrôle",
+          "Évaluation de la posture de sécurité et identification des écarts",
+          "Leadership de Responsable de la Sécurité des Systèmes d'Information Virtuel (vCISO)",
+          "Développement de programme de sécurité à long terme et maturité",
+          "Stratégie de gestion des risques et exécution",
+          "Rapports de sécurité et communication au niveau de la direction"
+        ],
+        "deliverables": "Rapport sur les conclusions de l'audit, plan d'engagement vCISO, feuille de route de sécurité, séances d'information pour la direction"
+      },
+      "training": {
+        "title": "Formation et Opérations de Sécurité",
+        "description": "Renforcez vos défenses humaines et techniques grâce à la formation et à la gestion proactive des vulnérabilités.",
+        "details": [
+          "Programmes de formation à la sensibilisation à la sécurité personnalisés",
+          "Campagnes de simulation de phishing et éducation",
+          "Services d'identification et d'évaluation des vulnérabilités",
+          "Surveillance des menaces et conseils en remédiation",
+          "Initiatives de développement de la culture de sécurité",
+          "Métriques et rapports de sensibilisation à la sécurité continus"
+        ],
+        "deliverables": "Curriculum de formation, matériel de campagne de sensibilisation, rapport d'évaluation des vulnérabilités, métriques de progrès"
+      },
+      "strategy": {
+        "title": "Stratégie et Conseil en Cybersécurité",
+        "description": "Conseils stratégiques et planification pour aligner les décisions technologiques avec vos objectifs de sécurité.",
+        "details": [
+          "Développement de la stratégie et de la feuille de route du programme de sécurité",
+          "Évaluation des risques technologiques et planification de l'atténuation",
+          "Examen de l'architecture de sécurité et recommandations",
+          "Planification stratégique des investissements en sécurité",
+          "Séances d'information sur la sécurité pour la direction et aide à la décision",
+          "Conseils sur l'évaluation des fournisseurs et des technologies"
+        ],
+        "deliverables": "Plan de sécurité stratégique, recommandations technologiques, rapports exécutifs, cadres de décision"
+      },
+      "testing": {
+        "title": "Tests et Évaluation de la Sécurité",
+        "description": "Simulations d'attaques en conditions réelles qui valident vos défenses et découvrent les faiblesses exploitables.",
+        "details": [
+          "Tests d'intrusion d'infrastructure réseau",
+          "Tests de sécurité des applications web et mobiles",
+          "Évaluations de la sécurité des environnements cloud",
+          "Simulations d'ingénierie sociale et de phishing",
+          "Validation manuelle d'exploitation et analyse d'impact",
+          "Conseils détaillés en remédiation et tests de validation de correction"
+        ],
+        "deliverables": "Rapport de test d'intrusion, résumé exécutif, recommandations de remédiation, validation du nouveau test"
+      }
+    },
+    "cta": {
+      "text": "Besoin d'une solution personnalisée ? Nos experts peuvent adapter un programme de sécurité à vos besoins spécifiques.",
+      "button": "Obtenir un Devis Personnalisé"
+    },
+    "card": {
+      "view_details": "Voir les Détails",
+      "hide_details": "Masquer les Détails",
+      "included": "Ce qui est Inclus",
+      "deliverables_label": "Livrables : "
+    }
+  },
+  "about": {
+    "title": "Gardiens du",
+    "title_accent": "Royaume Numérique",
+    "subtitle": "Nous ne sommes pas seulement des consultants ; nous sommes vos partenaires stratégiques en défense. À une époque où les données sont la nouvelle monnaie, protéger vos actifs est non négociable. Notre équipe se compose de chercheurs en sécurité d'élite et de vétérans de l'industrie dédiés à garder une longueur d'avance sur les cybermenaces.",
+    "benefits": [
+      "Hackers Éthiques Certifiés (CEH)",
+      "Consultants Certifiés CISSP & OSCP",
+      "Experts en Conformité ISO 27001",
+      "Canaux de support dédiés 24/7"
+    ],
+    "quote": "La sécurité n'est pas un produit, mais un processus. Nous construisons le processus qui sécurise votre avenir.",
+    "quote_author": "Responsable de la Sécurité"
+  },
+  "whatwedo": {
+    "title": "Ce Que Nous",
+    "title_accent": "Faisons",
+    "subtitle": "Notre approche combine des méthodologies éprouvées avec des technologies de pointe pour fournir des solutions de sécurité complètes. Nous nous concentrons sur la compréhension de vos défis uniques et la construction d'un programme de sécurité qui évolue avec votre entreprise.",
+    "methodology_title": "Notre",
+    "methodology_accent": "Méthodologie",
+    "methodologies": {
+      "risk": {
+        "title": "Évaluation des Risques et de la Conformité",
+        "description": "Nous commençons par évaluer votre posture de risque actuelle et votre statut de conformité, identifiant les lacunes dans les cadres de gouvernance et les exigences réglementaires pour établir une base de sécurité solide."
+      },
+      "auditing": {
+        "title": "Audit Complet",
+        "description": "Nos audits de sécurité indépendants examinent vos contrôles, politiques et procédures, fournissant des informations objectives sur votre posture de sécurité et les domaines nécessitant des améliorations."
+      },
+      "training": {
+        "title": "Formation et Sensibilisation",
+        "description": "Nous autonomisons votre équipe grâce à des programmes de formation à la sécurité ciblés et des initiatives de sensibilisation, construisant une culture de sécurité qui renforce vos défenses humaines."
+      },
+      "planning": {
+        "title": "Planification Stratégique",
+        "description": "Notre approche stratégique combine les tests de sécurité, la gestion des risques et le développement de programmes pour renforcer continuellement votre posture de sécurité et s'aligner sur les objectifs commerciaux."
+      }
+    },
+    "approach_title": "Notre",
+    "approach_accent": "Approche",
+    "approaches": {
+      "governance": {
+        "title": "Stratégie Axée sur la Gouvernance",
+        "description": "Nous construisons des programmes de sécurité sur des fondations de gouvernance solides, garantissant que les politiques, procédures et contrôles s'alignent sur votre tolérance au risque et vos obligations de conformité."
+      },
+      "tailored": {
+        "title": "Mise en Œuvre Personnalisée",
+        "description": "Chaque organisation fait face à des défis uniques. Nous concevons des solutions de sécurité adaptées à votre industrie, échelle, environnement réglementaire et objectifs stratégiques."
+      },
+      "evidence": {
+        "title": "Résultats Basés sur les Preuves",
+        "description": "Nous définissons des métriques de sécurité claires et fournissons des rapports réguliers, vous permettant de suivre les progrès et de démontrer la valeur de vos investissements en sécurité."
+      }
+    },
+    "process_title": "Notre",
+    "process_accent": "Processus",
+    "processes": {
+      "step1": {
+        "title": "Évaluation et Analyse des Écarts",
+        "description": "Nous évaluons votre posture de sécurité, votre statut de conformité et votre exposition aux risques, identifiant les lacunes critiques et les opportunités d'amélioration."
+      },
+      "step2": {
+        "title": "Développement de la Stratégie",
+        "description": "Nous créons une feuille de route de sécurité personnalisée qui répond à vos risques spécifiques, besoins de conformité et objectifs commerciaux."
+      },
+      "step3": {
+        "title": "Exécution du Programme",
+        "description": "Nous mettons en œuvre des cadres de gouvernance, des contrôles de sécurité, des programmes de formation et des services consultatifs avec un impact opérationnel minimal."
+      },
+      "step4": {
+        "title": "Amélioration Continue",
+        "description": "Nous fournissons des audits continus, des évaluations, des mises à jour de formation et des conseils stratégiques pour maintenir et améliorer votre maturité en sécurité."
+      }
+    },
+    "cta_title": "Prêt à Renforcer Votre Sécurité ?",
+    "cta_subtitle": "Discutons de la façon dont nos solutions de sécurité complètes peuvent protéger votre entreprise et permettre une croissance sécurisée.",
+    "cta_button": "Commencez Aujourd'hui"
+  },
+  "consultants": {
+    "badge": "Équipe d'Experts",
+    "title": "Rencontrez Nos",
+    "title_accent": "Consultants",
+    "subtitle": "Notre équipe de professionnels de la sécurité certifiés apporte des décennies d'expérience combinée dans la protection des organisations contre les cybermenaces en constante évolution.",
+    "view_profile": "Voir le Profil Complet",
+    "linkedin_profile": "Profil LinkedIn",
+    "profile_modal": {
+      "contact_btn": "Contacter",
+      "executive_profile": "Profil Exécutif",
+      "experience_highlights": "Points Forts de l'Expérience Professionnelle",
+      "key_differentiators": "Différenciateurs Clés",
+      "education": "Formation",
+      "certifications": "Certifications",
+      "technical": "Compétences Techniques",
+      "view_linkedin": "Voir le Profil Complet sur LinkedIn"
+    }
+  },
+  "contact": {
+    "title": "Prêt à",
+    "title_accent": "Sécuriser Votre Entreprise ?",
+    "subtitle": "N'attendez pas qu'une violation se produise. Contactez-nous dès aujourd'hui pour une consultation confidentielle concernant votre posture de sécurité.",
+    "email_us": "Écrivez-nous",
+    "global_hq": "Siège Mondial",
+    "emergency": "Urgence",
+    "cta": "Planifier une Consultation Gratuite"
+  },
+  "footer": {
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions d'Utilisation",
+    "security": "Sécurité",
+    "copyright": "© {{year}} RiskWise Global Consulting. Tous droits réservés."
+  }
+}

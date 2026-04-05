@@ -15,6 +15,8 @@ import {
   User,
 } from "lucide-react";
 import type { ConsultantProfile } from "@/lib/consultant-profiles";
+import { localize, localizeArray } from "@/lib/consultant-profiles";
+import { useTranslation } from "react-i18next";
 
 interface ConsultantProfileModalProps {
   profile: ConsultantProfile | null;
@@ -27,12 +29,21 @@ export function ConsultantProfileModal({
   open,
   onOpenChange,
 }: ConsultantProfileModalProps) {
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language?.startsWith("fr") ? "fr" : "en";
+
   if (!profile) return null;
 
   const hasFullProfile =
     profile.executiveProfile ||
     profile.coreCapabilities?.length ||
-    profile.experienceHighlights?.length;
+    profile.experienceHighlights;
+
+  const role = localize(profile.role, lang);
+  const location = localize(profile.location, lang);
+  const executiveProfile = localize(profile.executiveProfile, lang);
+  const experienceHighlights = localizeArray(profile.experienceHighlights, lang);
+  const differentiators = localizeArray(profile.differentiators, lang);
 
   return (
     <AnimatePresence>
@@ -117,7 +128,7 @@ export function ConsultantProfileModal({
                       transition={{ delay: 0.35 }}
                       className="text-lg sm:text-xl text-primary font-medium mt-1"
                     >
-                      {profile.role}
+                      {role}
                     </motion.p>
 
                     {/* Contact badges */}
@@ -127,10 +138,10 @@ export function ConsultantProfileModal({
                       transition={{ delay: 0.4 }}
                       className="flex flex-wrap gap-2 sm:gap-3 mt-4"
                     >
-                      {profile.location && (
+                      {location && (
                         <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm text-muted-foreground">
                           <MapPin className="w-3.5 h-3.5 text-primary" />
-                          {profile.location}
+                          {location}
                         </span>
                       )}
                       {profile.languages?.length && (
@@ -156,7 +167,7 @@ export function ConsultantProfileModal({
                       className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-primary-foreground font-medium text-sm hover:bg-primary/90 transition-all hover:scale-105 active:scale-95 shadow-lg shadow-primary/25"
                     >
                       <Mail className="w-4 h-4" />
-                      Contact
+                      {t("consultants.profile_modal.contact_btn")}
                     </a>
                   )}
                   {profile.contact?.phone && (
@@ -186,14 +197,14 @@ export function ConsultantProfileModal({
               {/* Content sections */}
               <div className="px-6 sm:px-10 py-8 space-y-8">
                 {/* Executive Profile */}
-                {profile.executiveProfile && (
+                {executiveProfile && (
                   <ProfileSection
                     icon={Briefcase}
-                    title="Executive Profile"
+                    title={t("consultants.profile_modal.executive_profile")}
                     delay={0.1}
                   >
                     <p className="text-muted-foreground leading-relaxed text-base">
-                      {profile.executiveProfile}
+                      {executiveProfile}
                     </p>
                   </ProfileSection>
                 )}
@@ -203,11 +214,11 @@ export function ConsultantProfileModal({
                   <ProfileSection
                     key={i}
                     icon={Sparkles}
-                    title={cap.title}
+                    title={localize(cap.title, lang)}
                     delay={0.15 + i * 0.05}
                   >
                     <div className="grid sm:grid-cols-2 gap-2">
-                      {cap.items.map((item, j) => (
+                      {localizeArray(cap.items, lang).map((item, j) => (
                         <motion.div
                           key={j}
                           initial={{ opacity: 0, x: -10 }}
@@ -224,14 +235,14 @@ export function ConsultantProfileModal({
                 ))}
 
                 {/* Experience Highlights */}
-                {profile.experienceHighlights?.length && (
+                {experienceHighlights.length > 0 && (
                   <ProfileSection
                     icon={Briefcase}
-                    title="Professional Experience Highlights"
+                    title={t("consultants.profile_modal.experience_highlights")}
                     delay={0.2}
                   >
                     <div className="space-y-3">
-                      {profile.experienceHighlights.map((item, i) => (
+                      {experienceHighlights.map((item, i) => (
                         <motion.div
                           key={i}
                           initial={{ opacity: 0, x: -10 }}
@@ -247,14 +258,14 @@ export function ConsultantProfileModal({
                 )}
 
                 {/* Differentiators */}
-                {profile.differentiators?.length && (
+                {differentiators.length > 0 && (
                   <ProfileSection
                     icon={CheckCircle2}
-                    title="Key Differentiators"
+                    title={t("consultants.profile_modal.key_differentiators")}
                     delay={0.25}
                   >
                     <div className="flex flex-wrap gap-3">
-                      {profile.differentiators.map((item, i) => (
+                      {differentiators.map((item, i) => (
                         <motion.span
                           key={i}
                           initial={{ opacity: 0, scale: 0.9 }}
@@ -276,7 +287,7 @@ export function ConsultantProfileModal({
                     {profile.education?.length && (
                       <ProfileSection
                         icon={GraduationCap}
-                        title="Education"
+                        title={t("consultants.profile_modal.education")}
                         delay={0.3}
                         compact
                       >
@@ -289,7 +300,7 @@ export function ConsultantProfileModal({
                               transition={{ delay: 0.45 + i * 0.05 }}
                               className="p-3 rounded-lg bg-white/5 border border-white/5"
                             >
-                              <div className="font-medium text-foreground text-sm">{edu.degree}</div>
+                              <div className="font-medium text-foreground text-sm">{localize(edu.degree, lang)}</div>
                               <div className="text-xs text-muted-foreground mt-1">{edu.institution}</div>
                             </motion.div>
                           ))}
@@ -300,7 +311,7 @@ export function ConsultantProfileModal({
                     {profile.certifications?.length && (
                       <ProfileSection
                         icon={Award}
-                        title="Certifications"
+                        title={t("consultants.profile_modal.certifications")}
                         delay={0.35}
                         compact
                       >
@@ -327,7 +338,7 @@ export function ConsultantProfileModal({
                 {profile.technical && (
                   <ProfileSection
                     icon={Briefcase}
-                    title="Technical Proficiencies"
+                    title={t("consultants.profile_modal.technical")}
                     delay={0.4}
                   >
                     <div className="flex flex-wrap gap-2">
@@ -361,7 +372,7 @@ export function ConsultantProfileModal({
                       className="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-medium hover:shadow-lg hover:shadow-primary/25 transition-all hover:scale-105 active:scale-95"
                     >
                       <Linkedin className="w-5 h-5" />
-                      View Full Profile on LinkedIn
+                      {t("consultants.profile_modal.view_linkedin")}
                       <ExternalLink className="w-4 h-4" />
                     </a>
                   </motion.div>
