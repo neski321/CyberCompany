@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import heroBg from "@assets/generated_images/dark_abstract_cybersecurity_network_background_with_blue_neon_lines.webp";
 import { AssessmentForm } from "@/components/AssessmentForm";
+import { useTranslation } from "react-i18next";
 
 export function Hero() {
+  const { t } = useTranslation();
   const [assessmentOpen, setAssessmentOpen] = useState(false);
 
   const scrollToServices = () => {
@@ -39,7 +41,7 @@ export function Hero() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
             </span>
-            Elite Cyber Defense
+            {t("hero.badge")}
           </div>
         </motion.div>
 
@@ -49,7 +51,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-5xl md:text-7xl font-display font-bold leading-tight mb-6 max-w-4xl mx-auto"
         >
-          Fortify Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-300 text-glow">Digital Future</span>
+          {t("hero.title")} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-300 text-glow">{t("hero.title_accent")}</span>
         </motion.h1>
 
         <motion.p
@@ -58,8 +60,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          We provide enterprise-grade security consulting for businesses that refuse to compromise. 
-          Proactive threat hunting, vulnerability assessment, and strategic defense.
+          {t("hero.subtitle")}
         </motion.p>
 
         <motion.div
@@ -73,7 +74,7 @@ export function Hero() {
             onClick={() => setAssessmentOpen(true)}
             className="bg-primary text-primary-foreground hover:bg-primary/90 min-w-[180px] h-12 text-base font-semibold shadow-[0_0_20px_rgba(6,182,212,0.4)]"
           >
-            Start Assessment <ArrowRight className="ml-2 w-4 h-4" />
+            {t("hero.cta_primary")} <ArrowRight className="ml-2 w-4 h-4" />
           </Button>
           <Button 
             size="lg" 
@@ -81,7 +82,7 @@ export function Hero() {
             onClick={scrollToServices}
             className="border-white/10 hover:bg-white/5 hover:text-primary min-w-[180px] h-12 text-base backdrop-blur-sm"
           >
-            View Services
+            {t("hero.cta_secondary")}
           </Button>
         </motion.div>
 
@@ -93,10 +94,10 @@ export function Hero() {
           className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/5 pt-8 max-w-4xl mx-auto"
         >
           {[
-            { label: "Threats Blocked", value: "10k+" },
-            { label: "Uptime Secured", value: "99.9%" },
-            { label: "Clients Protected", value: "500+" },
-            { label: "Global Reach", value: "24/7" },
+            { label: t("hero.stats.threats"), value: "10k+" },
+            { label: t("hero.stats.uptime"), value: "99.9%" },
+            { label: t("hero.stats.clients"), value: "500+" },
+            { label: t("hero.stats.reach"), value: "24/7" },
           ].map((stat, i) => (
             <div key={i} className="text-center">
               <div className="text-2xl md:text-3xl font-display font-bold text-white mb-1">{stat.value}</div>

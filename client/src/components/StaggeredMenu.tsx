@@ -1,6 +1,7 @@
 import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { Menu, X } from "lucide-react";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export interface StaggeredMenuItem {
   label: string;
@@ -407,11 +408,12 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                 </li>
               )}
             </ul>
+            <div className="mt-auto pb-8 flex justify-start">
+               <LanguageSwitcher />
+            </div>
           </div>
         </aside>
       </div>
-
-
     </div>
   );
 };
