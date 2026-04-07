@@ -1,7 +1,6 @@
 import React, { useCallback, useLayoutEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { Menu, X } from "lucide-react";
-import { LanguageSwitcher } from "./LanguageSwitcher";
 
 export interface StaggeredMenuItem {
   label: string;
@@ -17,6 +16,7 @@ export interface StaggeredMenuProps {
   displayItemNumbering?: boolean;
   className?: string;
   logoComponent?: React.ReactNode;
+  headerRightSlot?: React.ReactNode;
   menuButtonColor?: string;
   openMenuButtonColor?: string;
   accentColor?: string;
@@ -34,6 +34,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   displayItemNumbering = false,
   className,
   logoComponent,
+  headerRightSlot,
   menuButtonColor = "#fff",
   openMenuButtonColor = "#fff",
   changeMenuColorOnOpen = true,
@@ -233,6 +234,18 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
     }
   }, [changeMenuColorOnOpen, menuButtonColor, openMenuButtonColor]);
 
+  // Lock body scroll when menu is open
+  React.useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   const toggleMenu = useCallback(() => {
     const target = !openRef.current;
     openRef.current = target;
@@ -328,28 +341,31 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         </div>
 
         <header
-          className="staggered-menu-header absolute top-0 left-0 w-full flex items-center justify-between p-4 sm:p-6 bg-transparent pointer-events-none z-20"
+          className="staggered-menu-header fixed top-0 left-0 w-full flex items-center justify-between px-4 py-4 bg-slate-950 border-b border-white/10 pointer-events-none z-20"
           aria-label="Main navigation header"
         >
-          <div className="sm-logo flex items-center select-none pointer-events-auto" aria-label="Logo">
+          <div className="sm-logo flex items-center select-none pointer-events-auto flex-shrink min-w-0 max-w-[calc(100%-160px)]" aria-label="Logo">
             {logoComponent}
           </div>
 
-          <button
-            ref={toggleBtnRef}
-            className="sm-toggle relative inline-flex items-center justify-center p-2 bg-transparent border-0 cursor-pointer overflow-visible pointer-events-auto text-white hover:bg-white/5 rounded-lg transition-colors"
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            aria-controls="staggered-menu-panel"
-            onClick={toggleMenu}
-            type="button"
-          >
-            {open ? (
-              <X className="w-6 h-6" aria-hidden="true" />
-            ) : (
-              <Menu className="w-6 h-6" aria-hidden="true" />
-            )}
-          </button>
+          <div className="flex items-center gap-3 pointer-events-auto flex-shrink-0">
+            {headerRightSlot}
+            <button
+              ref={toggleBtnRef}
+              className="sm-toggle relative inline-flex items-center justify-center p-2 bg-transparent border-0 cursor-pointer overflow-visible text-white hover:bg-white/5 rounded-lg transition-colors"
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              aria-controls="staggered-menu-panel"
+              onClick={toggleMenu}
+              type="button"
+            >
+              {open ? (
+                <X className="w-6 h-6" aria-hidden="true" />
+              ) : (
+                <Menu className="w-6 h-6" aria-hidden="true" />
+              )}
+            </button>
+          </div>
         </header>
 
         <aside
@@ -408,9 +424,6 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
                 </li>
               )}
             </ul>
-            <div className="mt-auto pb-8 flex justify-start">
-               <LanguageSwitcher />
-            </div>
           </div>
         </aside>
       </div>

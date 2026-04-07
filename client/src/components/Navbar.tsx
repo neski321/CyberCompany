@@ -67,9 +67,9 @@ export function Navbar() {
   );
 
   const logoComponent = (
-    <Link href="/" className="flex items-center gap-2 group cursor-pointer">
-      <Shield className="w-7 h-7 text-primary group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.5)] transition-all" />
-      <span className="font-display font-bold text-lg tracking-wide text-white whitespace-nowrap">
+    <Link href="/" className="flex items-center gap-2 group cursor-pointer min-w-0">
+      <Shield className="w-7 h-7 text-primary group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.5)] transition-all flex-shrink-0" />
+      <span className="font-display font-bold text-lg tracking-wide text-white truncate">
         RISKWISE GLOBAL CONSULTING
       </span>
     </Link>
@@ -79,15 +79,15 @@ export function Navbar() {
     <>
       {/* Desktop Nav - lg and up */}
       <nav
-        className={`hidden lg:block fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? "bg-background/80 backdrop-blur-md border-b border-white/5 py-4" : "bg-transparent py-6"
+        className={`hidden lg:block fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-background/95 backdrop-blur-md border-b border-white/10 ${
+          isScrolled ? "py-4" : "py-5"
         }`}
       >
         <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between gap-4">
-          <Link href="/" className="flex-shrink-0">
+          <Link href="/" className="flex-shrink-0 min-w-0">
             <div className="flex items-center gap-2 group cursor-pointer">
-              <Shield className="w-7 h-7 sm:w-8 sm:h-8 text-primary group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.5)] transition-all" />
-              <span className="font-display font-bold text-lg sm:text-xl tracking-wide text-white whitespace-nowrap">
+              <Shield className="w-7 h-7 sm:w-8 sm:h-8 text-primary group-hover:drop-shadow-[0_0_8px_rgba(6,182,212,0.5)] transition-all flex-shrink-0" />
+              <span className="font-display font-bold text-lg sm:text-xl tracking-wide text-white truncate">
                 RISKWISE GLOBAL CONSULTING
               </span>
             </div>
@@ -126,6 +126,7 @@ export function Navbar() {
           items={staggeredMenuItems}
           displayItemNumbering={false}
           logoComponent={logoComponent}
+          headerRightSlot={<LanguageSwitcher />}
           menuButtonColor="#ffffff"
           openMenuButtonColor="#ffffff"
           changeMenuColorOnOpen={false}
