@@ -175,8 +175,8 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[95dvh] md:max-h-[90vh] overflow-y-auto bg-card/95 backdrop-blur-xl border-white/10 p-4 sm:p-6 w-[calc(100vw-2rem)] md:w-full [@media(max-width:768px)]:!top-4 [@media(max-width:768px)]:!bottom-4 [@media(max-width:768px)]:!translate-y-0 [@media(max-width:768px)]:!translate-x-[-50%]">
-        <DialogHeader className="sticky top-0 bg-card/95 backdrop-blur-sm z-10 pb-4 -mx-4 sm:-mx-6 px-4 sm:px-6 border-b border-white/5 mb-4">
+      <DialogContent className="max-w-2xl max-h-[95dvh] md:max-h-[90vh] flex flex-col overflow-hidden bg-card/95 backdrop-blur-xl border-white/10 p-0 w-[calc(100vw-2rem)] md:w-full [@media(max-width:768px)]:!top-4 [@media(max-width:768px)]:!bottom-4 [@media(max-width:768px)]:!translate-y-0 [@media(max-width:768px)]:!translate-x-[-50%]">
+        <DialogHeader className="flex-shrink-0 bg-card/95 backdrop-blur-sm z-10 pb-4 px-4 sm:px-6 pt-4 sm:pt-6 border-b border-white/5">
           <div className="flex items-center gap-2 sm:gap-3 mb-2">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
               <CalendarIcon2 className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
@@ -192,226 +192,228 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
           </div>
         </DialogHeader>
 
-        <Form {...form}>
-          <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm sm:text-base">Full Name *</FormLabel>
-                    <FormControl>
-                      <Input 
-                        placeholder="John Doe" 
-                        {...field}
-                        className="text-base"
-                        autoComplete="name"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm sm:text-base">Email Address *</FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="email" 
-                        placeholder="john@company.com" 
-                        {...field}
-                        className="text-base"
-                        autoComplete="email"
-                        inputMode="email"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-              <FormField
-                control={form.control}
-                name="company"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm sm:text-base">Company Name *</FormLabel>
-                    <FormControl>
-                      <Input 
-                        placeholder="Acme Corp" 
-                        {...field}
-                        className="text-base"
-                        autoComplete="organization"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm sm:text-base">Phone Number</FormLabel>
-                    <FormControl>
-                      <Input 
-                        type="tel" 
-                        placeholder="+1 (555) 123-4567" 
-                        {...field}
-                        className="text-base"
-                        autoComplete="tel"
-                        inputMode="tel"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
-              <FormField
-                control={form.control}
-                name="date"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col">
-                    <FormLabel className="text-sm sm:text-base">Select Date *</FormLabel>
-                    <Popover>
-                      <PopoverTrigger asChild>
-                        <FormControl>
-                          <Button
-                            variant="outline"
-                            className={cn(
-                              "w-full pl-3 text-left font-normal text-base h-10",
-                              !field.value && "text-muted-foreground"
-                            )}
-                            type="button"
-                          >
-                            {field.value ? (
-                              format(field.value, "PPP")
-                            ) : (
-                              <span>Pick a date</span>
-                            )}
-                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                          </Button>
-                        </FormControl>
-                      </PopoverTrigger>
-                      <PopoverContent className="w-auto p-0 z-[60]" align="start" side="bottom">
-                        <Calendar
-                          mode="single"
-                          selected={field.value}
-                          onSelect={field.onChange}
-                          disabled={isDateDisabled}
-                          initialFocus
-                        />
-                      </PopoverContent>
-                    </Popover>
-                    <FormDescription className="text-xs sm:text-sm">
-                      Select a date for your consultation
-                    </FormDescription>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="timeSlot"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-sm sm:text-base">Select Time *</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
+        <div className="flex-1 overflow-y-auto px-4 sm:px-6 pt-4">
+          <Form {...form}>
+            <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+                <FormField
+                  control={form.control}
+                  name="name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm sm:text-base">Full Name *</FormLabel>
                       <FormControl>
-                        <SelectTrigger className="text-base h-10">
-                          <SelectValue placeholder="Choose a time slot">
-                            {field.value ? (
-                              <div className="flex items-center gap-2">
-                                <Clock className="w-4 h-4" />
-                                {field.value}
-                              </div>
-                            ) : (
-                              "Choose a time slot"
-                            )}
-                          </SelectValue>
-                        </SelectTrigger>
+                        <Input 
+                          placeholder="John Doe" 
+                          {...field}
+                          className="text-base"
+                          autoComplete="name"
+                        />
                       </FormControl>
-                      <SelectContent className="z-[60]">
-                        {timeSlots.map((time) => (
-                          <SelectItem key={time} value={time}>
-                            {time}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm sm:text-base">Email Address *</FormLabel>
+                      <FormControl>
+                        <Input 
+                          type="email" 
+                          placeholder="john@company.com" 
+                          {...field}
+                          className="text-base"
+                          autoComplete="email"
+                          inputMode="email"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+                <FormField
+                  control={form.control}
+                  name="company"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm sm:text-base">Company Name *</FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder="Acme Corp" 
+                          {...field}
+                          className="text-base"
+                          autoComplete="organization"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm sm:text-base">Phone Number</FormLabel>
+                      <FormControl>
+                        <Input 
+                          type="tel" 
+                          placeholder="+1 (555) 123-4567" 
+                          {...field}
+                          className="text-base"
+                          autoComplete="tel"
+                          inputMode="tel"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
+                <FormField
+                  control={form.control}
+                  name="date"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col">
+                      <FormLabel className="text-sm sm:text-base">Select Date *</FormLabel>
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <FormControl>
+                            <Button
+                              variant="outline"
+                              className={cn(
+                                "w-full pl-3 text-left font-normal text-base h-10",
+                                !field.value && "text-muted-foreground"
+                              )}
+                              type="button"
+                            >
+                              {field.value ? (
+                                format(field.value, "PPP")
+                              ) : (
+                                <span>Pick a date</span>
+                              )}
+                              <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            </Button>
+                          </FormControl>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-0 z-[60]" align="start" side="bottom">
+                          <Calendar
+                            mode="single"
+                            selected={field.value}
+                            onSelect={field.onChange}
+                            disabled={isDateDisabled}
+                            initialFocus
+                          />
+                        </PopoverContent>
+                      </Popover>
+                      <FormDescription className="text-xs sm:text-sm">
+                        Select a date for your consultation
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="timeSlot"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-sm sm:text-base">Select Time *</FormLabel>
+                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                        <FormControl>
+                          <SelectTrigger className="text-base h-10">
+                            <SelectValue placeholder="Choose a time slot">
+                              {field.value ? (
+                                <div className="flex items-center gap-2">
+                                  <Clock className="w-4 h-4" />
+                                  {field.value}
+                                </div>
+                              ) : (
+                                "Choose a time slot"
+                              )}
+                            </SelectValue>
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent className="z-[60]">
+                          {timeSlots.map((time) => (
+                            <SelectItem key={time} value={time}>
+                              {time}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormDescription className="text-xs sm:text-sm">
+                        All times are in your local timezone
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <FormField
+                control={form.control}
+                name="message"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-sm sm:text-base">Additional Notes (Optional)</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Any specific topics you'd like to discuss or questions you have..."
+                        className="min-h-[80px] text-base resize-none"
+                        {...field}
+                      />
+                    </FormControl>
                     <FormDescription className="text-xs sm:text-sm">
-                      All times are in your local timezone
+                      Help us prepare for our conversation
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-            </div>
 
-            <FormField
-              control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm sm:text-base">Additional Notes (Optional)</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Any specific topics you'd like to discuss or questions you have..."
-                      className="min-h-[80px] text-base resize-none"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription className="text-xs sm:text-sm">
-                    Help us prepare for our conversation
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div className="flex flex-col sm:flex-row gap-3 pt-4 pb-2 sticky bottom-0 bg-card/95 backdrop-blur-sm -mx-4 sm:-mx-6 px-4 sm:px-6 border-t border-white/5 mt-4">
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 h-11 text-base"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Scheduling...
-                  </>
-                ) : (
-                  <>
-                    <CalendarIcon2 className="mr-2 h-4 w-4" />
-                    Confirm Schedule
-                  </>
-                )}
-              </Button>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() => onOpenChange(false)}
-                disabled={isSubmitting}
-                className="h-11 text-base"
-              >
-                Cancel
-              </Button>
-            </div>
-          </form>
-        </Form>
+              <div className="flex flex-col sm:flex-row gap-3 pt-4 pb-4 sticky bottom-0 bg-card/95 backdrop-blur-sm border-t border-white/5 mt-4 -mx-4 sm:-mx-6 px-4 sm:px-6">
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90 h-11 text-base"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Scheduling...
+                    </>
+                  ) : (
+                    <>
+                      <CalendarIcon2 className="mr-2 h-4 w-4" />
+                      Confirm Schedule
+                    </>
+                  )}
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => onOpenChange(false)}
+                  disabled={isSubmitting}
+                  className="h-11 text-base"
+                >
+                  Cancel
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </div>
       </DialogContent>
     </Dialog>
   );
