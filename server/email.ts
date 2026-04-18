@@ -5,16 +5,23 @@ import { log } from "./index";
 // For production, set these in your environment:
 // SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM, NOTIFICATION_EMAIL
 const getEmailConfig = () => {
-  // Default to a test configuration if not set
-  // For development, you can use services like Mailtrap, Ethereal, or Gmail
+  const port = parseInt(process.env.SMTP_PORT || "587");
   return {
     host: process.env.SMTP_HOST || "smtp.gmail.com",
-    port: parseInt(process.env.SMTP_PORT || "587"),
-    secure: process.env.SMTP_SECURE === "true", // true for 465, false for other ports
+    port: port,
+    secure: process.env.SMTP_SECURE === "true" || port === 465,
     auth: {
       user: process.env.SMTP_USER || "",
       pass: process.env.SMTP_PASS || "",
     },
+    // Adding timeouts for cloud environments like Railway
+    connectionTimeout: 20000, // 20 seconds
+    greetingTimeout: 20000,
+    socketTimeout: 30000,
+    tls: {
+      // Helps avoid certain cloud connection issues
+      rejectUnauthorized: false
+    }
   };
 };
 
