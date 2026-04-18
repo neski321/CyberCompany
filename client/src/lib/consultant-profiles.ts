@@ -36,7 +36,135 @@ export const consultantProfiles: ConsultantProfile[] = [
       en: "Principal Security Consultant",
       fr: "Consultante Principale en Sécurité",
     },
+    location: {
+      en: "Overland Park, Kansas",
+      fr: "Overland Park, Kansas",
+    },
+    languages: ["English"],
     linkedinUrl: "https://www.linkedin.com/in/trixy-otieno-ms-cissp-cisa-ceh-gcih-gsec-pcip-pmp-3a3a98238/",
+    executiveProfile: {
+      en: "Seasoned cybersecurity and GRC professional with over 9 years of experience designing, implementing, and managing enterprise security programs across global organizations. Specialized in building and maturing security programs from the ground up, establishing risk management frameworks, and driving audit readiness across complex, multi-entity environments. Delivers practical, scalable solutions that align deep technical security with strategic business objectives.",
+      fr: "Professionnelle chevronnée de la cybersécurité et de la GRC avec plus de 9 ans d'expérience dans la conception, la mise en œuvre et la gestion de programmes de sécurité d'entreprise au sein d'organisations mondiales. Spécialisée dans la création et la maturation de programmes de sécurité à partir de zéro, l'établissement de cadres de gestion des risques et la préparation aux audits dans des environnements multi-entités complexes. Elle propose des solutions pratiques et évolutives qui alignent la sécurité technique approfondie avec les objectifs stratégiques de l'entreprise.",
+    },
+    coreCapabilities: [
+      {
+        title: {
+          en: "GRC & Security Governance",
+          fr: "GRC et Gouvernance de la Sécurité",
+        },
+        items: {
+          en: [
+            "Framework design & implementation",
+            "Security program maturation",
+            "Policy & procedure development",
+            "Data governance & privacy",
+            "Strategic security alignment",
+          ],
+          fr: [
+            "Conception et mise en œuvre de cadres",
+            "Maturation des programmes de sécurité",
+            "Développement de politiques et procédures",
+            "Gouvernance des données et confidentialité",
+            "Alignement stratégique de la sécurité",
+          ],
+        },
+      },
+      {
+        title: {
+          en: "Risk & Compliance Management",
+          fr: "Gestion des Risques et Conformité",
+        },
+        items: {
+          en: [
+            "Enterprise risk assessments",
+            "Third-party risk management (TPRM)",
+            "Compliance readiness (ISO, PCI-DSS, etc.)",
+            "Control implementation & testing",
+            "Regulatory gap analysis",
+          ],
+          fr: [
+            "Évaluations des risques d'entreprise",
+            "Gestion des risques liés aux tiers (TPRM)",
+            "Préparation à la conformité (ISO, PCI-DSS, etc.)",
+            "Mise en œuvre et tests de contrôles",
+            "Analyse des écarts réglementaires",
+          ],
+        },
+      },
+      {
+        title: {
+          en: "Audit & Incident Readiness",
+          fr: "Préparation aux Audits et Incidents",
+        },
+        items: {
+          en: [
+            "Audit readiness & management",
+            "Incident handler oversight (GCIH)",
+            "Operational security auditing",
+            "Ethical hacking (CEH) insights",
+            "Audit-ready security documentation",
+          ],
+          fr: [
+            "Préparation et gestion des audits",
+            "Supervision de la gestion des incidents (GCIH)",
+            "Audit de la sécurité opérationnelle",
+            "Aperçus du piratage éthique (CEH)",
+            "Documentation de sécurité prête pour l'audit",
+          ],
+        },
+      },
+    ],
+    experienceHighlights: {
+      en: [
+        "Led the design and management of global enterprise security programs from inception to maturity.",
+        "Established practical risk management frameworks across complex IT and operational environments.",
+        "Guided multi-entity organizations through rigorous compliance initiatives and audit preparations.",
+        "Directed hands-on GRC activities including policy development and third-party risk oversight.",
+        "Integrated security controls that balance technical defense with organizational scalability.",
+        "Supported businesses in strengthening security posture through structured, defensible GRC processes.",
+      ],
+      fr: [
+        "A dirigé la conception et la gestion de programmes de sécurité d'entreprise mondiaux, de la création à la maturité.",
+        "Établi des cadres de gestion des risques pratiques dans des environnements informatiques et opérationnels complexes.",
+        "Guidé des organisations multi-entités à travers des initiatives de conformité rigoureuses et des préparations aux audits.",
+        "Dirigé des activités GRC concrètes, y compris le développement de politiques et la surveillance des risques liés aux tiers.",
+        "Intégré des contrôles de sécurité qui équilibrent la défense technique avec l'évolutivité organisationnelle.",
+        "Accompagné les entreprises dans le renforcement de leur posture de sécurité grâce à des processus GRC structurés et défendables.",
+      ],
+    },
+    differentiators: {
+      en: [
+        "Practical, Risk-Driven Methodology",
+        "Deep Multi-Entity Operational Experience",
+        "Comprehensive Audit-Ready Approach",
+        "Elite Certifications (CISSP, CISA, PMP)",
+        "Bridging Technical Security & Business GRC",
+      ],
+      fr: [
+        "Méthodologie pratique axée sur le risque",
+        "Vaste expérience opérationnelle multi-entités",
+        "Approche complète prête pour l'audit",
+        "Certifications d'élite (CISSP, CISA, PMP)",
+        "Lien entre sécurité technique et GRC d'entreprise",
+      ],
+    },
+    education: [
+      {
+        degree: { en: "M.S.", fr: "M.S." },
+        institution: "Information Assurance",
+      },
+    ],
+    certifications: [
+      "Certified Information Systems Security Professional (CISSP)",
+      "Certified Information Systems Auditor (CISA)",
+      "Payment Card Industry Professional (PCIP)",
+      "GIAC Certified Incident Handler (GCIH)",
+      "GIAC Security Essentials Certification (GSEC)",
+      "Certified Ethical Hacker (CEH)",
+      "ISO 27001:2013 Internal Auditor (TPECS)",
+      "Project Management Professional (PMP)",
+    ],
+    technical: "GRC Frameworks, ISO 27001, PCI-DSS, Risk Management, Security Auditing, Incident Response",
   },
   {
     name: "Aminata Kasse",
