@@ -9,6 +9,8 @@ import Home from "@/pages/Home";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsOfService from "@/pages/TermsOfService";
 import Security from "@/pages/Security";
+import Admin from "@/pages/Admin";
+import { CustomCursor } from "@/components/CustomCursor";
 
 function ScrollToTop() {
   const [location] = useLocation();
@@ -25,6 +27,7 @@ function Router() {
       <Route path="/privacy-policy" component={PrivacyPolicy} />
       <Route path="/terms-of-service" component={TermsOfService} />
       <Route path="/security" component={Security} />
+      <Route path="/amitrixnes" component={Admin} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -33,6 +36,7 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <CustomCursor />
       <TooltipProvider>
         <Toaster />
         <ScrollToTop />

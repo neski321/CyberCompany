@@ -46,6 +46,8 @@ const schedulingSchema = z.object({
   timeSlot: z.string().min(1, "Please select a time slot"),
   timezone: z.string().optional(),
   message: z.string().optional(),
+  // Honeypot field
+  confirm_email_field: z.string().optional(),
 });
 
 type SchedulingFormValues = z.infer<typeof schedulingSchema>;
@@ -99,6 +101,7 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
       timeSlot: "",
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       message: "",
+      confirm_email_field: "",
     },
   });
 
@@ -195,6 +198,21 @@ export function SchedulingDialog({ open, onOpenChange }: SchedulingDialogProps) 
         <div className="flex-1 overflow-y-auto px-4 sm:px-6 pt-4">
           <Form {...form}>
             <form ref={formRef} onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 sm:space-y-6">
+              {/* Honeypot field - hidden from humans */}
+              <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }} aria-hidden="true">
+                <FormField
+                  control={form.control}
+                  name="confirm_email_field"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input {...field} tabIndex={-1} autoComplete="off" />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+              </div>
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                 <FormField
                   control={form.control}
