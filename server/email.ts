@@ -1,48 +1,16 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import { log } from "./index";
 
-// Email configuration - uses environment variables
-// For production, set these in your environment:
-// SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, SMTP_FROM, NOTIFICATION_EMAIL
-const getEmailConfig = () => {
-  const port = parseInt(process.env.SMTP_PORT || "587");
-  return {
-    host: process.env.SMTP_HOST || "smtp.gmail.com",
-    port: port,
-    secure: process.env.SMTP_SECURE === "true" || port === 465,
-    auth: {
-      user: process.env.SMTP_USER || "",
-      pass: process.env.SMTP_PASS || "",
-    },
-    // Adding timeouts for cloud environments like Railway
-    connectionTimeout: 20000, // 20 seconds
-    greetingTimeout: 20000,
-    socketTimeout: 30000,
-    tls: {
-      // Helps avoid certain cloud connection issues
-      rejectUnauthorized: false
-    }
-  };
-};
+// Initializing Resend client
+const resend = new Resend(process.env.RESEND_API_KEY || "re_123");
 
 const getFromEmail = () => {
-  return process.env.SMTP_FROM || process.env.SMTP_USER || "noreply@riskwiseglobalconsulting.com";
+  return process.env.SMTP_FROM || "onboarding@resend.dev";
 };
 
 const getNotificationEmail = () => {
   return process.env.NOTIFICATION_EMAIL || "secure@riskwiseglobalconsulting.com";
 };
-
-// Create reusable transporter
-let transporter: nodemailer.Transporter | null = null;
-
-function getTransporter() {
-  if (!transporter) {
-    const config = getEmailConfig();
-    transporter = nodemailer.createTransport(config);
-  }
-  return transporter;
-}
 
 // Helper to escape HTML for security
 function escapeHtml(unsafe: string): string {
@@ -170,11 +138,10 @@ export async function sendAssessmentEmail(data: AssessmentSubmission): Promise<v
 </html>`;
 
   try {
-    const transporter = getTransporter();
-    await transporter.sendMail({
+    await resend.emails.send({
       from: `RiskWise Reports <${fromEmail}>`,
       to: notificationEmail,
-      replyTo: data.email,
+      reply_to: data.email,
       subject: `[ASSESSMENT] ${sanitized.name} - ${sanitized.company}`,
       html: htmlContent,
     });
@@ -211,11 +178,10 @@ export async function sendConsultationScheduleEmail(data: ConsultationSchedule):
 </div>`;
 
   try {
-    const transporter = getTransporter();
-    await transporter.sendMail({
+    await resend.emails.send({
       from: `RiskWise Calendar <${fromEmail}>`,
       to: notificationEmail,
-      replyTo: data.email,
+      reply_to: data.email,
       subject: `[SCHEDULE] ${sanitized.name} - ${sanitized.datetime}`,
       html: htmlContent,
     });
@@ -319,8 +285,7 @@ export async function sendAssessmentConfirmation(data: AssessmentSubmission): Pr
   const html = getBrandedConfirmationLayout(title, body, summaryHtml);
 
   try {
-    const transporter = getTransporter();
-    await transporter.sendMail({
+    await resend.emails.send({
       from: `RiskWise Global Consulting <${fromEmail}>`,
       to: data.email,
       subject: "Security Assessment Request Received - RiskWise",
@@ -348,8 +313,7 @@ export async function sendConsultationConfirmation(data: ConsultationSchedule): 
   const html = getBrandedConfirmationLayout(title, body, summaryHtml);
 
   try {
-    const transporter = getTransporter();
-    await transporter.sendMail({
+    await resend.emails.send({
       from: `RiskWise Global Consulting <${fromEmail}>`,
       to: data.email,
       subject: "Consultation Confirmed - RiskWise Global Consulting",
