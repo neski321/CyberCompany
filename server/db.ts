@@ -1,12 +1,19 @@
 import Database from "better-sqlite3";
 import path from "path";
+import fs from "fs";
 import { log } from "./index";
 
 let dbInstance: Database.Database | null = null;
 
 function getDb() {
   if (!dbInstance) {
-    const dbPath = path.join(process.cwd(), "data", "submissions.db");
+    const dataDir = path.join(process.cwd(), "data");
+    if (!fs.existsSync(dataDir)) {
+      fs.mkdirSync(dataDir, { recursive: true });
+      log(`Created database directory: ${dataDir}`, "db");
+    }
+
+    const dbPath = path.join(dataDir, "submissions.db");
     dbInstance = new Database(dbPath);
     
     // Initialize tables
