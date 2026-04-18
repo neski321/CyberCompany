@@ -37,6 +37,16 @@ function getTransporter() {
   return transporter;
 }
 
+// Helper to escape HTML for security
+function escapeHtml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 // Format concern label
 function formatConcern(concern: string): string {
   const concerns: Record<string, string> = {
@@ -100,500 +110,246 @@ export interface ConsultationSchedule {
   message?: string;
 }
 
+/**
+ * Internal notification for new assessment
+ */
 export async function sendAssessmentEmail(data: AssessmentSubmission): Promise<void> {
   const notificationEmail = getNotificationEmail();
   const fromEmail = getFromEmail();
 
-  // HTML email template
+  const sanitized = {
+    name: escapeHtml(data.name),
+    email: escapeHtml(data.email),
+    company: escapeHtml(data.company),
+    phone: data.phone ? escapeHtml(data.phone) : "",
+    industry: escapeHtml(data.industry),
+    measures: data.currentSecurityMeasures ? escapeHtml(data.currentSecurityMeasures) : "",
+    message: escapeHtml(data.message),
+  };
+
   const htmlContent = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Security Assessment Request</title>
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #f5f5f5;
-    }
-    .container {
-      background-color: #ffffff;
-      border-radius: 8px;
-      padding: 30px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .header {
-      border-bottom: 3px solid #06b6d4;
-      padding-bottom: 20px;
-      margin-bottom: 30px;
-    }
-    .header h1 {
-      color: #06b6d4;
-      margin: 0;
-      font-size: 24px;
-      font-weight: 700;
-    }
-    .header p {
-      color: #666;
-      margin: 5px 0 0 0;
-      font-size: 14px;
-    }
-    .section {
-      margin-bottom: 25px;
-    }
-    .section-title {
-      color: #1a1a1a;
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      padding-bottom: 5px;
-      border-bottom: 1px solid #e5e5e5;
-    }
-    .field {
-      margin-bottom: 15px;
-    }
-    .field-label {
-      color: #666;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 5px;
-      font-weight: 600;
-    }
-    .field-value {
-      color: #1a1a1a;
-      font-size: 15px;
-      padding: 8px 12px;
-      background-color: #f9f9f9;
-      border-left: 3px solid #06b6d4;
-      border-radius: 4px;
-    }
-    .message-box {
-      background-color: #f9f9f9;
-      border-left: 3px solid #06b6d4;
-      padding: 15px;
-      border-radius: 4px;
-      margin-top: 10px;
-    }
-    .message-box p {
-      margin: 0;
-      color: #1a1a1a;
-      white-space: pre-wrap;
-    }
-    .footer {
-      margin-top: 30px;
-      padding-top: 20px;
-      border-top: 1px solid #e5e5e5;
-      text-align: center;
-      color: #666;
-      font-size: 12px;
-    }
-    .badge {
-      display: inline-block;
-      padding: 4px 8px;
-      background-color: #06b6d4;
-      color: white;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-    }
-    @media (max-width: 600px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-    }
+    body { font-family: sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }
+    .container { background-color: #ffffff; border-radius: 8px; padding: 30px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .header { border-bottom: 3px solid #06b6d4; padding-bottom: 10px; margin-bottom: 20px; }
+    .header h1 { color: #06b6d4; margin: 0; font-size: 20px; }
+    .section-title { font-weight: bold; border-bottom: 1px solid #eee; margin: 15px 0 10px; padding-bottom: 5px; }
+    .field { margin-bottom: 10px; }
+    .label { color: #666; font-size: 12px; font-weight: bold; text-transform: uppercase; }
+    .value { background: #f9f9f9; padding: 8px; border-left: 3px solid #06b6d4; }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="header">
-      <h1>🛡️ New Security Assessment Request</h1>
-      <p>Submitted: ${new Date().toLocaleString("en-US", {
-        dateStyle: "long",
-        timeStyle: "short",
-      })}</p>
-    </div>
-
-    <div class="section">
-      <div class="section-title">Contact Information</div>
-      <div class="grid">
-        <div class="field">
-          <div class="field-label">Full Name</div>
-          <div class="field-value">${data.name}</div>
-        </div>
-        <div class="field">
-          <div class="field-label">Email Address</div>
-          <div class="field-value">${data.email}</div>
-        </div>
-        <div class="field">
-          <div class="field-label">Company</div>
-          <div class="field-value">${data.company}</div>
-        </div>
-        ${data.phone ? `
-        <div class="field">
-          <div class="field-label">Phone Number</div>
-          <div class="field-value">${data.phone}</div>
-        </div>
-        ` : ""}
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-title">Company Details</div>
-      <div class="grid">
-        <div class="field">
-          <div class="field-label">Company Size</div>
-          <div class="field-value">${formatCompanySize(data.companySize)}</div>
-        </div>
-        <div class="field">
-          <div class="field-label">Industry</div>
-          <div class="field-value">${data.industry}</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="section-title">Security Requirements</div>
-      <div class="field">
-        <div class="field-label">Primary Concern</div>
-        <div class="field-value">
-          <span class="badge">${formatConcern(data.primaryConcern)}</span>
-        </div>
-      </div>
-      <div class="field">
-        <div class="field-label">Timeline</div>
-        <div class="field-value">${formatTimeline(data.timeline)}</div>
-      </div>
-      ${data.currentSecurityMeasures ? `
-      <div class="field">
-        <div class="field-label">Current Security Measures</div>
-        <div class="field-value">${data.currentSecurityMeasures}</div>
-      </div>
-      ` : ""}
-    </div>
-
-    <div class="section">
-      <div class="section-title">Additional Details</div>
-      <div class="message-box">
-        <p>${data.message}</p>
-      </div>
-    </div>
-
-    <div class="footer">
-      <p>This assessment request was submitted through the RiskWise Global Consulting website.</p>
-      <p>Please respond to: <a href="mailto:${data.email}">${data.email}</a></p>
-    </div>
+    <div class="header"><h1>🛡️ New Security Assessment Request</h1></div>
+    <div class="section-title">Contact</div>
+    <div class="field"><div class="label">Name</div><div class="value">${sanitized.name}</div></div>
+    <div class="field"><div class="label">Email</div><div class="value">${sanitized.email}</div></div>
+    <div class="field"><div class="label">Company</div><div class="value">${sanitized.company}</div></div>
+    ${sanitized.phone ? `<div class="field"><div class="label">Phone</div><div class="value">${sanitized.phone}</div></div>` : ""}
+    
+    <div class="section-title">Requirements</div>
+    <div class="field"><div class="label">Concern</div><div class="value">${formatConcern(data.primaryConcern)}</div></div>
+    <div class="field"><div class="label">Timeline</div><div class="value">${formatTimeline(data.timeline)}</div></div>
+    
+    <div class="section-title">Message</div>
+    <div style="white-space: pre-wrap; font-size: 14px;">${sanitized.message}</div>
   </div>
 </body>
-</html>
-  `;
-
-  // Plain text version for email clients that don't support HTML
-  const textContent = `
-NEW SECURITY ASSESSMENT REQUEST
-===============================
-
-Submitted: ${new Date().toLocaleString("en-US", {
-    dateStyle: "long",
-    timeStyle: "short",
-  })}
-
-CONTACT INFORMATION
-------------------
-Name: ${data.name}
-Email: ${data.email}
-Company: ${data.company}
-${data.phone ? `Phone: ${data.phone}` : ""}
-
-COMPANY DETAILS
----------------
-Company Size: ${formatCompanySize(data.companySize)}
-Industry: ${data.industry}
-
-SECURITY REQUIREMENTS
----------------------
-Primary Concern: ${formatConcern(data.primaryConcern)}
-Timeline: ${formatTimeline(data.timeline)}
-${data.currentSecurityMeasures ? `Current Security Measures: ${data.currentSecurityMeasures}` : ""}
-
-ADDITIONAL DETAILS
-------------------
-${data.message}
-
----
-This assessment request was submitted through the RiskWise Global Consulting website.
-Please respond to: ${data.email}
-  `;
+</html>`;
 
   try {
-    const mailOptions = {
-      from: `RiskWise Global Consulting <${fromEmail}>`,
+    const transporter = getTransporter();
+    await transporter.sendMail({
+      from: `RiskWise Reports <${fromEmail}>`,
       to: notificationEmail,
       replyTo: data.email,
-      subject: `New Security Assessment Request from ${data.name} at ${data.company}`,
-      text: textContent,
+      subject: `[ASSESSMENT] ${sanitized.name} - ${sanitized.company}`,
       html: htmlContent,
-    };
-
-    const transporter = getTransporter();
-    await transporter.sendMail(mailOptions);
-    
-    log(`Assessment email sent successfully to ${notificationEmail} for ${data.name} from ${data.company}`);
+    });
   } catch (error) {
-    log(`Failed to send assessment email: ${error}`, "email");
-    throw new Error("Failed to send email notification");
+    log(`Internal email error: ${error}`, "email");
+    throw error;
   }
 }
 
+/**
+ * Internal notification for new consultation
+ */
 export async function sendConsultationScheduleEmail(data: ConsultationSchedule): Promise<void> {
   const notificationEmail = getNotificationEmail();
   const fromEmail = getFromEmail();
 
-  // Format the date nicely
-  const consultationDate = new Date(data.datetime);
-  const formattedDate = consultationDate.toLocaleString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "numeric",
-    minute: "2-digit",
-    timeZoneName: "short",
-  });
+  const sanitized = {
+    name: escapeHtml(data.name),
+    email: escapeHtml(data.email),
+    company: escapeHtml(data.company),
+    datetime: escapeHtml(data.datetime),
+    timeSlot: escapeHtml(data.timeSlot),
+    message: data.message ? escapeHtml(data.message) : "",
+  };
 
-  // HTML email template
   const htmlContent = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Consultation Scheduled</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #f5f5f5;
-    }
-    .container {
-      background-color: #ffffff;
-      border-radius: 8px;
-      padding: 30px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .header {
-      border-bottom: 3px solid #06b6d4;
-      padding-bottom: 20px;
-      margin-bottom: 30px;
-    }
-    .header h1 {
-      color: #06b6d4;
-      margin: 0;
-      font-size: 24px;
-      font-weight: 700;
-    }
-    .header p {
-      color: #666;
-      margin: 5px 0 0 0;
-      font-size: 14px;
-    }
-    .section {
-      margin-bottom: 25px;
-    }
-    .section-title {
-      color: #1a1a1a;
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 10px;
-      padding-bottom: 5px;
-      border-bottom: 1px solid #e5e5e5;
-    }
-    .field {
-      margin-bottom: 15px;
-    }
-    .field-label {
-      color: #666;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 5px;
-      font-weight: 600;
-    }
-    .field-value {
-      color: #1a1a1a;
-      font-size: 15px;
-      padding: 8px 12px;
-      background-color: #f9f9f9;
-      border-left: 3px solid #06b6d4;
-      border-radius: 4px;
-    }
-    .datetime-box {
-      background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
-      color: white;
-      padding: 20px;
-      border-radius: 8px;
-      text-align: center;
-      margin: 20px 0;
-    }
-    .datetime-box .date {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 5px;
-    }
-    .datetime-box .time {
-      font-size: 18px;
-      opacity: 0.9;
-    }
-    .message-box {
-      background-color: #f9f9f9;
-      border-left: 3px solid #06b6d4;
-      padding: 15px;
-      border-radius: 4px;
-      margin-top: 10px;
-    }
-    .message-box p {
-      margin: 0;
-      color: #1a1a1a;
-      white-space: pre-wrap;
-    }
-    .footer {
-      margin-top: 30px;
-      padding-top: 20px;
-      border-top: 1px solid #e5e5e5;
-      text-align: center;
-      color: #666;
-      font-size: 12px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 15px;
-    }
-    @media (max-width: 600px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <h1>📅 New Consultation Scheduled</h1>
-      <p>Submitted: ${new Date().toLocaleString("en-US", {
-        dateStyle: "long",
-        timeStyle: "short",
-      })}</p>
-    </div>
-
-    <div class="datetime-box">
-      <div class="date">${formattedDate}</div>
-      <div class="time">${data.timeSlot}${data.timezone ? ` (${data.timezone})` : ""}</div>
-    </div>
-
-    <div class="section">
-      <div class="section-title">Contact Information</div>
-      <div class="grid">
-        <div class="field">
-          <div class="field-label">Full Name</div>
-          <div class="field-value">${data.name}</div>
-        </div>
-        <div class="field">
-          <div class="field-label">Email Address</div>
-          <div class="field-value">${data.email}</div>
-        </div>
-        <div class="field">
-          <div class="field-label">Company</div>
-          <div class="field-value">${data.company}</div>
-        </div>
-        ${data.phone ? `
-        <div class="field">
-          <div class="field-label">Phone Number</div>
-          <div class="field-value">${data.phone}</div>
-        </div>
-        ` : ""}
-      </div>
-    </div>
-
-    ${data.message ? `
-    <div class="section">
-      <div class="section-title">Additional Notes</div>
-      <div class="message-box">
-        <p>${data.message}</p>
-      </div>
-    </div>
-    ` : ""}
-
-    <div class="footer">
-      <p>This consultation was scheduled through the RiskWise Global Consulting website.</p>
-      <p>Please respond to: <a href="mailto:${data.email}">${data.email}</a></p>
-      <p style="margin-top: 10px; color: #06b6d4; font-weight: 600;">Please confirm this appointment in your calendar.</p>
-    </div>
-  </div>
-</body>
-</html>
-  `;
-
-  // Plain text version
-  const textContent = `
-NEW CONSULTATION SCHEDULED
-==========================
-
-Consultation Date & Time: ${formattedDate}
-${data.timezone ? `Timezone: ${data.timezone}` : ""}
-
-CONTACT INFORMATION
-------------------
-Name: ${data.name}
-Email: ${data.email}
-Company: ${data.company}
-${data.phone ? `Phone: ${data.phone}` : ""}
-
-${data.message ? `
-ADDITIONAL NOTES
-----------------
-${data.message}
-` : ""}
-
----
-This consultation was scheduled through the RiskWise Global Consulting website.
-Please respond to: ${data.email}
-Please confirm this appointment in your calendar.
-  `;
+<div style="font-family: sans-serif; color: #333;">
+  <h2 style="color: #06b6d4;">📅 New Consultation Scheduled</h2>
+  <p><strong>Client:</strong> ${sanitized.name} (${sanitized.company})</p>
+  <p><strong>Date/Time:</strong> ${sanitized.datetime}</p>
+  <p><strong>Slot:</strong> ${sanitized.timeSlot}</p>
+  <p><strong>Email:</strong> ${sanitized.email}</p>
+  ${sanitized.message ? `<p><strong>Notes:</strong><br/>${sanitized.message}</p>` : ""}
+</div>`;
 
   try {
-    const mailOptions = {
-      from: `RiskWise Global Consulting <${fromEmail}>`,
+    const transporter = getTransporter();
+    await transporter.sendMail({
+      from: `RiskWise Calendar <${fromEmail}>`,
       to: notificationEmail,
       replyTo: data.email,
-      subject: `New Consultation Scheduled: ${data.name} from ${data.company} - ${formattedDate}`,
-      text: textContent,
+      subject: `[SCHEDULE] ${sanitized.name} - ${sanitized.datetime}`,
       html: htmlContent,
-    };
-
-    const transporter = getTransporter();
-    await transporter.sendMail(mailOptions);
-    
-    log(`Consultation schedule email sent successfully to ${notificationEmail} for ${data.name} from ${data.company}`);
+    });
   } catch (error) {
-    log(`Failed to send consultation schedule email: ${error}`, "email");
-    throw new Error("Failed to send email notification");
+    log(`Internal schedule email error: ${error}`, "email");
+    throw error;
+  }
+}
+
+/**
+ * Outlook/Gmail compatible confirmation email (Table-based)
+ */
+function getBrandedConfirmationLayout(title: string, body: string, summaryHtml: string): string {
+  return `
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>${title}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body style="margin: 0; padding: 0; background-color: #f4f7f9; font-family: Arial, Helvetica, sans-serif;">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td style="padding: 20px 0 30px 0;">
+        <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border: 1px solid #cccccc; border-collapse: collapse; background-color: #ffffff;">
+          <!-- Header -->
+          <tr>
+            <td align="center" bgcolor="#0f172a" style="padding: 30px 0 30px 0; color: #ffffff; font-size: 24px; font-weight: bold;">
+              <span style="color: #06b6d4;">🛡️</span> RISKWISE GLOBAL CONSULTING
+            </td>
+          </tr>
+          <!-- Body -->
+          <tr>
+            <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td style="color: #1a202c; font-family: Arial, sans-serif; font-size: 20px; font-weight: bold;">
+                    ${title}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 20px 0 10px 0; color: #4a5568; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                    ${body}
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 10px 0 30px 0;">
+                    <table border="0" cellpadding="20" cellspacing="0" width="100%" style="background-color: #f8fafc; border-left: 4px solid #06b6d4; border-radius: 4px;">
+                      <tr>
+                        <td style="color: #2d3748; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px;">
+                          ${summaryHtml}
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="color: #4a5568; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                    Our team will review your information and reach out within 24 hours. If you have immediate questions, feel free to reply to this email.
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          <!-- Footer -->
+          <tr>
+            <td bgcolor="#f8fafc" style="padding: 30px 30px 30px 30px; border-top: 1px solid #edf2f7;">
+              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td style="color: #718096; font-family: Arial, sans-serif; font-size: 12px; width: 75%;">
+                    &copy; 2026 RiskWise Global Consulting. All rights reserved.<br/>
+                    Kansas City, Kansas, United States
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+}
+
+export async function sendAssessmentConfirmation(data: AssessmentSubmission): Promise<void> {
+  const fromEmail = getFromEmail();
+  const sanitizedName = escapeHtml(data.name);
+  
+  const title = "We've Received Your Assessment Request";
+  const body = `Hello ${sanitizedName},<br/><br/>Thank you for reaching out to RiskWise Global Consulting. We have received your request for a security assessment for <b>${escapeHtml(data.company)}</b>.`;
+  
+  const summaryHtml = `
+    <strong style="color: #06b6d4; text-transform: uppercase; font-size: 11px;">Request Summary</strong><br/><br/>
+    <b>Primary Concern:</b> ${formatConcern(data.primaryConcern)}<br/>
+    <b>Timeline:</b> ${formatTimeline(data.timeline)}<br/>
+    <b>Company Size:</b> ${formatCompanySize(data.companySize)}
+  `;
+
+  const html = getBrandedConfirmationLayout(title, body, summaryHtml);
+
+  try {
+    const transporter = getTransporter();
+    await transporter.sendMail({
+      from: `RiskWise Global Consulting <${fromEmail}>`,
+      to: data.email,
+      subject: "Security Assessment Request Received - RiskWise",
+      html: html,
+    });
+  } catch (error) {
+    log(`Assessment confirmation error: ${error}`, "email");
+  }
+}
+
+export async function sendConsultationConfirmation(data: ConsultationSchedule): Promise<void> {
+  const fromEmail = getFromEmail();
+  const sanitizedName = escapeHtml(data.name);
+  
+  const title = "Your Consultation is Scheduled";
+  const body = `Hello ${sanitizedName},<br/><br/>Your security consultation with RiskWise Global Consulting has been successfully scheduled. We look forward to speaking with you.`;
+  
+  const summaryHtml = `
+    <strong style="color: #06b6d4; text-transform: uppercase; font-size: 11px;">Appointment Details</strong><br/><br/>
+    <b>Date & Time:</b> ${escapeHtml(data.datetime)}<br/>
+    <b>Company:</b> ${escapeHtml(data.company)}<br/>
+    <b>Status:</b> Confirmed
+  `;
+
+  const html = getBrandedConfirmationLayout(title, body, summaryHtml);
+
+  try {
+    const transporter = getTransporter();
+    await transporter.sendMail({
+      from: `RiskWise Global Consulting <${fromEmail}>`,
+      to: data.email,
+      subject: "Consultation Confirmed - RiskWise Global Consulting",
+      html: html,
+    });
+  } catch (error) {
+    log(`Consultation confirmation error: ${error}`, "email");
   }
 }
 

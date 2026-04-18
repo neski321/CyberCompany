@@ -50,6 +50,8 @@ const assessmentSchema = z.object({
   currentSecurityMeasures: z.string().optional(),
   timeline: z.enum(["immediate", "1-3-months", "3-6-months", "6-12-months", "exploring"]),
   message: z.string().min(10, "Please provide more details (at least 10 characters)"),
+  // Honeypot field for bot protection
+  confirm_email_field: z.string().optional(),
 });
 
 type AssessmentFormValues = z.infer<typeof assessmentSchema>;
@@ -76,6 +78,7 @@ export function AssessmentForm({ open, onOpenChange }: AssessmentFormProps) {
       currentSecurityMeasures: "",
       timeline: "exploring",
       message: "",
+      confirm_email_field: "",
     },
   });
 
@@ -137,6 +140,21 @@ export function AssessmentForm({ open, onOpenChange }: AssessmentFormProps) {
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            {/* Honeypot field - hidden from humans */}
+            <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }} aria-hidden="true">
+              <FormField
+                control={form.control}
+                name="confirm_email_field"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input {...field} tabIndex={-1} autoComplete="off" />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <FormField
                 control={form.control}

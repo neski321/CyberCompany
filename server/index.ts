@@ -81,15 +81,13 @@ app.use((req, res, next) => {
   }
 
   // ALWAYS serve the app on the port specified in the environment variable PORT
-  // Other ports are firewalled. Default to 5000 if not specified.
-  // this serves both the API and the client.
-  // It is the only port that is not firewalled.
-  const port = 4500
+  // Other ports are firewalled. Default to 4500 if not specified.
+  const port = Number(process.env.PORT) || 4500;
+  
   httpServer.listen(
     {
       port,
       host: "0.0.0.0",
-      //eusePort: true,
     },
     () => {
       log(`serving on port ${port}`);
