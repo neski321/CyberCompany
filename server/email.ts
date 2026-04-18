@@ -139,7 +139,7 @@ export async function sendAssessmentEmail(data: AssessmentSubmission): Promise<v
 
   try {
     await resend.emails.send({
-      from: `RiskWise Reports <${fromEmail}>`,
+      from: fromEmail,
       to: notificationEmail,
       reply_to: data.email,
       subject: `[ASSESSMENT] ${sanitized.name} - ${sanitized.company}`,
@@ -179,7 +179,7 @@ export async function sendConsultationScheduleEmail(data: ConsultationSchedule):
 
   try {
     await resend.emails.send({
-      from: `RiskWise Calendar <${fromEmail}>`,
+      from: fromEmail,
       to: notificationEmail,
       reply_to: data.email,
       subject: `[SCHEDULE] ${sanitized.name} - ${sanitized.datetime}`,
@@ -286,7 +286,7 @@ export async function sendAssessmentConfirmation(data: AssessmentSubmission): Pr
 
   try {
     await resend.emails.send({
-      from: `RiskWise Global Consulting <${fromEmail}>`,
+      from: fromEmail,
       to: data.email,
       subject: "Security Assessment Request Received - RiskWise",
       html: html,
@@ -314,7 +314,7 @@ export async function sendConsultationConfirmation(data: ConsultationSchedule): 
 
   try {
     await resend.emails.send({
-      from: `RiskWise Global Consulting <${fromEmail}>`,
+      from: fromEmail,
       to: data.email,
       subject: "Consultation Confirmed - RiskWise Global Consulting",
       html: html,
