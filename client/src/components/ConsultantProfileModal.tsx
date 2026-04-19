@@ -1,9 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Mail,
-  Phone,
   MapPin,
-  Linkedin,
   Languages,
   CheckCircle2,
   GraduationCap,
@@ -11,8 +8,7 @@ import {
   Briefcase,
   Sparkles,
   X,
-  ExternalLink,
-  User,
+  ShieldCheck,
 } from "lucide-react";
 import type { ConsultantProfile } from "@/lib/consultant-profiles";
 import { localize, localizeArray } from "@/lib/consultant-profiles";
@@ -103,7 +99,7 @@ export function ConsultantProfileModal({
                     className="relative"
                   >
                     <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/30 flex items-center justify-center shadow-lg shadow-primary/20">
-                      <User className="w-12 h-12 sm:w-16 sm:h-16 text-primary" />
+                      <ShieldCheck className="w-12 h-12 sm:w-16 sm:h-16 text-primary" />
                     </div>
                     <div
                       className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-primary/50"
@@ -120,7 +116,7 @@ export function ConsultantProfileModal({
                       transition={{ delay: 0.3 }}
                       className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-white text-glow"
                     >
-                      {profile.name}
+                      {localize(profile.codename, lang)}
                     </motion.h2>
                     <motion.p
                       initial={{ opacity: 0, x: -20 }}
@@ -153,45 +149,6 @@ export function ConsultantProfileModal({
                     </motion.div>
                   </div>
                 </div>
-
-                {/* Quick contact actions */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  className="flex flex-wrap gap-3 mt-6"
-                >
-                  {profile.contact?.email && (
-                    <a
-                      href={`mailto:${profile.contact.email}`}
-                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-primary-foreground font-medium text-sm hover:bg-primary/90 transition-all hover:scale-105 active:scale-95 shadow-lg shadow-primary/25"
-                    >
-                      <Mail className="w-4 h-4" />
-                      {t("consultants.profile_modal.contact_btn")}
-                    </a>
-                  )}
-                  {profile.contact?.phone && (
-                    <a
-                      href={`tel:${profile.contact.phone.replace(/\D/g, "")}`}
-                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-foreground font-medium text-sm hover:bg-white/10 hover:border-primary/30 transition-all hover:scale-105 active:scale-95"
-                    >
-                      <Phone className="w-4 h-4 text-primary" />
-                      {profile.contact.phone}
-                    </a>
-                  )}
-                  {profile.linkedinUrl && (
-                    <a
-                      href={profile.linkedinUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-white/10 text-foreground font-medium text-sm hover:bg-white/10 hover:border-primary/30 transition-all hover:scale-105 active:scale-95"
-                    >
-                      <Linkedin className="w-4 h-4 text-primary" />
-                      LinkedIn
-                      <ExternalLink className="w-3 h-3 opacity-50" />
-                    </a>
-                  )}
-                </motion.div>
               </motion.div>
 
               {/* Content sections */}
@@ -357,26 +314,7 @@ export function ConsultantProfileModal({
                   </ProfileSection>
                 )}
 
-                {/* LinkedIn CTA for profiles without full info */}
-                {!hasFullProfile && profile.linkedinUrl && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
-                    className="flex justify-center pt-4"
-                  >
-                    <a
-                      href={profile.linkedinUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-primary/80 text-primary-foreground font-medium hover:shadow-lg hover:shadow-primary/25 transition-all hover:scale-105 active:scale-95"
-                    >
-                      <Linkedin className="w-5 h-5" />
-                      {t("consultants.profile_modal.view_linkedin")}
-                      <ExternalLink className="w-4 h-4" />
-                    </a>
-                  </motion.div>
-                )}
+
               </div>
             </div>
           </motion.div>

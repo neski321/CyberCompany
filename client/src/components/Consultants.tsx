@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Linkedin, User, MapPin, ArrowRight, Shield } from "lucide-react";
+import { ShieldCheck, MapPin, ArrowRight, Shield } from "lucide-react";
 import { consultantProfiles, localize, type ConsultantProfile } from "@/lib/consultant-profiles";
 import { ConsultantProfileModal } from "@/components/ConsultantProfileModal";
 import { useTranslation } from "react-i18next";
@@ -72,17 +72,13 @@ export function Consultants() {
                       <div className="flex items-start gap-5 mb-6">
                         {/* Large Avatar */}
                         <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center border border-primary/20 group-hover:border-primary/40 transition-colors flex-shrink-0">
-                          {(consultant.executiveProfile || consultant.coreCapabilities) ? (
-                            <User className="w-10 h-10 text-primary" />
-                          ) : (
-                            <Linkedin className="w-10 h-10 text-primary" />
-                          )}
+                          <ShieldCheck className="w-10 h-10 text-primary" />
                         </div>
                         
                         {/* Name and Role */}
                         <div className="flex-1 min-w-0">
                           <h3 className="text-xl font-display font-bold text-white group-hover:text-primary transition-colors mb-1">
-                            {consultant.name}
+                            {localize(consultant.codename, lang)}
                           </h3>
                           <p className="text-sm text-muted-foreground leading-relaxed">
                             {role}
@@ -114,11 +110,6 @@ export function Consultants() {
                             {cert.length > 30 ? cert.substring(0, 30) + "..." : cert}
                           </span>
                         ))}
-                        {consultant.linkedinUrl && !consultant.executiveProfile && (
-                          <span className="px-3 py-1 text-xs rounded-full bg-[#0077b5]/10 text-[#0077b5] border border-[#0077b5]/20">
-                            {t("consultants.linkedin_profile")}
-                          </span>
-                        )}
                       </div>
 
                       {/* Executive Summary Preview */}

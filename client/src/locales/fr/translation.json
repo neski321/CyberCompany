@@ -185,20 +185,17 @@
   },
   "consultants": {
     "badge": "Équipe d'Experts",
-    "title": "Rencontrez Nos",
-    "title_accent": "Consultants",
-    "subtitle": "Notre équipe de professionnels de la sécurité certifiés apporte des décennies d'expérience combinée dans la protection des organisations contre les cybermenaces en constante évolution.",
-    "view_profile": "Voir le Profil Complet",
-    "linkedin_profile": "Profil LinkedIn",
+    "title": "Nos",
+    "title_accent": "Experts",
+    "subtitle": "Notre équipe de professionnels de la sécurité certifiés apporte des décennies d'expérience combinée dans la protection des organisations contre les cybermenaces en constante évolution. Nous laissons nos accréditations et résultats parler d'eux-mêmes.",
+    "view_profile": "Voir le Profil d'Expertise",
     "profile_modal": {
-      "contact_btn": "Contacter",
       "executive_profile": "Profil Exécutif",
       "experience_highlights": "Points Forts de l'Expérience Professionnelle",
       "key_differentiators": "Différenciateurs Clés",
       "education": "Formation",
       "certifications": "Certifications",
-      "technical": "Compétences Techniques",
-      "view_linkedin": "Voir le Profil Complet sur LinkedIn"
+      "technical": "Compétences Techniques"
     }
   },
   "contact": {

@@ -1,12 +1,8 @@
 export interface ConsultantProfile {
   name: string;
+  codename: Record<string, string>;
   role: Record<string, string>;
   location?: Record<string, string>;
-  contact?: {
-    phone?: string;
-    email?: string;
-  };
-  linkedinUrl?: string;
   languages?: string[];
   executiveProfile?: Record<string, string>;
   coreCapabilities?: { title: Record<string, string>; items: Record<string, string[]> }[];
@@ -31,7 +27,11 @@ export function localizeArray(value: Record<string, string[]> | undefined, lang:
 
 export const consultantProfiles: ConsultantProfile[] = [
   {
-    name: "Trixy Otieno",
+    name: "Consultant Alpha",
+    codename: {
+      en: "Consultant Alpha",
+      fr: "Consultant Alpha",
+    },
     role: {
       en: "Principal Security Consultant",
       fr: "Consultante Principale en Sécurité",
@@ -41,7 +41,6 @@ export const consultantProfiles: ConsultantProfile[] = [
       fr: "Overland Park, Kansas",
     },
     languages: ["English"],
-    linkedinUrl: "https://www.linkedin.com/in/trixy-otieno-ms-cissp-cisa-ceh-gcih-gsec-pcip-pmp-3a3a98238/",
     executiveProfile: {
       en: "Seasoned cybersecurity and GRC professional with over 9 years of experience designing, implementing, and managing enterprise security programs across global organizations. Specialized in building and maturing security programs from the ground up, establishing risk management frameworks, and driving audit readiness across complex, multi-entity environments. Delivers practical, scalable solutions that align deep technical security with strategic business objectives.",
       fr: "Professionnelle chevronnée de la cybersécurité et de la GRC avec plus de 9 ans d'expérience dans la conception, la mise en œuvre et la gestion de programmes de sécurité d'entreprise au sein d'organisations mondiales. Spécialisée dans la création et la maturation de programmes de sécurité à partir de zéro, l'établissement de cadres de gestion des risques et la préparation aux audits dans des environnements multi-entités complexes. Elle propose des solutions pratiques et évolutives qui alignent la sécurité technique approfondie avec les objectifs stratégiques de l'entreprise.",
@@ -167,7 +166,11 @@ export const consultantProfiles: ConsultantProfile[] = [
     technical: "GRC Frameworks, ISO 27001, PCI-DSS, Risk Management, Security Auditing, Incident Response",
   },
   {
-    name: "Aminata Kasse",
+    name: "Consultant Bravo",
+    codename: {
+      en: "Consultant Bravo",
+      fr: "Consultant Bravo",
+    },
     role: {
       en: "Executive Project Management & Strategic Operations Advisor",
       fr: "Conseillère en Gestion de Projets Exécutifs et Opérations Stratégiques",
@@ -175,10 +178,6 @@ export const consultantProfiles: ConsultantProfile[] = [
     location: {
       en: "Overland Park, Kansas",
       fr: "Overland Park, Kansas",
-    },
-    contact: {
-      phone: "(913) 957-6113",
-      email: "amykasse@yahoo.fr",
     },
     languages: ["English", "French"],
     executiveProfile: {

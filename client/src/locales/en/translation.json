@@ -185,20 +185,17 @@
   },
   "consultants": {
     "badge": "Expert Team",
-    "title": "Meet Our",
-    "title_accent": "Consultants",
-    "subtitle": "Our team of certified security professionals brings decades of combined experience in protecting organizations from evolving cyber threats.",
-    "view_profile": "View Full Profile",
-    "linkedin_profile": "LinkedIn Profile",
+    "title": "Our",
+    "title_accent": "Experts",
+    "subtitle": "Our team of certified security professionals brings decades of combined experience in protecting organizations from evolving cyber threats. We let our credentials and results speak for themselves.",
+    "view_profile": "View Expertise Profile",
     "profile_modal": {
-      "contact_btn": "Contact",
       "executive_profile": "Executive Profile",
       "experience_highlights": "Professional Experience Highlights",
       "key_differentiators": "Key Differentiators",
       "education": "Education",
       "certifications": "Certifications",
-      "technical": "Technical Proficiencies",
-      "view_linkedin": "View Full Profile on LinkedIn"
+      "technical": "Technical Proficiencies"
     }
   },
   "contact": {
