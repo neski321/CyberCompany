@@ -160,7 +160,7 @@ export function ConsultantProfileModal({
                     title={t("consultants.profile_modal.executive_profile")}
                     delay={0.1}
                   >
-                    <p className="text-muted-foreground leading-relaxed text-base">
+                    <p className="text-muted-foreground leading-relaxed text-base whitespace-pre-line">
                       {executiveProfile}
                     </p>
                   </ProfileSection>

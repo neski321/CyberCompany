@@ -27,14 +27,14 @@ export function localizeArray(value: Record<string, string[]> | undefined, lang:
 
 export const consultantProfiles: ConsultantProfile[] = [
   {
-    name: "Consultant Alpha",
+    name: "Security Consultants",
     codename: {
-      en: "Consultant Alpha",
-      fr: "Consultant Alpha",
+      en: "Security Consultants",
+      fr: "Consultants en Sécurité",
     },
     role: {
-      en: "Principal Security Consultant",
-      fr: "Consultante Principale en Sécurité",
+      en: "Our Security Consultants have the following qualifications",
+      fr: "Nos consultants en sécurité possèdent les qualifications suivantes",
     },
     location: {
       en: "Overland Park, Kansas",
@@ -42,8 +42,8 @@ export const consultantProfiles: ConsultantProfile[] = [
     },
     languages: ["English"],
     executiveProfile: {
-      en: "Seasoned cybersecurity and GRC professional with over 9 years of experience designing, implementing, and managing enterprise security programs across global organizations. Specialized in building and maturing security programs from the ground up, establishing risk management frameworks, and driving audit readiness across complex, multi-entity environments. Delivers practical, scalable solutions that align deep technical security with strategic business objectives.",
-      fr: "Professionnelle chevronnée de la cybersécurité et de la GRC avec plus de 9 ans d'expérience dans la conception, la mise en œuvre et la gestion de programmes de sécurité d'entreprise au sein d'organisations mondiales. Spécialisée dans la création et la maturation de programmes de sécurité à partir de zéro, l'établissement de cadres de gestion des risques et la préparation aux audits dans des environnements multi-entités complexes. Elle propose des solutions pratiques et évolutives qui alignent la sécurité technique approfondie avec les objectifs stratégiques de l'entreprise.",
+      en: "Seasoned cybersecurity and GRC team with over 9 years of experience designing, implementing, and managing enterprise security programs across global organizations. Specialized in building and maturing security programs from the ground up, establishing risk management frameworks, and driving audit readiness across complex, multi-entity environments. Delivers practical, scalable solutions that align deep technical security with strategic business objectives.",
+      fr: "Équipe expérimentée de la cybersécurité et de la GRC avec plus de 9 ans d'expérience dans la conception, la mise en œuvre et la gestion de programmes de sécurité d'entreprise au sein d'organisations mondiales. Spécialisée dans la création et la maturation de programmes de sécurité à partir de zéro, l'établissement de cadres de gestion des risques et la préparation aux audits dans des environnements multi-entités complexes.",
     },
     coreCapabilities: [
       {
@@ -166,14 +166,14 @@ export const consultantProfiles: ConsultantProfile[] = [
     technical: "GRC Frameworks, ISO 27001, PCI-DSS, Risk Management, Security Auditing, Incident Response",
   },
   {
-    name: "Consultant Bravo",
+    name: "Aminata Kasse",
     codename: {
-      en: "Consultant Bravo",
-      fr: "Consultant Bravo",
+      en: "Aminata Kasse",
+      fr: "Aminata Kasse",
     },
     role: {
-      en: "Executive Project Management & Strategic Operations Advisor",
-      fr: "Conseillère en Gestion de Projets Exécutifs et Opérations Stratégiques",
+      en: "Cybersecurity Governance, Business Resilience & Digital Risk Advisor",
+      fr: "Conseillère en Gouvernance Cyber, Résilience et Risques Numériques",
     },
     location: {
       en: "Overland Park, Kansas",
@@ -181,127 +181,89 @@ export const consultantProfiles: ConsultantProfile[] = [
     },
     languages: ["English", "French"],
     executiveProfile: {
-      en: "Executive-level Project Management and Strategic Operations Advisor with experience leading cross-functional initiatives across federal, multinational, and corporate environments. Specialized in aligning project governance, procurement strategy, and financial oversight to deliver structured, compliant, and measurable outcomes. Proven ability to translate strategic objectives into disciplined execution frameworks, optimize capital investments, strengthen vendor accountability, and improve operational performance.",
-      fr: "Conseillère en Gestion de Projets et Opérations Stratégiques de niveau exécutif, avec une expérience dans la direction d'initiatives interfonctionnelles au sein d'environnements fédéraux, multinationaux et corporatifs. Spécialisée dans l'alignement de la gouvernance de projet, de la stratégie d'approvisionnement et de la surveillance financière pour fournir des résultats structurés, conformes et mesurables. Capacité avérée à traduire les objectifs stratégiques en cadres d'exécution disciplinés, à optimiser les investissements en capital, à renforcer la responsabilité des fournisseurs et à améliorer la performance opérationnelle.",
+      en: "Cybersecurity Governance. Business Resilience. Global Perspective.\n\nHelping organizations across the U.S. and Africa manage cyber risk, strengthen governance, and protect what matters most.\n\nAminata Kasse is a strategic business and cybersecurity risk professional with experience spanning federal, multinational, and corporate environments. She brings a multidisciplinary background in project management, financial oversight, procurement, compliance, vendor governance, and operational risk to the evolving challenges of cybersecurity.\n\nRecognizing that cybersecurity is not only a technology issue but a business imperative, Aminata focuses on helping organizations build stronger governance structures, identify and manage cyber and third-party risks, improve compliance readiness, and integrate cybersecurity into broader business strategy.\n\nHer approach is particularly valuable to organizations operating in or expanding between the United States and Africa, where navigating different regulatory environments, business practices, technologies, and risk landscapes requires both strategic perspective and disciplined execution.",
+      fr: "Gouvernance de la cybersécurité. Résilience des entreprises. Perspective mondiale.\n\nAide les organisations aux États-Unis et en Afrique à gérer les risques cybernétiques, à renforcer la gouvernance et à protéger ce qui compte le plus.\n\nAminata Kasse est une professionnelle stratégique de la gestion des risques d'entreprise et de la cybersécurité, possédant une expérience dans des environnements fédéraux, multinationaux et d'entreprise. Elle apporte un parcours multidisciplinaire en gestion de projet, surveillance financière, approvisionnement, conformité, gouvernance des fournisseurs et risque opérationnel aux défis évolutifs de la cybersécurité.\n\nReconnaissant que la cybersécurité n'est pas seulement un problème technologique mais un impératif d'entreprise, Aminata aide les organisations à renforcer leurs structures de gouvernance, à identifier et gérer les risques cybernétiques et des tiers, à améliorer la préparation à la conformité et à intégrer la cybersécurité dans leur stratégie globale.\n\nSon approche est particulièrement précieuse pour les organisations opérant entre les États-Unis et l'Afrique ou s'y développant, où la navigation dans différents environnements réglementaires, pratiques commerciales, technologies et paysages de risques exige à la fois une perspective stratégique et une exécution disciplinée.",
     },
     coreCapabilities: [
       {
         title: {
-          en: "Enterprise Project Leadership",
-          fr: "Leadership de Projets d'Entreprise",
+          en: "Cybersecurity Governance & Risk Advisory",
+          fr: "Gouvernance Cyber et Conseil en Risques",
         },
         items: {
           en: [
-            "End-to-end project lifecycle management",
-            "Governance framework development",
-            "Scope, timeline & milestone oversight",
-            "Executive reporting & KPI dashboards",
-            "Cross-functional stakeholder alignment",
+            "Cybersecurity Governance & GRC: Establishing policies, governance structures, controls, accountability, and risk-management practices aligned with business objectives.",
+            "Cyber Risk Assessments: Identifying organizational vulnerabilities and business risks to help leadership prioritize practical risk-reduction strategies.",
+            "Executive Cyber Risk Advisory: Translating complex cybersecurity and operational risks into clear business priorities that executives and decision-makers can act upon.",
           ],
           fr: [
-            "Gestion du cycle de vie complet des projets",
-            "Développement de cadres de gouvernance",
-            "Supervision de la portée, des délais et des jalons",
-            "Rapports exécutifs et tableaux de bord KPI",
-            "Alignement des parties prenantes interfonctionnelles",
+            "Gouvernance Cyber & GRC : Établissement de politiques, structures de gouvernance, contrôles et pratiques de gestion des risques alignés sur les objectifs commerciaux.",
+            "Évaluations des risques cyber : Identification des vulnérabilités et risques commerciaux pour prioriser des stratégies pratiques de réduction des risques.",
+            "Conseil exécutive en risques cyber : Traduction des risques complexes en priorités commerciales claires pour la prise de décision.",
           ],
         },
       },
       {
         title: {
-          en: "Strategic Procurement & Vendor Governance",
-          fr: "Approvisionnement Stratégique et Gouvernance des Fournisseurs",
+          en: "Vendor Risk & Compliance Readiness",
+          fr: "Risques Fournisseurs et Conformité",
         },
         items: {
           en: [
-            "RFP/RFQ/RFI design and facilitation",
-            "Vendor evaluation & contract negotiation",
-            "Supplier performance management",
-            "Cost optimization & spend analysis",
-            "Compliance documentation controls",
+            "Third-Party & Vendor Cyber Risk: Evaluating cybersecurity and operational risks associated with suppliers, contractors, technology providers, and third parties.",
+            "Compliance Readiness: Supporting organizations in strengthening documentation, internal controls, policies, and processes for regulatory, contractual, or industry requirements.",
           ],
           fr: [
-            "Conception et facilitation d'AO/DDQ/DDI",
-            "Évaluation des fournisseurs et négociation de contrats",
-            "Gestion de la performance des fournisseurs",
-            "Optimisation des coûts et analyse des dépenses",
-            "Contrôles de documentation de conformité",
+            "Risques cybernétiques liés aux tiers et fournisseurs : Évaluation des risques associés aux fournisseurs, sous-traitants et prestataires technologiques.",
+            "Préparation à la conformité : Renforcement de la documentation, des contrôles internes, des politiques et processus pour les exigences réglementaires ou contractuelles.",
           ],
         },
       },
       {
         title: {
-          en: "Financial & Capital Planning",
-          fr: "Planification Financière et en Capital",
+          en: "Program Leadership & Operational Resilience",
+          fr: "Gestion de Programme et Résilience Opérationnelle",
         },
         items: {
           en: [
-            "Capital budget modeling",
-            "Financial forecasting & variance analysis",
-            "Cost-benefit & ROI evaluation",
-            "Risk-adjusted financial planning",
+            "Cybersecurity Program & Project Management: Providing structured leadership for cybersecurity initiatives, from planning and stakeholder coordination to implementation oversight, risk tracking, and executive reporting.",
+            "Business Continuity & Operational Resilience: Helping organizations strengthen processes and preparedness to maintain critical operations and respond effectively to disruptions.",
           ],
           fr: [
-            "Modélisation du budget d'investissement",
-            "Prévisions financières et analyse des écarts",
-            "Évaluation coûts-avantages et ROI",
-            "Planification financière ajustée au risque",
-          ],
-        },
-      },
-      {
-        title: {
-          en: "Risk, Compliance & Process Optimization",
-          fr: "Risques, Conformité et Optimisation des Processus",
-        },
-        items: {
-          en: [
-            "Regulatory and policy alignment",
-            "Internal control strengthening",
-            "Workflow redesign & efficiency improvement",
-            "Performance monitoring systems",
-          ],
-          fr: [
-            "Alignement réglementaire et des politiques",
-            "Renforcement des contrôles internes",
-            "Refonte des flux de travail et amélioration de l'efficacité",
-            "Systèmes de suivi de la performance",
+            "Gestion de projets et programmes de cybersécurité : Leadership structuré de la planification aux rapports exécutifs et au suivi des risques.",
+            "Continuité d'activité et résilience opérationnelle : Renforcement des processus et de la préparation pour maintenir les opérations critiques.",
           ],
         },
       },
     ],
     experienceHighlights: {
       en: [
-        "Led competitive RFP cycles for capital and operational initiatives, ensuring cost control and vendor accountability.",
-        "Managed capital budget planning and financial forecasting for major investment projects.",
-        "Coordinated cross-functional teams across finance, procurement, engineering, and executive leadership.",
-        "Conducted financial investigations and regulatory compliance analysis within federal systems.",
-        "Developed performance dashboards and data validation frameworks to support executive decision-making.",
-        "Implemented process improvements that enhanced operational transparency and execution efficiency.",
+        "U.S.–Africa Cybersecurity & Digital Risk Advisory: Helping businesses, institutions, NGOs, and organizations operating across the U.S.–Africa corridor strengthen cybersecurity governance while supporting responsible digital growth.",
+        "Goal-Driven Execution: Making cybersecurity understandable, actionable, and aligned with business objectives.",
+        "Integrated Expertise: Combining strategic thinking, governance, financial discipline, vendor oversight, and project execution to transition organizations from risk identification to effective management.",
+        "Strategic Risk Advisory across federal, multinational, and corporate environments.",
       ],
       fr: [
-        "Dirigé des cycles d'appels d'offres compétitifs pour des initiatives d'investissement et opérationnelles, assurant le contrôle des coûts et la responsabilité des fournisseurs.",
-        "Géré la planification du budget d'investissement et les prévisions financières pour des projets d'investissement majeurs.",
-        "Coordonné des équipes interfonctionnelles dans les domaines de la finance, de l'approvisionnement, de l'ingénierie et de la direction exécutive.",
-        "Mené des enquêtes financières et des analyses de conformité réglementaire au sein de systèmes fédéraux.",
-        "Développé des tableaux de bord de performance et des cadres de validation des données pour soutenir la prise de décision exécutive.",
-        "Mis en œuvre des améliorations de processus qui ont renforcé la transparence opérationnelle et l'efficacité d'exécution.",
+        "Conseil en cybersécurité et risques numériques US-Afrique : Accompagnement des entreprises, institutions et ONG opérant sur le corridor US-Afrique pour renforcer la gouvernance cyber tout en soutenant une croissance numérique responsable.",
+        "Exécution axée sur les objectifs : Rendre la cybersécurité compréhensible, actionnable et alignée sur la stratégie d'entreprise.",
+        "Expertise intégrée : Combinaison de la pensée stratégique, de la gouvernance, de la discipline financière, de la surveillance des fournisseurs et de l'exécution des projets.",
+        "Conseil stratégique en risques dans des environnements fédéraux, multinationaux et d'entreprise.",
       ],
     },
     differentiators: {
       en: [
+        "U.S.–Africa Cybersecurity & Digital Risk Advisory",
+        "Multidisciplinary Background: Project Management, Finance, Procurement & GRC",
+        "Business-Aligned Risk Management Approach",
+        "Third-Party & Vendor Cyber Risk Expertise",
         "Bilingual Executive Communication (English/French)",
-        "Federal, Corporate & Global Supply Chain Experience",
-        "Integrated Finance + Procurement + Project Expertise",
-        "Structured Governance & Compliance Discipline",
-        "Data-Driven Decision Support",
       ],
       fr: [
-        "Communication Exécutive Bilingue (Anglais/Français)",
-        "Expérience Fédérale, Corporative et Chaîne d'Approvisionnement Mondiale",
-        "Expertise Intégrée Finance + Approvisionnement + Projet",
-        "Discipline Structurée de Gouvernance et Conformité",
-        "Aide à la Décision Basée sur les Données",
+        "Conseil en cybersécurité et risques numériques US-Afrique",
+        "Parcours multidisciplinaire : Gestion de projet, finance, approvisionnement et GRC",
+        "Approche de gestion des risques alignée sur l'entreprise",
+        "Expertise des risques cybernétiques liés aux tiers et fournisseurs",
+        "Communication exécutive bilingue (Anglais/Français)",
       ],
     },
     education: [
@@ -325,6 +287,6 @@ export const consultantProfiles: ConsultantProfile[] = [
       },
     ],
     certifications: ["Project Management Essentials Certification – Johnson County Community College"],
-    technical: "Microsoft Office Suite, SAP, ERP systems, Salesforce, Microsoft Project",
+    technical: "GRC Frameworks, Third-Party Risk Management (TPRM), Cyber Risk Assessments, Compliance Readiness, Microsoft Office Suite, SAP, ERP systems, Salesforce, Microsoft Project",
   },
 ];
